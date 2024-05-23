@@ -22,6 +22,6 @@ public class Customer {
     private String lastName;
     @Column(name="email",nullable = false)
     private String email;
-    @Column(name="phoneAddress",nullable = false)
-    private String phoneAddress;
+    @Column(name="phoneNumber",nullable = false)
+    private String phoneNumber;
 }
