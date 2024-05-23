@@ -1,15 +1,17 @@
-package models;
+package com.example.hotel_management_system.Models;
+
+
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor //automatically generates a constructor with a parameter for each field in the class
 @Entity
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="customer")
 public class Customer {
     @Id
@@ -25,3 +27,4 @@ public class Customer {
     @Column(name="phoneNumber",nullable = false)
     private String phoneNumber;
 }
+
