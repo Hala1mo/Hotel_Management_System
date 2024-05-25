@@ -1,7 +1,7 @@
 package com.example.hotel_management_system.Models.Enum;
 
 public enum  roomStatus {
-    AVAILABLE("Available"),
+    AVAILABLE("AVAILABLE"),
     OCCUPIED("Occupied"),
     DIRTY("Dirty"),
     MAINTENANCE("Maintence"),

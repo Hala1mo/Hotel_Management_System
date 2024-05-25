@@ -2,8 +2,11 @@ package com.example.hotel_management_system.Models;
 
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -32,8 +35,13 @@ public class Room  {
     @Column(name = "view", nullable = false)
     private com.example.hotel_management_system.Models.Enum.roomView view = roomView.GARDEN;
 
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name="roomType")
+    private Room_Type roomType;
 
-
+    @OneToMany(mappedBy = "room_id", cascade = {CascadeType.ALL})
+    private List <Reserve_Room> booking_room;
 
 }
 
