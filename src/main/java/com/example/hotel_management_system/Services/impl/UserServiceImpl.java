@@ -2,9 +2,9 @@ package com.example.hotel_management_system.Services.impl;
 
 import com.example.hotel_management_system.Exceptions.UserNotFoundException;
 import com.example.hotel_management_system.Security.auth.AuthenticationFacade;
-import com.example.hotel_management_system.dto.LoginDTO;
-import com.example.hotel_management_system.dto.PasswordChangeDTO;
-import com.example.hotel_management_system.dto.UserDTO;
+import com.example.hotel_management_system.DTO.LoginDTO;
+import com.example.hotel_management_system.DTO.PasswordChangeDTO;
+import com.example.hotel_management_system.DTO.UserDTO;
 import com.example.hotel_management_system.models.User;
 import com.example.hotel_management_system.utils.JwtUtil;
 import org.slf4j.LoggerFactory;

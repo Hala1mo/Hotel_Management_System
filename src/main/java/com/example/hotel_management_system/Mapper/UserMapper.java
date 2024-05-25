@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.dto.UserDTO;
+import com.example.hotel_management_system.DTO.UserDTO;
 import com.example.hotel_management_system.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

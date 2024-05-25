@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.DTO;
 
-import com.example.hotel_management_system.models.Enum.Role;
+import com.example.hotel_management_system.Models.Enum.Role;
 import lombok.Data;
 
 @Data

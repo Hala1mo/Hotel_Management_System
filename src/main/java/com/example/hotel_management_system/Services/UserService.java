@@ -1,8 +1,8 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.dto.LoginDTO;
-import com.example.hotel_management_system.dto.PasswordChangeDTO;
-import com.example.hotel_management_system.dto.UserDTO;
+import com.example.hotel_management_system.DTO.LoginDTO;
+import com.example.hotel_management_system.DTO.PasswordChangeDTO;
+import com.example.hotel_management_system.DTO.UserDTO;
 import com.example.hotel_management_system.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
