@@ -1,7 +1,7 @@
 package com.example.hotel_management_system.Mapper;
 
 import com.example.hotel_management_system.DTO.UserDTO;
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +19,7 @@ public class UserMapper {
         userDTO.setPhoneNumber(user.getPhoneNumber());
         userDTO.setEmail(user.getEmail());
         userDTO.setRole(user.getRole());
+        userDTO.setPassword(user.getPassword());
         return userDTO;
     }
 

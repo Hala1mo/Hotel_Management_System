@@ -1,12 +1,18 @@
 package com.example.hotel_management_system.Services.impl;
 
 import com.example.hotel_management_system.Exceptions.UserNotFoundException;
+import com.example.hotel_management_system.Mapper.EmployeeMapper;
+import com.example.hotel_management_system.Models.Employee;
+import com.example.hotel_management_system.Models.Enum.Role;
+import com.example.hotel_management_system.Security.Services.UserDetailsImpl;
 import com.example.hotel_management_system.Security.auth.AuthenticationFacade;
 import com.example.hotel_management_system.DTO.LoginDTO;
 import com.example.hotel_management_system.DTO.PasswordChangeDTO;
 import com.example.hotel_management_system.DTO.UserDTO;
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
 import com.example.hotel_management_system.utils.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +31,7 @@ import org.springframework.security.core.Authentication;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.example.hotel_management_system.Models.Enum.Role;
 
 import org.slf4j.Logger;
 
@@ -50,19 +57,49 @@ public class UserServiceImpl implements UserService {
     }
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Override
-    public String signup(UserDTO userDTO) {
+    public UserDTO signup(UserDTO userDTO) {
         logger.info("signing customer: {}", userDTO.getEmail());
-        UserDTO createdCustomer = createCustomer(userDTO);
+        UserDTO createdCustomer = createUser(userDTO);
         User user=UserMapper.mapToEntity(createdCustomer);
-        return jwtUtil.generateToken(user);
+        //return jwtUtil.generateToken(user);
+        return login(new LoginDTO(userDTO.getEmail(), userDTO.getPassword()));
+
     }
     @Override
-    public UserDTO createCustomer(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) {
         logger.info("Creating customer: {}", userDTO.getEmail());
         User user = UserMapper.mapToEntity(userDTO);
         User newUser = userRepository.save(user);
         return UserMapper.mapToDTO(newUser);
     }
+
+    public UserDTO login(@NotNull LoginDTO loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+            logger.info("User authenticated: {}", userPrincipal.getUsername());
+            String jwt = jwtUtil.generateToken(authentication);
+
+            System.out.println(jwt);
+
+            User user = userRepository.findByEmail(loginRequest.getEmail())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+            return UserMapper.mapToDTO(user);
+        } catch (AuthenticationException e) {
+            logger.error("Authentication failed: {}", e.getMessage());
+            throw new BadCredentialsException("Invalid email or password");
+        } catch (Exception e) {
+            logger.error("Exception during login: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+
+
+
 
 //    public User login(LoginDTO loginDTO) {
 //        logger.info("Creating customer: {}", loginDTO.getEmail());
@@ -82,21 +119,39 @@ public class UserServiceImpl implements UserService {
 //                .orElseThrow();
 //    }
 
-    public User login(LoginDTO loginDTO) {
-        try {
-            logger.info("Authenticating user: {}", loginDTO.getEmail());
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+//    public User login(LoginDTO loginDTO) {
+//        try {
+//            logger.info("Authenticating user: {}", loginDTO.getEmail());
+//            Authentication authentication = authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//            User user = authenticationFacade.getAuthenticatedUser();
+//
+//            return userRepository.findByEmail(loginDTO.getEmail())
+//                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        } catch (AuthenticationException e) {
+//            throw new BadCredentialsException("Invalid email or password");
+//        }
+//    }
 
-            User user = authenticationFacade.getAuthenticatedUser();
 
-            return userRepository.findByEmail(loginDTO.getEmail())
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid email or password");
-        }
-    }
+
+//    @Override
+//    public User login(LoginDTO loginDTO) {
+//        try {
+//            Authentication authentication = authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+//
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//
+//            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//            return userRepository.findByEmail(userDetails.getUsername())
+//                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        } catch (AuthenticationException e) {
+//            throw new BadCredentialsException("Invalid email or password");
+//        }
+//    }
 
 
     @Override
@@ -127,6 +182,9 @@ public class UserServiceImpl implements UserService {
             user.setPhoneNumber(userDTO.getPhoneNumber());
             user.setEmail(userDTO.getEmail());
             user.setRole(userDTO.getRole());
+
+            User updatedUser =userRepository.save(user);
+            return UserMapper.mapToDTO(updatedUser);
         }
         return null;
     }

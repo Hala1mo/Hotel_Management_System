@@ -1,30 +1,31 @@
 package com.example.hotel_management_system.DTO;
 
-import com.example.hotel_management_system.Models.Enum.Role;
+import com.example.hotel_management_system.Models.Enum.TaskStatus;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.time.LocalDate;
+
+
 @Data
-public class UserDTO {
+public class TaskDTO {
 
     @NotNull
     @NotBlank
-    private String firstName;
+    private String description;
     @NotNull
     @NotBlank
-    private String lastName;
+    private LocalDate scheduledDate;
     @NotNull
     @NotBlank
-    private String phoneNumber;
+    private Long  employee_id;
+
     @NotNull
     @NotBlank
-    private String email;
-    @NotNull
-    @NotBlank
-    private String password;
+    private Long  room_id;
     @NotNull
     @Enumerated
-    private Role role;
+    private TaskStatus status;
 }

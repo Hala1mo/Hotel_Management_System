@@ -1,7 +1,7 @@
 package com.example.hotel_management_system.Security.auth;
 
 import com.example.hotel_management_system.Exceptions.HttpNotFoundException;
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
 import com.example.hotel_management_system.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

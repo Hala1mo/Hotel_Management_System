@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.repositories;
 
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

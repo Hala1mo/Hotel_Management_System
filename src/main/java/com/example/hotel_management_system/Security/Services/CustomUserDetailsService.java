@@ -1,6 +1,6 @@
-package com.example.hotel_management_system.Services.impl;
+package com.example.hotel_management_system.Security.Services;
 
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
 import com.example.hotel_management_system.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +20,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+        return UserDetailsImpl.build(user);
     }
 }

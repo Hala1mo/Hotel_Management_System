@@ -1,7 +1,7 @@
-package com.example.hotel_management_system.models;
+package com.example.hotel_management_system.Models;
 
 
-import com.example.hotel_management_system.models.Enum.Role;
+import com.example.hotel_management_system.Models.Enum.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class User {
     private String firstName;
     @Column(name="lastName",nullable = false)
     private String lastName;
-    @Column(name="email",nullable = false)
+    @Column(name="email",nullable = false,unique = true)
     private String email;
     @Column(name="phoneNumber",nullable = false)
     private String phoneNumber;

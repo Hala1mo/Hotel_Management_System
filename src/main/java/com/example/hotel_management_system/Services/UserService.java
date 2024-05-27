@@ -3,7 +3,8 @@ package com.example.hotel_management_system.Services;
 import com.example.hotel_management_system.DTO.LoginDTO;
 import com.example.hotel_management_system.DTO.PasswordChangeDTO;
 import com.example.hotel_management_system.DTO.UserDTO;
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface UserService {
 
-    UserDTO createCustomer(UserDTO userDTO);
+    UserDTO createUser(UserDTO userDTO);
 
     List<UserDTO> getAllCustomers();
 
@@ -24,11 +25,9 @@ public interface UserService {
     void changePassword(Long userId, PasswordChangeDTO passwordChangeDTO);
 
 
-    String signup(UserDTO userDTO);
+    UserDTO signup(UserDTO userDTO );
 
-    UserDetails loadUserByUsername(String email);
+    UserDTO login(LoginDTO loginDTO);
 
-    User login(LoginDTO loginDTO);
 
-    UserDTO currentUser();
 }

@@ -6,8 +6,9 @@ import com.example.hotel_management_system.Services.UserService;
 import com.example.hotel_management_system.DTO.LoginDTO;
 import com.example.hotel_management_system.DTO.PasswordChangeDTO;
 import com.example.hotel_management_system.DTO.UserDTO;
-import com.example.hotel_management_system.models.User;
+import com.example.hotel_management_system.Models.User;
 import com.example.hotel_management_system.utils.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,31 +24,26 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
     private final AuthenticationFacade authenticationFacade;
 
     public UserController(AuthenticationFacade authenticationFacade) {
-
         this.authenticationFacade = authenticationFacade;
     }
-
 
     @PostMapping("/auth/signup")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> signup(@RequestBody UserDTO userDTO) {
-        String token = userService.signup(userDTO);
-        return ResponseEntity.ok(token);
+    public UserDTO signup(@RequestBody UserDTO userDTO) {
+      //  String token = userService.signup(userDTO);
+      //  return ResponseEntity.ok(token);
+        return userService.signup(userDTO);
     }
 
     @PostMapping("auth/login")
-    public ResponseEntity<String> authenticate(@RequestBody LoginDTO loginDTO) {
+    public UserDTO authenticate(@RequestBody LoginDTO loginDTO) {
         // Authenticate user
-        User authenticatedUser = userService.login(loginDTO);
-        String token = jwtUtil.generateToken(authenticatedUser);
-        return ResponseEntity.ok(token);
+        UserDTO authenticatedUser = userService.login(loginDTO);
+        return authenticatedUser;
     }
 
     @GetMapping("")
