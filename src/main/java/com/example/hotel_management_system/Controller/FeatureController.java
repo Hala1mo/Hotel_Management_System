@@ -20,6 +20,7 @@ public class FeatureController {
     }
     @GetMapping("")
     public List<FeatureDTO> retrieveFeatures(){
+
         return roomFeaturesService.retrieveFeatures();
     }
     @PostMapping("")

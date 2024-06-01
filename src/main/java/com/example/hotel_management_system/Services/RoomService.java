@@ -1,11 +1,14 @@
 package com.example.hotel_management_system.Services;
 
 import com.example.hotel_management_system.DTO.InsertRoomDTO;
+import com.example.hotel_management_system.DTO.ReservationInfoDTO;
 import com.example.hotel_management_system.DTO.RoomDTO;
+import com.example.hotel_management_system.DTO.RoomDetailsInfoDTO;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RoomService {
@@ -13,7 +16,9 @@ public interface RoomService {
     RoomDTO findRoomById(long id);
     RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom);
     ResponseEntity<?> saveNewRoom (InsertRoomDTO requestedRoom);
-    List<RoomDTO>retrieveRoomsBySpecificStatus(roomStatus status);
+    List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status);
     List<RoomDTO>retrieveRoomsBySpecificView(roomView view);
+    List<RoomDetailsInfoDTO>retrieveRoomsBySpecificDates(Date checkIn, Date checkOut);
+    List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id );
 
 }

@@ -26,6 +26,15 @@ public class Room_Type {
     @Column(name="type_name",nullable = false)
     private String type_name;
 
+    @Column(name="size_room",nullable = false)
+    private double size_room;
+
+    @Column(name="num_adults",nullable = false)
+    private int num_adults;
+
+    @Column(name="num_children",nullable = false)
+    private int num_children;
+
     @OneToMany(mappedBy = "roomType", cascade = {CascadeType.ALL})
     private List<Room> roomlist;
 

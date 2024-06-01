@@ -1,10 +1,12 @@
 package com.example.hotel_management_system.Models;
 
+import com.example.hotel_management_system.Models.Enum.paymentMethod;
 import com.example.hotel_management_system.Models.Enum.reservationStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +28,13 @@ public class Reservation {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="user_id")
-    private User user_id;
+    private User user;
 
-    @OneToMany(mappedBy = "booking_id", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.ALL})
     private List <Reserve_Room>  booking_room;
+
+    @OneToMany(mappedBy = "booking", cascade = {CascadeType.ALL})
+    private List <Reserve_Add_On> add_on;
 
     @Column(name="reservation_status",nullable = false)
      private reservationStatus status;
@@ -46,12 +51,11 @@ public class Reservation {
     @Column(name = "check_out_date", nullable = false)
     private Date checkOutDate;
 
-    @Column(name = "number_of_nights", nullable = false)
-    private double number_of_nights;
+    @Enumerated
+    @Column(name = "payment_Method", nullable = false)
+    private paymentMethod payment_Method;
 
-    @Column(name = "booking_amount", nullable = false)
-    private double booking_amount;
-
-
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+    private Invoice invoice;
 
 }

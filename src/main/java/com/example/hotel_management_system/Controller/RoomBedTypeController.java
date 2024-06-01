@@ -17,7 +17,7 @@ import java.util.List;
 public class RoomBedTypeController {
     BedTypeService bedTypeService;
     @Autowired
-    public RoomBedTypeController( BedTypeService bedTypeService){
+    public RoomBedTypeController(BedTypeService bedTypeService){
         this.bedTypeService=bedTypeService;
     }
     @GetMapping("")
@@ -25,9 +25,13 @@ public class RoomBedTypeController {
 
         return bedTypeService.retrieveAllBedTypes();
     }
+
+
     @PostMapping("")
     public Bed_TypeDTO saveBedType(@RequestBody Bed_TypeDTO request){
         return bedTypeService.saveBedType(request);
     }
+
+
 
 }

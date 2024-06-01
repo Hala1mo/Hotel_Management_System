@@ -1,5 +1,6 @@
 package com.example.hotel_management_system.Models;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,10 +8,10 @@ import lombok.*;
 @Setter
 @Entity
 @Builder
-@Table(name="room_type_bed")
+@Table(name="reserve_add_on")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Room_Type_Bed {
+public class Reserve_Add_On {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +19,12 @@ public class Room_Type_Bed {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="type_id")
-    private Room_Type type_id;
+    @JoinColumn(name="book_id")
+    private Reservation booking;
 
 
     @ManyToOne
-    @JoinColumn(name="bed_id")
-        private Bed_Type bed_id;
-
-    @Column(name="num_beds")
-    private int num_beds;
+    @JoinColumn(name="add_on_id")
+    private Add_On add_on_id;
 
 }

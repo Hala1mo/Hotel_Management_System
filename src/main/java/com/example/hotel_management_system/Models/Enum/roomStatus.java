@@ -2,11 +2,11 @@ package com.example.hotel_management_system.Models.Enum;
 
 public enum  roomStatus {
     AVAILABLE("AVAILABLE"),
-    OCCUPIED("Occupied"),
+    RESERVED("Reserved"),
     DIRTY("Dirty"),
     MAINTENANCE("Maintence"),
-    RESERVED("Reserved"),
-    CHECKED_OUT(" Checked_Out");
+    CHECKED_OUT(" Checked_Out"),
+    CHECKED_IN(" Checked_In");
 
     private final String value;
     roomStatus(String value) {

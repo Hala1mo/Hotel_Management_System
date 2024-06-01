@@ -2,11 +2,12 @@ package com.example.hotel_management_system.Services.Impl;
 
 
 
-import com.example.hotel_management_system.DTO.InsertRoomDTO;
-import com.example.hotel_management_system.DTO.RoomDTO;
+import com.example.hotel_management_system.DTO.*;
+import com.example.hotel_management_system.Mapper.Reserve_RoomMapper;
 import com.example.hotel_management_system.Mapper.RoomMapper;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
+import com.example.hotel_management_system.Models.Reserve_Room;
 import com.example.hotel_management_system.Models.Room;
 import com.example.hotel_management_system.Models.Room_Type;
 import com.example.hotel_management_system.Repository.RoomRepository;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,9 +56,15 @@ public class RoomServiceImpl implements RoomService {
        roomRepository.save(roomToSave);
     return ResponseEntity.ok("Saved Successfully");
     }
-    public List<RoomDTO>retrieveRoomsBySpecificStatus(roomStatus status){
+    public List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status){
         List<Room>rooms=roomRepository.findAllByStatus(status);
-        return rooms.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
+
+        return rooms.stream().map(room -> RoomMapper.detailsMapToDTO(room)).collect(Collectors.toList());
+    }
+
+    public List<RoomDetailsInfoDTO>retrieveRoomsBySpecificDates(Date checkIn,Date checkOut){
+        List<Room>rooms=roomRepository.findAvailableRooms(checkIn,checkOut);
+        return rooms.stream().map(room -> RoomMapper.detailsMapToDTO(room)).collect(Collectors.toList());
     }
 
     public List<RoomDTO>retrieveRoomsBySpecificView(roomView view){
@@ -64,6 +72,13 @@ public class RoomServiceImpl implements RoomService {
         return rooms.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
 
+
+    public List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id ){
+        Room room=roomRepository.findAllById(id);
+        List<Reserve_Room> reseravtionForARoom=room.getBooking_room();
+
+        return reseravtionForARoom.stream().map(reservation -> Reserve_RoomMapper.mapToBooking(reservation)).collect(Collectors.toList());
+    }
 
 
 }

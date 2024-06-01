@@ -7,7 +7,7 @@ import com.example.hotel_management_system.Models.Features;
 
 public class Bed_TypeMapper {
     public static Bed_TypeDTO mapToDTO(Bed_Type request){
-        Bed_TypeDTO bed_type=new Bed_TypeDTO();
+       Bed_TypeDTO bed_type=new Bed_TypeDTO();
        bed_type.setBed_type(request.getBed_type());
        bed_type.setId(request.getId());
        return  bed_type;
