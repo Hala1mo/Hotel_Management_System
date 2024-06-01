@@ -1,12 +1,12 @@
 package com.example.hotel_management_system.Security.auth;
 
-import com.example.hotel_management_system.Exceptions.HttpNotFoundException;
+import com.example.hotel_management_system.Error.BadRequestException;
 import com.example.hotel_management_system.Models.User;
 import com.example.hotel_management_system.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,12 +23,10 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
 
     @Override
     public User getAuthenticatedUser() {
-
             String email = getAuthentication().getName();
-
-
+            System.out.println("email:"+email);
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new HttpNotFoundException("User not found with email " + email));
+                .orElseThrow(() -> new EntityNotFoundException("User not found with email " + email));
     }
 
     @Override

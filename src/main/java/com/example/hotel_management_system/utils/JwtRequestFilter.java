@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,128 +28,42 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtils;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain)
             throws ServletException, IOException {
-            final String requestTokenHeader = request.getHeader("Authorization");
+        try {
+            String jwt = parseJwt(request);
+            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+               System.out.println(jwt);
+                System.out.println("setting token");
+                String username = jwtUtils.extractUsername(jwt);
+                System.out.println(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                System.out.println(userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                jwt,
+                                userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                String token = authentication.getCredentials().toString();
+                System.out.println(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (Exception e) {
+            logger.error("Cannot set owner authentication: {e}", e);
+        }
 
-            System.out.println(requestTokenHeader);
-              String username = null;
-              String jwtToken = null;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
-            try {
-                username = jwtUtils.extractUsername(jwtToken);
-                System.out.println("Username extracted: " + username);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
-            } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
-            }
-        } else {
-            System.out.println("JWT Token does not begin with Bearer String");
-        }
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if (jwtUtils.validateJwtToken(jwtToken)) {
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken
-                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                System.out.println("Authentication successful for user: " + username);
-            } else {
-                System.out.println("JWT Token is invalid");
-            }
-        }
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 
-//@Override
-//protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
-//    try {
-//        String jwt = parseJwt(request);
-//        if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-//            String username = jwtUtils.extractUsername(jwt);
-//
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-//            UsernamePasswordAuthenticationToken authentication =
-//                    new UsernamePasswordAuthenticationToken(
-//                            userDetails,
-//                            null,
-//                            userDetails.getAuthorities());
-//            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//        }
-//    } catch (Exception e) {
-//        logger.error("Cannot set owner authentication: {e}", e);
-//    }
-//
-//    filterChain.doFilter(request, response);
-//}
-
-//    @Override
-//    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        try {
-//            String jwt = parseJwt(request);
-//            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-//                String username = jwtUtils.extractUsername(jwt);
-//
-//                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-//
-//                UsernamePasswordAuthenticationToken authentication =
-//                        new UsernamePasswordAuthenticationToken(
-//                                userDetails,
-//                                null,
-//                                userDetails.getAuthorities());
-//                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//
-//                SecurityContextHolder.getContext().setAuthentication(authentication);
-//            }
-//        } catch (Exception e) {
-//            logger.error("Cannot set owner authentication: {e}", e);
-//        }
-//            filterChain.doFilter(request, response);
-//    }
-
-
     private String parseJwt(HttpServletRequest request) {
+        System.out.println("parsinggg");
         String headerAuth = request.getHeader("Authorization");
 
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
             return headerAuth.substring(7);
         }
 
-        return null; // or throw an exception, depending on your requirements
+        return null;
     }
 }
-//}
-
-
-
-//    @Override
-//    protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
-//        try {
-//            final String requestTokenHeader = request.getHeader("Authorization");
-//
-//            if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-//                String jwt = parseJwt(request);
-//                String username = jwtUtils.extractUsername(jwt);
-//                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-//                if (jwtUtils.validateToken(jwt, userDetails)) {
-//                    UsernamePasswordAuthenticationToken authentication =
-//                            new UsernamePasswordAuthenticationToken(
-//                                    userDetails,
-//                                    null,
-//                                    userDetails.getAuthorities());
-//                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//
-//                    SecurityContextHolder.getContext().setAuthentication(authentication);
-//                }
-//            }
-//        } catch (Exception e) {
-//            logger.error("Cannot set owner authentication: {e}", e);
-//        }
-//
-//        filterChain.doFilter(request, response);
-//    }

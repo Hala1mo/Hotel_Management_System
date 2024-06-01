@@ -25,11 +25,13 @@ public class HouseKeepingTask {
     private String description;
     @Column(name="scheduledDate",nullable = false)
     private LocalDate scheduledDate;
-    @Column(name="status",nullable = false)
-    private TaskStatus status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private TaskStatus status = TaskStatus.pending; // Default value
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private Employee assignedEmployee;
+    private Employee employee;
+
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;

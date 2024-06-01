@@ -1,8 +1,8 @@
 package com.example.hotel_management_system.controllers;
 
-import com.example.hotel_management_system.DTO.TaskDTO;
+import com.example.hotel_management_system.DTO.Task.CreateTaskDTO;
+import com.example.hotel_management_system.DTO.Task.TaskDTO;
 import com.example.hotel_management_system.Services.HouseKeepingService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +19,17 @@ public class TaskController {
     public List<TaskDTO> getAllTasks() {
         return housekeepingTaskService.getAllTasks();
     }
-
+    @GetMapping("id/{id}")
+    public TaskDTO getTasksByID(@PathVariable Long id) {
+        return housekeepingTaskService.getTaskById(id);
+    }
     @GetMapping("/employee/{employeeId}")
     public List<TaskDTO> getTasksByEmployee(@PathVariable Long employeeId) {
-        return housekeepingTaskService.getTaskByEmployeeId(employeeId);
+        return housekeepingTaskService.getTaskByEmployee(employeeId);
     }
 
-    @PostMapping
-    public TaskDTO createTask(@RequestBody TaskDTO task) {
+    @PostMapping("/create")
+    public TaskDTO createTask(@RequestBody CreateTaskDTO task) {
         return housekeepingTaskService.createTask(task);
     }
 
@@ -34,4 +37,22 @@ public class TaskController {
     public void deleteTask(@PathVariable Long id) {
         housekeepingTaskService.deleteTaskById(id);
     }
+
+
+    @GetMapping("Finish/{id}")
+    public void setTaskStatusAsFinished(@PathVariable Long id) {
+         housekeepingTaskService.setTaskFinished(id);
+    }
+
+    @GetMapping("Pending/{id}")
+    public void setTaskStatusAsPending(@PathVariable Long id) {
+            housekeepingTaskService.setTaskPending(id);
+    }
+
+    @GetMapping("UnderProgress/{id}")
+    public void setTaskStatusAsUnderProgress(@PathVariable Long id) {
+       housekeepingTaskService.setTaskInProgress(id);
+    }
+
+
 }

@@ -10,9 +10,13 @@ public interface EmployeeService {
 
     EmployeeDTO createEmployee(EmployeeDTO employeeDTO);
 
-    List<Employee> getAllEmployees();
+    List<EmployeeDTO> getAllEmployees();
 
     EmployeeDTO getEmployeeById(long id);
+
+    EmployeeDTO getEmployeeByEmail(String email);
+
+    List<EmployeeDTO> getEmployeeForSpecifDepartment(String department);
 
     EmployeeDTO updateEmployee(long id, EmployeeDTO employeeDTO);
 

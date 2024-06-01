@@ -1,4 +1,4 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Task;
 
 import com.example.hotel_management_system.Models.Enum.TaskStatus;
 import jakarta.persistence.Enumerated;

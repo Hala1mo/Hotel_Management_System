@@ -4,16 +4,12 @@ import com.example.hotel_management_system.Security.Services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,11 +76,5 @@ public class JwtUtil {
     }
 
 
-    private boolean isTokenExpired(String token) {
-        return extractClaims(token).getExpiration().before(new Date());
-    }
 
-    public void addTokenToResponse(HttpServletResponse response, String token) {
-        response.setHeader("Authorization", "Bearer " + token);
-    }
 }

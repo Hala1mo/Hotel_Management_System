@@ -5,5 +5,10 @@ public enum Department {
     HOUSEKEEPING,
     MAINTENANCE,
     KITCHEN,
+    SECURITY,
+    HR,
+    MARKETING,
+    IT,
+    FINANCE
 
 }
