@@ -14,11 +14,11 @@ import java.util.List;
 public interface RoomService {
     List<RoomDTO> retrieveRooms();
     RoomDTO findRoomById(long id);
-    RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom);
+   // RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom);
     ResponseEntity<?> saveNewRoom (InsertRoomDTO requestedRoom);
     List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status);
     List<RoomDTO>retrieveRoomsBySpecificView(roomView view);
     List<RoomDetailsInfoDTO>retrieveRoomsBySpecificDates(Date checkIn, Date checkOut);
     List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id );
-
+    List<RoomDTO> getRoomsByCleanStatus(String status);
 }

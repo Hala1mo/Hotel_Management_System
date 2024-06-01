@@ -1,12 +1,9 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.InsertRoomDTO;
-import com.example.hotel_management_system.DTO.RoomDTO;
 import com.example.hotel_management_system.DTO.RoomTypeDTO;
-import com.example.hotel_management_system.Models.Room;
 import com.example.hotel_management_system.Models.Room_Type;
 
-public class RoomTypeMapper{
+public class RoomTypeMapper {
 
     public static RoomTypeDTO mapToDTO(Room_Type roomtypeRequest){
         RoomTypeDTO roomtype=new RoomTypeDTO();

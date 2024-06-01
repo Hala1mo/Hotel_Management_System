@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Models.Enum;
 
-public enum  roomView {
+public enum roomView {
 POOL("Pool"),
 GARDEN("Garden"),
     SEA("Sea");

@@ -2,7 +2,6 @@ package com.example.hotel_management_system.Repository;
 
 
 import com.example.hotel_management_system.Models.Reservation;
-import com.example.hotel_management_system.Models.Room_Type_Bed;
 import com.example.hotel_management_system.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

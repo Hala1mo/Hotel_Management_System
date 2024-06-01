@@ -1,5 +1,6 @@
 package com.example.hotel_management_system.Models;
 
+import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -41,7 +42,10 @@ public class Room  {
     private Room_Type roomType;
 
     @OneToMany(mappedBy = "room_id", cascade = {CascadeType.ALL})
-    private List <Reserve_Room> booking_room;
+    private List<Reserve_Room> booking_room;
+
+
+    @Column(name="cleanliness_status",nullable = false)
+    private CleanlinessStatus cleanlinessStatus;
 
 }
-

@@ -1,11 +1,6 @@
 package com.example.hotel_management_system.DTO;
 
 import com.example.hotel_management_system.Models.Enum.paymentMethod;
-import com.example.hotel_management_system.Models.Enum.reservationStatus;
-import com.example.hotel_management_system.Models.Reserve_Room;
-import com.example.hotel_management_system.Models.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

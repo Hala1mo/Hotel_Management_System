@@ -1,8 +1,10 @@
 package com.example.hotel_management_system.Services.Impl;
 
 
-
-import com.example.hotel_management_system.DTO.*;
+import com.example.hotel_management_system.DTO.InsertRoomDTO;
+import com.example.hotel_management_system.DTO.ReservationInfoDTO;
+import com.example.hotel_management_system.DTO.RoomDTO;
+import com.example.hotel_management_system.DTO.RoomDetailsInfoDTO;
 import com.example.hotel_management_system.Mapper.Reserve_RoomMapper;
 import com.example.hotel_management_system.Mapper.RoomMapper;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
@@ -13,21 +15,23 @@ import com.example.hotel_management_system.Models.Room_Type;
 import com.example.hotel_management_system.Repository.RoomRepository;
 import com.example.hotel_management_system.Repository.RoomTypeRepository;
 import com.example.hotel_management_system.Services.RoomService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class RoomServiceImpl implements RoomService {
-   RoomRepository roomRepository;
-   RoomTypeRepository roomTypeRepository;
+    RoomRepository roomRepository;
+    RoomTypeRepository roomTypeRepository;
 
     @Autowired
-    public RoomServiceImpl(RoomRepository roomRepository,RoomTypeRepository roomTypeRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, RoomTypeRepository roomTypeRepository) {
 
         this.roomRepository=roomRepository;
         this.roomTypeRepository=roomTypeRepository;
@@ -42,8 +46,8 @@ public class RoomServiceImpl implements RoomService {
         Room roomById = roomRepository.findAllById(id);
         return RoomMapper.mapToDTO(roomById);
     }
-     public RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom) {
-         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
+    public RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom) {
+        Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
         Room roomById = roomRepository.findAllById(id);
         RoomMapper.update(roomById,requestedRoom,roomType);
         roomRepository.save(roomById);
@@ -53,8 +57,8 @@ public class RoomServiceImpl implements RoomService {
     public ResponseEntity<?> saveNewRoom (InsertRoomDTO requestedRoom) {
         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
         Room roomToSave = RoomMapper.ToEntity(requestedRoom,roomType);
-       roomRepository.save(roomToSave);
-    return ResponseEntity.ok("Saved Successfully");
+        roomRepository.save(roomToSave);
+        return ResponseEntity.ok("Saved Successfully");
     }
     public List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status){
         List<Room>rooms=roomRepository.findAllByStatus(status);
@@ -80,5 +84,19 @@ public class RoomServiceImpl implements RoomService {
         return reseravtionForARoom.stream().map(reservation -> Reserve_RoomMapper.mapToBooking(reservation)).collect(Collectors.toList());
     }
 
-
+    @Override
+    public List<RoomDTO> getRoomsByCleanStatus(String status) {
+        List<Room> queryResult = roomRepository.findAll();
+        if (queryResult.isEmpty()) {
+            throw new EntityNotFoundException("No rooms found");
+        }
+        List<RoomDTO> rooms = new ArrayList<>();
+        for (Room room : queryResult) {
+            if(room.getCleanlinessStatus().toString().equals(status)) {
+                RoomDTO employeeDTO = RoomMapper.mapToDTO(room);
+                rooms.add(employeeDTO);
+            }
+        }
+        return rooms;
+    }
 }

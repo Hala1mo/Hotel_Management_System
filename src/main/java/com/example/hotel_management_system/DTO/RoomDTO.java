@@ -1,26 +1,19 @@
 package com.example.hotel_management_system.DTO;
 
+import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
+import com.example.hotel_management_system.Models.Enum.Department;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
-import com.example.hotel_management_system.Models.Room_Type;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Column;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class RoomDTO{
+public class RoomDTO {
     private long id;
 
     @NotNull
@@ -43,4 +36,7 @@ public class RoomDTO{
     @NotBlank
     private String room_Type;
 
+    @NotNull
+    @Enumerated
+    private CleanlinessStatus cleanlinessStatus;
 }

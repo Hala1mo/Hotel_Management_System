@@ -15,7 +15,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class InsertRoomDTO{
+public class InsertRoomDTO {
     private long id;
 
     @NotNull

@@ -1,16 +1,11 @@
 package com.example.hotel_management_system.Services.Impl;
 
 import com.example.hotel_management_system.DTO.FeatureDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
 import com.example.hotel_management_system.Mapper.FeatureMapper;
-import com.example.hotel_management_system.Mapper.RoomTypeMapper;
 import com.example.hotel_management_system.Models.Features;
-import com.example.hotel_management_system.Models.Room_Type;
 import com.example.hotel_management_system.Repository.FeaturesRepository;
-import com.example.hotel_management_system.Repository.RoomRepository;
 import com.example.hotel_management_system.Repository.RoomTypeRepository;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
-import com.example.hotel_management_system.Services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +20,7 @@ public class RoomFeaturesServiceImpl implements RoomFeaturesService {
 
 
     @Autowired
-    public RoomFeaturesServiceImpl( FeaturesRepository featuresRepository, RoomTypeRepository roomTypeRepository) {
+    public RoomFeaturesServiceImpl(FeaturesRepository featuresRepository, RoomTypeRepository roomTypeRepository) {
 
         this.featuresRepository = featuresRepository;
         this.roomTypeRepository = roomTypeRepository;
