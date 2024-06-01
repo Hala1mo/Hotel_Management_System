@@ -20,7 +20,6 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("")
-    @PreAuthorize("hasRole('ADMIN')")
     public List<EmployeeDTO> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
@@ -42,13 +41,11 @@ public class EmployeeController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public EmployeeDTO updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO updatedEmployee) {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployeeById(id);
     }

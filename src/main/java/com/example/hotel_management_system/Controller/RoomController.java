@@ -30,15 +30,21 @@ public class RoomController {
     public List<RoomDTO> retrieveBedTypes(){
         return roomService.retrieveRooms();
     }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/status/{status}")
     public List<RoomDetailsInfoDTO> retrieveRoomsBySpecificStatus(@PathVariable roomStatus status){
         return roomService.retrieveRoomsBySpecificStatus(status);
     }
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/view/{view}")
     public List<RoomDTO>retrieveRoomsBySpecificView(@PathVariable roomView view){
         return roomService.retrieveRoomsBySpecificView(view);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/available-rooms")
     public List<RoomDetailsInfoDTO> getAvailableRooms(
             @RequestParam("check-in-date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkInDate,
@@ -46,6 +52,8 @@ public class RoomController {
         List<RoomDetailsInfoDTO> availableRooms = roomService.retrieveRoomsBySpecificDates(checkInDate,checkOutDate);
         return availableRooms;
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/reservations/{id}")
     public List<ReservationInfoDTO> retrieveReservationForSpecificRoom (@PathVariable long id ) {
         return roomService.retrieveReservationForSpecificRoom(id);
@@ -57,16 +65,23 @@ public class RoomController {
         return roomService.retrieveRooms();
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> saveNewRoom (@RequestBody  InsertRoomDTO requestedRoom){
         return roomService.saveNewRoom(requestedRoom);
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/id/{id}")
     public RoomDTO getRoomById(@PathVariable Long id) {
         return roomService.findRoomById(id);
     }
 
+
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/cleanliness/{status}")
     public List<RoomDTO> getRoomByCleanStatus(@PathVariable String status) {
         return roomService.getRoomsByCleanStatus(status);

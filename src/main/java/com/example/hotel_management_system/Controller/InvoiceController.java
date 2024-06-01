@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/Invoice")
+@RequestMapping("api/reservations/Invoice")
 public class InvoiceController {
 }

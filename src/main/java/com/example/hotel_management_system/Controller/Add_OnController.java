@@ -5,30 +5,33 @@ import com.example.hotel_management_system.DTO.FeatureDTO;
 import com.example.hotel_management_system.Services.AddOnService;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/addOn")
+@RequestMapping("api/reservations/addOn")
 public class Add_OnController {
     AddOnService addOnService;
     @Autowired
     public Add_OnController( AddOnService addOnService){
-
         this.addOnService=addOnService;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("")
     public List<Add_OnDTO > retrieveAddOn(){
         return addOnService.retrieveAddOnFeatures();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
     public Add_OnDTO saveAddOn (@RequestBody  Add_OnDTO request){
         return addOnService.saveAddOn(request);
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{id}/update")
     public Add_OnDTO updateAddOn (Add_OnDTO request,long id){
         return addOnService.updateAddOn(request, id);

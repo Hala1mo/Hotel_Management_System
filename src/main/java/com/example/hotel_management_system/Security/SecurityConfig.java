@@ -126,7 +126,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Autowired
@@ -158,7 +158,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/auth/**").permitAll()
                         .requestMatchers("/api/employees/**").access(adminAuth)
                         .requestMatchers("/api/tasks/**").access(adminAuth)
-                        .requestMatchers("/api/rooms/**").access(adminAuth)
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandling -> exceptionHandling
