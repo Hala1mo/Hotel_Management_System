@@ -21,8 +21,10 @@ public class RoomTypeMapper {
     public static Room_Type ToEntity(RoomTypeDTO roomtypeRequest){
         return Room_Type.builder().type_name(roomtypeRequest.getType_name())
                 .price(roomtypeRequest.getPrice())
+                .num_adults(roomtypeRequest.getNum_adults())
+                .num_children(roomtypeRequest.getNum_children())
+                .size_room(roomtypeRequest.getSize_room())
                 .build();
-
     }
 
 }
