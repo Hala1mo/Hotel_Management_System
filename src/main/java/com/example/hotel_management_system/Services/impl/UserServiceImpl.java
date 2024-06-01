@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             return UserMapper.mapToDTO(user, jwt);
         } catch (AuthenticationException e) {
             logger.error("Authentication failed: {}", e.getMessage());
-            throw new BadCredentialsException("Invalid password");
+            throw new BadCredentialsException("Invalid pass");
         } catch (Exception e) {
             logger.error("Exception during login: {}", e.getMessage());
             throw e;
