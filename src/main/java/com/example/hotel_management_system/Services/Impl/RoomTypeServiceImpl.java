@@ -1,9 +1,6 @@
 package com.example.hotel_management_system.Services.Impl;
 
-import com.example.hotel_management_system.DTO.FeatureDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
-import com.example.hotel_management_system.DTO.Room_Type_BedDTO;
-import com.example.hotel_management_system.DTO.Room_Type_FeatureDTO;
+import com.example.hotel_management_system.DTO.*;
 import com.example.hotel_management_system.Mapper.RoomTypeMapper;
 import com.example.hotel_management_system.Mapper.Room_Type_BedMapper;
 import com.example.hotel_management_system.Mapper.Room_Type_FeatureMapper;
@@ -73,6 +70,12 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return features.stream().map(feature -> Room_Type_FeatureMapper.mapToDTOFeature(feature)).collect(Collectors.toList());
     }
 
+    public List<Bed_TypeDTO> retrieveBedTypeForSpecificRoomType(Long id){
+        Room_Type room_type= roomTypeRepository.findAllById(id);
+        List<Room_Type_Bed> beds=room_type.getRoom_type_bed();
+        return beds.stream().map(bed -> Room_Type_BedMapper.mapToDTOBed(bed)).collect(Collectors.toList());
+
+    }
     public RoomTypeDTO saveRoomType (RoomTypeDTO request){
         Room_Type roomTypeToSave = RoomTypeMapper.ToEntity(request);
         roomTypeRepository.save(roomTypeToSave);

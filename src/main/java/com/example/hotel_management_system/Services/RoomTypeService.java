@@ -1,10 +1,8 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.DTO.FeatureDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
-import com.example.hotel_management_system.DTO.Room_Type_BedDTO;
-import com.example.hotel_management_system.DTO.Room_Type_FeatureDTO;
+import com.example.hotel_management_system.DTO.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -14,5 +12,6 @@ public interface RoomTypeService {
     ResponseEntity<?> addBedTypeForSpecificRoomType(Room_Type_BedDTO request);
     List<FeatureDTO> retrieveFeaturesForSpecificRoomType(long id);
     RoomTypeDTO saveRoomType (RoomTypeDTO request);
+    List<Bed_TypeDTO> retrieveBedTypeForSpecificRoomType(Long id);
 
 }

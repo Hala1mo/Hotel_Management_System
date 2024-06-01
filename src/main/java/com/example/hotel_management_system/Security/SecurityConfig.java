@@ -159,6 +159,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/employees/**").access(adminAuth)
                         .requestMatchers("/api/tasks/**").access(adminAuth)
                         .requestMatchers("/api/rooms/**").access(adminAuth)
+                        .requestMatchers("/api/RoomType/**").access(adminAuth)
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandling -> exceptionHandling

@@ -16,6 +16,7 @@ public class Bed_TypeDTO {
 
     private long id;
 
+
     @NotNull
     @NotBlank
     @Size(min=3,max = 50)
