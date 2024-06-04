@@ -1,5 +1,6 @@
 package com.example.hotel_management_system.DTO;
 
+import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
 import jakarta.persistence.Enumerated;
@@ -36,5 +37,9 @@ public class InsertRoomDTO {
     @NotNull
     @NotBlank
     private long  room_TypeID;
+
+    @NotNull
+    @Enumerated
+    private CleanlinessStatus cleanlinessStatus;
 
 }

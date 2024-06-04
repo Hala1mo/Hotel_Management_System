@@ -24,6 +24,7 @@ public class RoomMapper{
         room.setRoom_Type(roomRequest.getRoomType().getType_name());
         room.setView(roomRequest.getView());
         room.setStatus(roomRequest.getStatus());
+        room.setCleanlinessStatus(roomRequest.getCleanlinessStatus());
         return room;
     }
 
@@ -76,6 +77,7 @@ public class RoomMapper{
                 .view(roomRequest.getView())
                 .floor_number(roomRequest.getFloor_number())
                 .roomType(room_type)
+                .cleanlinessStatus(roomRequest.getCleanlinessStatus())
                 .build();
 
     }

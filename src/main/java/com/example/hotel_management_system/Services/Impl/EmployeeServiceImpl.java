@@ -1,4 +1,4 @@
-package com.example.hotel_management_system.Services.impl;
+package com.example.hotel_management_system.Services.Impl;
 
 import com.example.hotel_management_system.DTO.EmployeeDTO;
 import com.example.hotel_management_system.Mapper.EmployeeMapper;

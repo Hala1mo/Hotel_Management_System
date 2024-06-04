@@ -6,6 +6,7 @@ import com.example.hotel_management_system.Models.Features;
 import com.example.hotel_management_system.Repository.FeaturesRepository;
 import com.example.hotel_management_system.Repository.RoomTypeRepository;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,9 @@ public class RoomFeaturesServiceImpl implements RoomFeaturesService {
     }
     public List<FeatureDTO> retrieveFeatures(){
         List<Features> allFeatures= featuresRepository.findAll();
+        if(allFeatures==null){
+            throw new EntityNotFoundException("No features found in the database");
+        }
         return allFeatures.stream().map(feature -> FeatureMapper.mapToDTO(feature)).collect(Collectors.toList());
     }
 

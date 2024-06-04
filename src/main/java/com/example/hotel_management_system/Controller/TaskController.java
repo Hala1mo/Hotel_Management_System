@@ -25,7 +25,7 @@ public class TaskController {
     }
     @GetMapping("/employee/{employeeId}")
     public List<TaskDTO> getTasksByEmployee(@PathVariable Long employeeId) {
-        return housekeepingTaskService.getTaskByEmployee(employeeId);
+        return housekeepingTaskService.getTaskForEmployee(employeeId);
     }
 
     @PostMapping("/create")
@@ -38,21 +38,39 @@ public class TaskController {
         housekeepingTaskService.deleteTaskById(id);
     }
 
+    @PutMapping("update/{id}")
+    public void updateTask(@PathVariable Long id,@RequestBody TaskDTO task) {
+        housekeepingTaskService.updateTask(id,task);
+    }
 
-    @GetMapping("Finish/{id}")
+
+    @GetMapping("status/finish/{id}")
     public void setTaskStatusAsFinished(@PathVariable Long id) {
          housekeepingTaskService.setTaskFinished(id);
     }
 
-    @GetMapping("Pending/{id}")
+    @GetMapping("status/pending/{id}")
     public void setTaskStatusAsPending(@PathVariable Long id) {
             housekeepingTaskService.setTaskPending(id);
     }
 
-    @GetMapping("UnderProgress/{id}")
+    @GetMapping("status/underProgress/{id}")
     public void setTaskStatusAsUnderProgress(@PathVariable Long id) {
        housekeepingTaskService.setTaskInProgress(id);
     }
 
 
+    @GetMapping("/status/underProgress")
+    public void getTaskStatusUnderProgress() {
+        housekeepingTaskService.getInProgressTasks();
+    }
+
+    @GetMapping("/status/completed")
+    public void getTaskStatusCompleted() {
+        housekeepingTaskService.getFinishedTasks();
+    }
+    @GetMapping("/status/pending")
+    public void getTaskStatusPending() {
+        housekeepingTaskService.getPendingTasks();
+    }
 }

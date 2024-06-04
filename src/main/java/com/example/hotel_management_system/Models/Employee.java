@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor //automatically generates a constructor with a parameter for each field in the class
@@ -34,4 +36,5 @@ public class Employee {
     private long salary;
     @Column(name="department",nullable = false)
     private Department department;
+
 }

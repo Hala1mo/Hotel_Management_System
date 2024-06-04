@@ -10,6 +10,7 @@ import com.example.hotel_management_system.Repository.InvoiceRepository;
 import com.example.hotel_management_system.Repository.ReservationRepository;
 import com.example.hotel_management_system.Repository.RoomTypeRepository;
 import com.example.hotel_management_system.Services.InvoiceService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     InvoiceDetailsDTO retrieveInvoiceForSpecificBooking(long id){
         Reservation booking=reservationRepository.findAllById(id);
+        if (booking==null) {
+            throw new EntityNotFoundException("No Reservation found with this id");
+        }
         Invoice invoice=invoiceRepository.findAllByBooking(booking);
+        if (invoice==null) {
+            throw new EntityNotFoundException("No Invoice found for this booking");
+        }
         return InvoiceMapper.mapToInvoiceDetailsDTO(invoice);
     }
 

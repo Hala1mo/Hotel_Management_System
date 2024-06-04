@@ -40,7 +40,7 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
             throw new IllegalArgumentException("Room is already assigned for cleaning on this date");
         }
         Optional<Employee> employeeOptional = employeeRepository.findById(taskDTO.getEmployee_id());
-        Employee employee = employeeOptional.orElseThrow(() -> new EntityNotFoundException("Employee not found with id: " + taskDTO.getEmployee_id()));
+       Employee employee = employeeOptional.orElseThrow(() -> new EntityNotFoundException("Employee not found with id: " + taskDTO.getEmployee_id()));
 
         if(!employee.getDepartment().name().equals("HOUSEKEEPING")){
             throw new IllegalArgumentException("Employee is not in department HouseKeeping: ");
@@ -77,7 +77,7 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
     }
 
     @Override
-    public List<TaskDTO> getTaskByEmployee(long id) {
+    public List<TaskDTO> getTaskForEmployee(long id) {
         Employee employee = employeeRepository.findById(id);
         if(employee!=null) {
             List<HouseKeepingTask> queryResult = taskRepository.findByEmployee(employee);
@@ -215,4 +215,42 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
         }
 
     }
-}
+
+
+    @Override
+    public List<TaskDTO> getFinishedTasks() {
+        List<HouseKeepingTask> queryResult = taskRepository.findAll();
+        List<TaskDTO> tasks = new ArrayList<>();
+        for (HouseKeepingTask task : queryResult) {
+            if(task.getStatus().name().equals("completed")){
+            TaskDTO taskDTO = TaskMapper.mapToDTO(task);
+            tasks.add(taskDTO);}
+        }
+        return tasks;
+    }
+
+    @Override
+    public List<TaskDTO> getInProgressTasks() {
+        List<HouseKeepingTask> queryResult = taskRepository.findAll();
+        List<TaskDTO> tasks = new ArrayList<>();
+        for (HouseKeepingTask task : queryResult) {
+            if(task.getStatus().name().equals("inProgress")){
+                TaskDTO taskDTO = TaskMapper.mapToDTO(task);
+                tasks.add(taskDTO);}
+        }
+        return tasks;
+    }
+
+    @Override
+    public List<TaskDTO> getPendingTasks() {
+        List<HouseKeepingTask> queryResult = taskRepository.findAll();
+        List<TaskDTO> tasks = new ArrayList<>();
+        for (HouseKeepingTask task : queryResult) {
+            if(task.getStatus().name().equals("pending")){
+                TaskDTO taskDTO = TaskMapper.mapToDTO(task);
+                tasks.add(taskDTO);}
+        }
+        return tasks;
+    }
+ }
+

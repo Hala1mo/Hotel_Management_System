@@ -12,7 +12,7 @@ public interface HouseKeepingService {
 
     List<TaskDTO> getAllTasks();
 
-    List<TaskDTO> getTaskByEmployee(long id);
+    List<TaskDTO> getTaskForEmployee(long id);
     TaskDTO getTaskById(long id);
 
     TaskDTO updateTask(long id, TaskDTO taskDTO);
@@ -25,4 +25,8 @@ public interface HouseKeepingService {
     void setTaskInProgress(long id);
 
 
+    List<TaskDTO> getFinishedTasks();
+    List<TaskDTO> getInProgressTasks();
+
+    List<TaskDTO> getPendingTasks();
 }
