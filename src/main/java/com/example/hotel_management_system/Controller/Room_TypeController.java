@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/RoomType")
+@RequestMapping("/api/rooms/RoomType")
 public class Room_TypeController {
     RoomTypeService roomTypeservice;
 
@@ -22,11 +22,11 @@ public class Room_TypeController {
     public List<RoomTypeDTO> retrieveRoomsTypes(){
         return roomTypeservice.retrieveRoomsTypes();
     }
-    @GetMapping("{id}/Features")
+    @GetMapping("Features/{id}")
     public List<FeatureDTO> retrieveFeaturesForSpecificRoomType(@PathVariable Long id){
         return roomTypeservice.retrieveFeaturesForSpecificRoomType(id);
     }
-    @GetMapping("{id}/Bed")
+    @GetMapping("/Bed/{id}")
     public List<Bed_TypeDTO> retrieveBedTypeForSpecificRoomType(@PathVariable Long id){
         return roomTypeservice.retrieveBedTypeForSpecificRoomType(id);
     }

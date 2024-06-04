@@ -158,6 +158,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/auth/**").permitAll()
                         .requestMatchers("/api/employees/**").access(adminAuth)
                         .requestMatchers("/api/tasks/**").access(adminAuth)
+                        .requestMatchers("/api/rooms/RoomType/**").access(adminAuth)
+                        .requestMatchers("api/rooms/BedType/*").access(adminAuth)
                         .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandling -> exceptionHandling

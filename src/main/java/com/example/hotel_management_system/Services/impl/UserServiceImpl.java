@@ -1,4 +1,4 @@
-package com.example.hotel_management_system.Services.Impl;
+package com.example.hotel_management_system.Services.impl;
 
 import com.example.hotel_management_system.DTO.User.*;
 import com.example.hotel_management_system.Error.UserNotFoundException;
@@ -66,12 +66,10 @@ public class UserServiceImpl implements UserService {
             logger.info("User authenticated: {}", userPrincipal.getUsername());
             String jwt = jwtUtil.generateToken(authentication);
             System.out.println(jwt);
-//            User user = userRepository.findByEmail(loginRequest.getEmail())
-//                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             return UserMapper.mapToDTO(user, jwt);
         } catch (AuthenticationException e) {
             logger.error("Authentication failed: {}", e.getMessage());
-            throw new BadCredentialsException("Invalid pass");
+            throw new BadCredentialsException("Invalid password");
         } catch (Exception e) {
             logger.error("Exception during login: {}", e.getMessage());
             throw e;

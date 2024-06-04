@@ -32,23 +32,32 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     public RoomServiceImpl(RoomRepository roomRepository, RoomTypeRepository roomTypeRepository) {
-
         this.roomRepository=roomRepository;
         this.roomTypeRepository=roomTypeRepository;
     }
     @Override
     public List<RoomDTO> retrieveRooms() {
         List<Room> allRoom= roomRepository.findAll();
+        if (allRoom.isEmpty()) {
+            throw new EntityNotFoundException("No Rooms found in the database.");
+        }
         return allRoom.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
     @Override
     public RoomDTO findRoomById(long id) {
         Room roomById = roomRepository.findAllById(id);
+        if (roomById==null) {
+            throw new EntityNotFoundException("No Room found with this id");
+        }
         return RoomMapper.mapToDTO(roomById);
     }
     public RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom) {
         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
         Room roomById = roomRepository.findAllById(id);
+
+        if(roomById==null){
+            throw new EntityNotFoundException("Room not found with id: " + id);
+        }
         RoomMapper.update(roomById,requestedRoom,roomType);
         roomRepository.save(roomById);
         return RoomMapper.mapToDTO(roomById);
@@ -62,24 +71,41 @@ public class RoomServiceImpl implements RoomService {
     }
     public List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status){
         List<Room>rooms=roomRepository.findAllByStatus(status);
-
+        if (rooms.isEmpty()) {
+            throw new EntityNotFoundException("No Rooms found for this status:"+status);
+        }
         return rooms.stream().map(room -> RoomMapper.detailsMapToDTO(room)).collect(Collectors.toList());
     }
 
     public List<RoomDetailsInfoDTO>retrieveRoomsBySpecificDates(Date checkIn,Date checkOut){
         List<Room>rooms=roomRepository.findAvailableRooms(checkIn,checkOut);
+
+        if (rooms.isEmpty()) {
+            throw new EntityNotFoundException("No Rooms available in these dates.");
+        }
+
         return rooms.stream().map(room -> RoomMapper.detailsMapToDTO(room)).collect(Collectors.toList());
     }
 
     public List<RoomDTO>retrieveRoomsBySpecificView(roomView view){
         List<Room>rooms=roomRepository.findAllByView(view);
+        if (rooms.isEmpty()) {
+            throw new EntityNotFoundException("No Rooms found in this view");
+        }
         return rooms.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
 
 
     public List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id ){
         Room room=roomRepository.findAllById(id);
+        if(room==null){
+            throw new EntityNotFoundException("No Room found with this id");
+        }
         List<Reserve_Room> reseravtionForARoom=room.getBooking_room();
+
+        if(reseravtionForARoom==null){
+            throw new EntityNotFoundException("No Reservations found for this room with id"+id);
+        }
 
         return reseravtionForARoom.stream().map(reservation -> Reserve_RoomMapper.mapToBooking(reservation)).collect(Collectors.toList());
     }
@@ -88,7 +114,7 @@ public class RoomServiceImpl implements RoomService {
     public List<RoomDTO> getRoomsByCleanStatus(String status) {
         List<Room> queryResult = roomRepository.findAll();
         if (queryResult.isEmpty()) {
-            throw new EntityNotFoundException("No rooms found");
+            throw new EntityNotFoundException("No rooms found by this status:"+status);
         }
         List<RoomDTO> rooms = new ArrayList<>();
         for (Room room : queryResult) {
