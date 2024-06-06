@@ -1,11 +1,8 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.Bed_TypeDTO;
-import com.example.hotel_management_system.DTO.FeatureDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
+import com.example.hotel_management_system.DTO.Room.Bed_TypeDTO;
 import com.example.hotel_management_system.Services.BedTypeService;
-import com.example.hotel_management_system.Services.RoomFeaturesService;
-import com.example.hotel_management_system.Services.RoomTypeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +28,8 @@ public class RoomBedTypeController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("")
-    public Bed_TypeDTO saveBedType(@RequestBody Bed_TypeDTO request){
+    @PostMapping("/create")
+    public Bed_TypeDTO saveBedType(@Valid @RequestBody Bed_TypeDTO request){
         return bedTypeService.saveBedType(request);
     }
 

@@ -1,45 +1,41 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Room;
 
 import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class InsertRoomDTO {
     private long id;
 
-    @NotNull
-    @NotBlank
-    private int room_number;
+    @NotNull(message = "Room Number is mandatory")
+    private Integer room_number;
 
-    @NotNull
-    @NotBlank
-    private int floor_number;
+    @NotNull(message = "Floor Number is mandatory")
+    private Integer floor_number;
 
+    @NotNull(message = "Status is mandatory")
     @Enumerated
-    @NotNull
-    private roomStatus status ;
+    private roomStatus status;
 
+    @NotNull(message = "View is mandatory")
     @Enumerated
-    @NotNull
-    private roomView view ;
-    @NotNull
-    @NotBlank
-    private long  room_TypeID;
+    private roomView view;
 
-    @NotNull
+    @NotNull(message = "Room type id is mandatory")
+    private Long room_TypeID;
+
+    @NotNull(message = "CleanlinessStatus is mandatory")
     @Enumerated
     private CleanlinessStatus cleanlinessStatus;
-
 }

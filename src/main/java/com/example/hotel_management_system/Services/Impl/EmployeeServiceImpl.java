@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.Services.Impl;
 
-import com.example.hotel_management_system.DTO.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 import com.example.hotel_management_system.Mapper.EmployeeMapper;
 import com.example.hotel_management_system.Models.Employee;
 import com.example.hotel_management_system.Services.EmployeeService;
@@ -18,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      @Autowired
       EmployeeRepository employeeRepository;
     @Override
-    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+    public EmployeeDTO createEmployee(InsertEmployeeDTO employeeDTO) {
         Employee employee = EmployeeMapper.mapToEntity(employeeDTO);
         Employee newUser = employeeRepository.save(employee);
         return EmployeeMapper.mapToDTO(newUser);

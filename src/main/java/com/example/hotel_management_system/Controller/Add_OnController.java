@@ -1,9 +1,8 @@
 package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.Add_OnDTO;
-import com.example.hotel_management_system.DTO.FeatureDTO;
 import com.example.hotel_management_system.Services.AddOnService;
-import com.example.hotel_management_system.Services.RoomFeaturesService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class Add_OnController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
-    public Add_OnDTO saveAddOn (@RequestBody  Add_OnDTO request){
+    public Add_OnDTO saveAddOn (@Valid @RequestBody  Add_OnDTO request){
         return addOnService.saveAddOn(request);
     }
     @PreAuthorize("hasRole('ADMIN')")

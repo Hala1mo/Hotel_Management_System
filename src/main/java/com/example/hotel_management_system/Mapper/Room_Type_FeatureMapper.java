@@ -1,7 +1,7 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.FeatureDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
+import com.example.hotel_management_system.DTO.Room.FeatureDTO;
+import com.example.hotel_management_system.DTO.Room.RoomTypeDTO;
 import com.example.hotel_management_system.Models.Features;
 import com.example.hotel_management_system.Models.Room_Type;
 import com.example.hotel_management_system.Models.Room_Type_Feature;

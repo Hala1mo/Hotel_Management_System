@@ -1,5 +1,6 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Room;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,12 +14,11 @@ import lombok.Setter;
 public class Room_Type_FeatureDTO {
 
     private long id;
-
-    @NotNull
+    @Valid
+    @NotNull(message = "Room type id is mandatory")
     private long type_id;
 
-
-    @NotNull
+    @NotNull(message = "Feature id is mandatory")
     private long feature_id;
 
 }

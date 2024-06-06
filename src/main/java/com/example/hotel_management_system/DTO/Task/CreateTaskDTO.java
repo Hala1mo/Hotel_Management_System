@@ -1,26 +1,25 @@
 package com.example.hotel_management_system.DTO.Task;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
-
 
 @Data
 public class CreateTaskDTO {
 
-    @NotNull
-    @NotBlank
+    @Valid
+    @NotBlank(message = "Description is mandatory")
     private String description;
-    @NotNull
-    @NotBlank
-    private LocalDate scheduledDate;
-    @NotNull
-    @NotBlank
-    private Long  employee_id;
 
-    @NotNull
-    @NotBlank
-    private Long  room_id;
+    @NotNull(message = "Scheduled Date is mandatory")
+    private LocalDate scheduledDate;
+
+    @NotNull(message = "Employee Id is mandatory")
+    private Long employee_id;
+
+    @NotNull(message = "Room Id is mandatory")
+    private Long room_id;
 }

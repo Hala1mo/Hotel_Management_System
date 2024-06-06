@@ -2,9 +2,7 @@ package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.Add_OnDTO;
 import com.example.hotel_management_system.DTO.ReservationDTO;
-import com.example.hotel_management_system.DTO.RoomDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
-import com.example.hotel_management_system.Repository.ReservationRepository;
+import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.Services.ReservationService;
 import com.example.hotel_management_system.Services.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin

@@ -1,10 +1,7 @@
 package com.example.hotel_management_system.Mapper;
 
 import com.example.hotel_management_system.DTO.Add_OnDTO;
-import com.example.hotel_management_system.DTO.Bed_TypeDTO;
 import com.example.hotel_management_system.Models.Add_On;
-import com.example.hotel_management_system.Models.Bed_Type;
-import com.example.hotel_management_system.Models.Features;
 
 public class Add_OnMapper {
     public static Add_OnDTO mapToDTO(Add_On request){

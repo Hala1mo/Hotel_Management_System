@@ -1,8 +1,8 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Room;
+
 
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
-import jakarta.persistence.Column;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -12,30 +12,45 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class RoomTypeDTO{
-
+public class RoomDetailsInfoDTO{
     private long id;
+
+
+    @NotNull
+    @NotBlank
+    private int room_number;
+
+    @NotNull
+    @NotBlank
+    private int floor_number;
+
+    @Enumerated
+    @NotNull
+    private roomStatus status ;
+
+    @Enumerated
+    @NotNull
+    private roomView view ;
     @NotNull
     @NotBlank
     private double price;
+
     @NotNull
     @NotBlank
     @Size(min =10,max = 50)
     private String type_name;
+
     @NotNull
-    @NotBlank
-    private double size_room;
-    @NotNull
-    @NotBlank
-    private int num_adults;
-    @NotNull
-    @NotBlank
-    private int num_children;
+    List<FeatureDTO> features;
 
 
+    @NotNull
+    List<Bed_TypeDTO> bed_Type;
 }

@@ -3,6 +3,7 @@ package com.example.hotel_management_system.Controller;
 import com.example.hotel_management_system.DTO.User.*;
 import com.example.hotel_management_system.Security.auth.AuthenticationFacade;
 import com.example.hotel_management_system.Services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,12 @@ public class UserController {
     @PostMapping("/auth/signup")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDTO signup(@RequestBody RegisterDTO registerDTO) {
+    public UserResponseDTO signup(@Valid @RequestBody RegisterDTO registerDTO) {
         return userService.signup(registerDTO);
     }
 
     @PostMapping("auth/login")
-    public UserResponseDTO authenticate(@RequestBody LoginDTO loginDTO) {
+    public UserResponseDTO authenticate(@Valid @RequestBody LoginDTO loginDTO) {
         return userService.login(loginDTO);
     }
 
@@ -64,7 +65,7 @@ public class UserController {
     //updateProfile
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/profile/updateProfile")
-    public ResponseEntity<UserDTO> updateProfile(@RequestBody UpdateUserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateProfile(@Valid @RequestBody UpdateUserDTO userDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.getCredentials() != null) {
             String email = authentication.getName();
@@ -86,7 +87,7 @@ public class UserController {
     //Change password
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/profile/changePassword")
-    public ResponseEntity<String> changePassword( @RequestBody PasswordChangeDTO passwordChangeDTO) {
+    public ResponseEntity<String> changePassword(@Valid @RequestBody PasswordChangeDTO passwordChangeDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication.getCredentials() != null) {
             String email = authentication.getName();

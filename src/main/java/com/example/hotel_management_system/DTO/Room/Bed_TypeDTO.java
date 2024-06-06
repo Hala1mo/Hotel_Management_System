@@ -1,5 +1,6 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Room;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -12,18 +13,15 @@ import org.antlr.v4.runtime.misc.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeatureDTO {
+public class Bed_TypeDTO {
 
     private long id;
 
-    @NotNull
-    @NotBlank
-    @Size(min=3,max = 50)
-    private String feature;
+    @Valid
 
-    @NotNull
-    @NotBlank
+    @NotBlank(message = "Bed Type is mandatory")
     @Size(min=3,max = 50)
-    private String description;
+    private String bed_type;
+
 
 }

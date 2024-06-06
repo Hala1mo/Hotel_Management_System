@@ -1,14 +1,14 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.DTO.EmployeeDTO;
-import com.example.hotel_management_system.Models.Employee;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeService {
 
 
-    EmployeeDTO createEmployee(EmployeeDTO employeeDTO);
+    EmployeeDTO createEmployee(InsertEmployeeDTO employeeDTO);
 
     List<EmployeeDTO> getAllEmployees();
 

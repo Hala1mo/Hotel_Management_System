@@ -1,4 +1,4 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Room;
 
 import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
 import com.example.hotel_management_system.Models.Enum.Department;

@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
+import com.example.hotel_management_system.DTO.Room.RoomTypeDTO;
 import com.example.hotel_management_system.Models.Room_Type;
 
 public class RoomTypeMapper {

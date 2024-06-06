@@ -1,8 +1,7 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.DTO.*;
+import com.example.hotel_management_system.DTO.Room.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 

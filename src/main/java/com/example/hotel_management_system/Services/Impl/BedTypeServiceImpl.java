@@ -2,7 +2,7 @@ package com.example.hotel_management_system.Services.Impl;
 
 
 
-import com.example.hotel_management_system.DTO.Bed_TypeDTO;
+import com.example.hotel_management_system.DTO.Room.Bed_TypeDTO;
 import com.example.hotel_management_system.Mapper.Bed_TypeMapper;
 import com.example.hotel_management_system.Models.*;
 import com.example.hotel_management_system.Repository.BedTypeRepository;

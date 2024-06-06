@@ -1,10 +1,9 @@
 package com.example.hotel_management_system.Mapper;
 
 
-import com.example.hotel_management_system.DTO.InsertRoomDTO;
-import com.example.hotel_management_system.DTO.RoomDTO;
-import com.example.hotel_management_system.DTO.RoomDetailsInfoDTO;
-import com.example.hotel_management_system.DTO.Room_Type_FeatureDTO;
+import com.example.hotel_management_system.DTO.Room.InsertRoomDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Room;
 import com.example.hotel_management_system.Models.Room_Type;

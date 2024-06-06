@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Services.Impl;
 
-import com.example.hotel_management_system.DTO.*;
+import com.example.hotel_management_system.DTO.Room.*;
 import com.example.hotel_management_system.Mapper.RoomTypeMapper;
 import com.example.hotel_management_system.Mapper.Room_Type_BedMapper;
 import com.example.hotel_management_system.Mapper.Room_Type_FeatureMapper;

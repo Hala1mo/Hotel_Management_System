@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 import com.example.hotel_management_system.Models.Employee;
 
 public class EmployeeMapper {
@@ -19,7 +20,7 @@ public class EmployeeMapper {
     }
 
     // convert DTO to entity
-    public static Employee mapToEntity(EmployeeDTO employeeDTO) {
+    public static Employee mapToEntity(InsertEmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());

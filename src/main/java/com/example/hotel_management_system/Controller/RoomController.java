@@ -1,12 +1,13 @@
 package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.*;
-import com.example.hotel_management_system.Mapper.RoomMapper;
+import com.example.hotel_management_system.DTO.Room.InsertRoomDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
-import com.example.hotel_management_system.Models.Room;
-import com.example.hotel_management_system.Services.BedTypeService;
 import com.example.hotel_management_system.Services.RoomService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -68,7 +68,7 @@ public class RoomController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<?> saveNewRoom (@RequestBody  InsertRoomDTO requestedRoom){
+    public ResponseEntity<?> saveNewRoom (@Valid @RequestBody InsertRoomDTO requestedRoom){
         return roomService.saveNewRoom(requestedRoom);
     }
 

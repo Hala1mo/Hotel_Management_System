@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.DTO.FeatureDTO;
+import com.example.hotel_management_system.DTO.Room.FeatureDTO;
 
 import java.util.List;
 

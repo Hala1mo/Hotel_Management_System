@@ -1,7 +1,8 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.*;
+import com.example.hotel_management_system.DTO.Room.*;
 import com.example.hotel_management_system.Services.RoomTypeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,16 +32,16 @@ public class Room_TypeController {
         return roomTypeservice.retrieveBedTypeForSpecificRoomType(id);
     }
     @PostMapping("/create")
-    public RoomTypeDTO saveRoomType(@RequestBody RoomTypeDTO request){
+    public RoomTypeDTO saveRoomType( @Valid @RequestBody RoomTypeDTO request){
         return roomTypeservice.saveRoomType(request);
     }
 
     @PostMapping("/save/Features")
-    public ResponseEntity<?> addFeatureForSpecificRoomType(@RequestBody Room_Type_FeatureDTO request){
+    public ResponseEntity<?> addFeatureForSpecificRoomType(@Valid @RequestBody Room_Type_FeatureDTO request){
         return roomTypeservice.addFeatureForSpecificRoomType(request);
     }
     @PostMapping("/save/Bed")
-    public ResponseEntity<?> addBedTypeForSpecificRoomType(@RequestBody Room_Type_BedDTO request){
+    public ResponseEntity<?> addBedTypeForSpecificRoomType (@Valid @RequestBody Room_Type_BedDTO request){
         return roomTypeservice.addBedTypeForSpecificRoomType(request);
     }
 }

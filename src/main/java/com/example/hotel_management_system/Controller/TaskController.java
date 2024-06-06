@@ -3,6 +3,7 @@ package com.example.hotel_management_system.Controller;
 import com.example.hotel_management_system.DTO.Task.CreateTaskDTO;
 import com.example.hotel_management_system.DTO.Task.TaskDTO;
 import com.example.hotel_management_system.Services.HouseKeepingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public TaskDTO createTask(@RequestBody CreateTaskDTO task) {
+    public TaskDTO createTask(@Valid @RequestBody CreateTaskDTO task) {
         return housekeepingTaskService.createTask(task);
     }
 
@@ -39,7 +40,7 @@ public class TaskController {
     }
 
     @PutMapping("update/{id}")
-    public void updateTask(@PathVariable Long id,@RequestBody TaskDTO task) {
+    public void updateTask(@PathVariable Long id, @Valid @RequestBody TaskDTO task) {
         housekeepingTaskService.updateTask(id,task);
     }
 

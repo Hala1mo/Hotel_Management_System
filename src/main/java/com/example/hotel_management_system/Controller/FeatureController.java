@@ -1,9 +1,8 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.FeatureDTO;
-import com.example.hotel_management_system.DTO.RoomTypeDTO;
+import com.example.hotel_management_system.DTO.Room.FeatureDTO;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
-import com.example.hotel_management_system.Services.RoomTypeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +29,8 @@ public class FeatureController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("")
-    public FeatureDTO saveFeatures(@RequestBody FeatureDTO request){
+    @PostMapping("/create")
+    public FeatureDTO saveFeatures( @Valid @RequestBody FeatureDTO request){
         return roomFeaturesService.saveFeatures(request);
     }
 

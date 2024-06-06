@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.Mapper;
 
 import com.example.hotel_management_system.DTO.*;
+import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.Models.*;
 
 public class Reserve_RoomMapper {

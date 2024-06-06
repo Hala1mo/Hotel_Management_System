@@ -1,13 +1,10 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.EmployeeDTO;
-import com.example.hotel_management_system.Models.Employee;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 import com.example.hotel_management_system.Services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,12 +33,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public EmployeeDTO addEmployee(@Valid  @RequestBody InsertEmployeeDTO employeeDTO) {
         return employeeService.createEmployee(employeeDTO);
     }
 
     @PutMapping("/update/{id}")
-    public EmployeeDTO updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO updatedEmployee) {
+    public EmployeeDTO updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeDTO updatedEmployee) {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 

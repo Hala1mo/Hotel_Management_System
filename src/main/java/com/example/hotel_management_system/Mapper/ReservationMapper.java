@@ -1,8 +1,6 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.FeatureDTO;
 import com.example.hotel_management_system.DTO.ReservationDTO;
-import com.example.hotel_management_system.DTO.Reserve_RoomDTO;
 import com.example.hotel_management_system.Models.*;
 import com.example.hotel_management_system.Models.Enum.reservationStatus;
 

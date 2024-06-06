@@ -2,9 +2,10 @@ package com.example.hotel_management_system.DTO.Task;
 
 import com.example.hotel_management_system.Models.Enum.TaskStatus;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 
@@ -12,20 +13,18 @@ import java.time.LocalDate;
 @Data
 public class TaskDTO {
 
-    @NotNull
-    @NotBlank
+
+    @Valid
+    @NotBlank(message = "Description is mandatory")
     private String description;
-    @NotNull
-    @NotBlank
+    @NotBlank(message = "Scheduled date is mandatory")
     private LocalDate scheduledDate;
-    @NotNull
-    @NotBlank
+    @NotBlank(message = "Employee id is mandatory")
     private Long  employee_id;
 
-    @NotNull
-    @NotBlank
+    @NotBlank(message = "Room id is mandatory")
     private Long  room_id;
-    @NotNull
+    @NotNull(message = "Task status is mandatory")
     @Enumerated
     private TaskStatus status;
 }
