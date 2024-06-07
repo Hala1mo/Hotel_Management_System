@@ -150,8 +150,6 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
         }
     }
 
-
-
     @Override
     public void deleteTaskById(long id) {
         HouseKeepingTask task = taskRepository.findById(id);
