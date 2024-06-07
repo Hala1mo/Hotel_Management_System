@@ -3,6 +3,7 @@ package com.example.hotel_management_system.Services;
 
 import com.example.hotel_management_system.DTO.Task.CreateTaskDTO;
 import com.example.hotel_management_system.DTO.Task.TaskDTO;
+import com.example.hotel_management_system.DTO.Task.TaskDTOV2;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface HouseKeepingService {
 
     List<TaskDTO> getTaskForEmployee(long id);
     TaskDTO getTaskById(long id);
-    TaskDTO getTaskByIdV2(long id);
+    TaskDTOV2 getTaskByIdV2(long id);
 
     TaskDTO updateTask(long id, TaskDTO taskDTO);
 

@@ -68,16 +68,17 @@ public class TaskController {
 
 
     @GetMapping("/status/underProgress")
-    public void getTaskStatusUnderProgress() {
-        housekeepingTaskService.getInProgressTasks();
+    public List<TaskDTO> getTaskStatusUnderProgress() {
+
+        return housekeepingTaskService.getInProgressTasks();
     }
 
     @GetMapping("/status/completed")
-    public void getTaskStatusCompleted() {
-        housekeepingTaskService.getFinishedTasks();
+    public List<TaskDTO> getTaskStatusCompleted() {
+        return housekeepingTaskService.getFinishedTasks();
     }
     @GetMapping("/status/pending")
-    public void getTaskStatusPending() {
-        housekeepingTaskService.getPendingTasks();
+    public List<TaskDTO> getTaskStatusPending() {
+        return housekeepingTaskService.getPendingTasks();
     }
 }

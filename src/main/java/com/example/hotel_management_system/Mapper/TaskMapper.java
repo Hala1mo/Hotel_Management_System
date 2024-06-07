@@ -2,6 +2,7 @@ package com.example.hotel_management_system.Mapper;
 
 
 import com.example.hotel_management_system.DTO.Task.TaskDTO;
+import com.example.hotel_management_system.DTO.Task.TaskDTOV2;
 import com.example.hotel_management_system.Models.HouseKeepingTask;
 
 public class TaskMapper {
@@ -16,8 +17,8 @@ public class TaskMapper {
         return taskDTO;
     }
 
-    public static  TaskDTO mapToDTOV2(HouseKeepingTask task) {
-        TaskDTO taskDTO = new TaskDTO();
+    public static  TaskDTOV2 mapToDTOV2(HouseKeepingTask task) {
+        TaskDTOV2 taskDTO = new TaskDTOV2();
         taskDTO.setRoom_id(task.getRoom().getId());
         taskDTO.setEmployee_id(task.getEmployee().getId());
         taskDTO.setDescription(task.getDescription());

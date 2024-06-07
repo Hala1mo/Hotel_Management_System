@@ -26,7 +26,4 @@ public class TaskDTO {
     @NotNull(message = "Task status is mandatory")
     @Enumerated
     private TaskStatus status;
-
-
-    private int floor_number;
 }

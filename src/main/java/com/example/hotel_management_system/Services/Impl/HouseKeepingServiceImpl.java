@@ -2,6 +2,7 @@ package com.example.hotel_management_system.Services.Impl;
 
 import com.example.hotel_management_system.DTO.Task.CreateTaskDTO;
 import com.example.hotel_management_system.DTO.Task.TaskDTO;
+import com.example.hotel_management_system.DTO.Task.TaskDTOV2;
 import com.example.hotel_management_system.Models.Employee;
 import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
 import com.example.hotel_management_system.Models.Enum.TaskStatus;
@@ -108,7 +109,7 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
     }
 
     @Override
-    public TaskDTO getTaskByIdV2(long id) {
+    public TaskDTOV2 getTaskByIdV2(long id) {
         HouseKeepingTask task = taskRepository.findById(id);
         if (task==null) {
             throw new EntityNotFoundException("No task found with this id");
