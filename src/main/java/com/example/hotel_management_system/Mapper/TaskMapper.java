@@ -16,6 +16,20 @@ public class TaskMapper {
         return taskDTO;
     }
 
+    public static  TaskDTO mapToDTOV2(HouseKeepingTask task) {
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setRoom_id(task.getRoom().getId());
+        taskDTO.setEmployee_id(task.getEmployee().getId());
+        taskDTO.setDescription(task.getDescription());
+        taskDTO.setScheduledDate(task.getScheduledDate());
+        taskDTO.setStatus(task.getStatus());
+        taskDTO.setFloor_number(task.getRoom().getFloor_number());
+        return taskDTO;
+    }
+
+
+
+
     // convert DTO to entity
 //    public static HouseKeepingTask mapToEntity(TaskDTO taskDTO) {
 //        HouseKeepingTask task = new HouseKeepingTask();

@@ -1,18 +1,15 @@
 package com.example.hotel_management_system.DTO.Employee;
 
-
 import com.example.hotel_management_system.Models.Enum.Department;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.NonNull;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 
 @Data
-public class EmployeeDTO {
+public class EmployeeDTO2 {
 
 
     @NotNull
@@ -39,7 +36,10 @@ public class EmployeeDTO {
     private long salary;
 
     @NotNull
+    @NotBlank
+    private LocalDate hireDate;
+
+    @NotNull
     @Enumerated
     private Department department;
-
 }

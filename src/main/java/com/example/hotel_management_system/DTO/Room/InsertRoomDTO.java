@@ -4,6 +4,7 @@ import com.example.hotel_management_system.Models.Enum.CleanlinessStatus;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class InsertRoomDTO {
     private long id;
+
+    @Valid
 
     @NotNull(message = "Room Number is mandatory")
     private Integer room_number;

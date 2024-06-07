@@ -10,12 +10,18 @@ public class RoomTypeMapper {
         roomtype.setId(roomtypeRequest.getId());
         roomtype.setType_name(roomtypeRequest.getType_name());
         roomtype.setPrice(roomtypeRequest.getPrice());
+        roomtype.setSize_room(roomtypeRequest.getSize_room());
+        roomtype.setNum_adults(roomtypeRequest.getNum_adults());
+        roomtype.setNum_children(roomtypeRequest.getNum_children());
         return roomtype;
     }
     public static void update (Room_Type roomtype , Room_Type roomtypeRequest) {
         roomtype.setId(roomtypeRequest.getId());
         roomtype.setType_name(roomtypeRequest.getType_name());
         roomtype.setPrice(roomtypeRequest.getPrice());
+        roomtype.setNum_adults(roomtypeRequest.getNum_adults());
+        roomtype.setNum_children(roomtypeRequest.getNum_children());
+        roomtype.setSize_room(roomtypeRequest.getSize_room());
 
     }
     public static Room_Type ToEntity(RoomTypeDTO roomtypeRequest){

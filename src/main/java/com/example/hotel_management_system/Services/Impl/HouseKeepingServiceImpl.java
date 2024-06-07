@@ -65,6 +65,7 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
         return TaskMapper.mapToDTO(newTask);
     }
 
+
     @Override
     public List<TaskDTO> getAllTasks() {
         List<HouseKeepingTask> queryResult = taskRepository.findAll();
@@ -104,6 +105,15 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
             throw new EntityNotFoundException("No task found with this id");
         }
         return TaskMapper.mapToDTO(task);
+    }
+
+    @Override
+    public TaskDTO getTaskByIdV2(long id) {
+        HouseKeepingTask task = taskRepository.findById(id);
+        if (task==null) {
+            throw new EntityNotFoundException("No task found with this id");
+        }
+        return TaskMapper.mapToDTOV2(task);
     }
 
     @Override

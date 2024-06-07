@@ -20,8 +20,14 @@ public class TaskController {
     public List<TaskDTO> getAllTasks() {
         return housekeepingTaskService.getAllTasks();
     }
-    @GetMapping("id/{id}")
+
+    @GetMapping(value="id/{id}", params = "version=1")
     public TaskDTO getTasksByID(@PathVariable Long id) {
+        return housekeepingTaskService.getTaskById(id);
+    }
+
+    @GetMapping(value="id/{id}", params = "version=2")
+    public TaskDTO getTasksByIDV2(@PathVariable Long id) {
         return housekeepingTaskService.getTaskById(id);
     }
     @GetMapping("/employee/{employeeId}")
@@ -29,7 +35,7 @@ public class TaskController {
         return housekeepingTaskService.getTaskForEmployee(employeeId);
     }
 
-    @PostMapping("/create")
+    @PostMapping(value="/create")
     public TaskDTO createTask(@Valid @RequestBody CreateTaskDTO task) {
         return housekeepingTaskService.createTask(task);
     }

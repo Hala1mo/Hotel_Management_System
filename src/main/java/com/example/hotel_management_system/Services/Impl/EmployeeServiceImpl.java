@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.Services.Impl;
 
 import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO2;
 import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 import com.example.hotel_management_system.Mapper.EmployeeMapper;
 import com.example.hotel_management_system.Models.Employee;
@@ -48,6 +49,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         return EmployeeMapper.mapToDTO(employee);
     }
 
+    //Version 2 by adding hire date to be retrieved with the DTO
+    @Override
+    public EmployeeDTO2 getEmployeeByIdV2(long id) {
+
+        Employee employee = employeeRepository.findById(id);
+        if (employee==null) {
+            throw new EntityNotFoundException("No Employee found with this id");
+        }
+        return EmployeeMapper.mapToDTOV2(employee);
+    }
+
     @Override
     public EmployeeDTO getEmployeeByEmail(String email) {
         Employee employee = employeeRepository.findByEmail(email);
@@ -93,7 +105,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     employee.setEmail(employeeDTO.getEmail());
                     employee.setPhoneNumber(employeeDTO.getPhoneNumber());
                     employee.setSalary(employeeDTO.getSalary());
-                    employee.setHireDate(employeeDTO.getHireDate());
+//                    employee.setHireDate(employeeDTO.getHireDate());
                     employee.setAddress(employeeDTO.getAddress());
                     employee.setDepartment(employeeDTO.getDepartment());
                     Employee updatedEmployee =employeeRepository.save(employee);

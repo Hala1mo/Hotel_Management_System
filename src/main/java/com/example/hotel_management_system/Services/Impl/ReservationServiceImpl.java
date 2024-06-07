@@ -9,6 +9,7 @@ import com.example.hotel_management_system.Models.Enum.reservationStatus;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Repository.*;
 import com.example.hotel_management_system.Services.ReservationService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,9 @@ public  ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String
         return  ResponseEntity.ok(reservationForCustomer.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList()));
 
     }
-    return ResponseEntity.ok("USER NOT FOUND");
+    else{
+            throw new EntityNotFoundException("User not found");
+    }
 }
 
     public ResponseEntity<?> reserveBooking(ReservationDTO request) {
@@ -58,7 +61,7 @@ public  ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String
         List<Reserve_RoomDTO> reservedRooms = request.getBooking_room();
 
         if (checkNumberOfGuests(reservedRooms, request) == 0) {
-            return ResponseEntity.badRequest().body("Room capacity exceeded");
+            throw new IllegalArgumentException("Room capacity exceeded");
         }
 
         paymentMethod payment = request.getPaymentMethod();
@@ -74,7 +77,7 @@ public  ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String
         for (Reserve_RoomDTO reserveRoomDTO : reservedRooms) {
             Room room = roomRepository.findAllById(reserveRoomDTO.getRoom_id());
             if (room.getStatus().compareTo(roomStatus.AVAILABLE) != 0) {
-                return ResponseEntity.ok("ROOM IS NOT AVAILABLE");
+                throw new IllegalArgumentException("Room is not available");
             }
         }
 

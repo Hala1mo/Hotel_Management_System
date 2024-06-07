@@ -19,8 +19,8 @@ public class RoomMapper{
         RoomDTO room=new RoomDTO();
         room.setId(roomRequest.getId());
         room.setRoom_number(roomRequest.getRoom_number());
-        room.setFloor_number(roomRequest.getFloor_number());
         room.setRoom_Type(roomRequest.getRoomType().getType_name());
+        room.setFloor_number(roomRequest.getFloor_number());
         room.setView(roomRequest.getView());
         room.setStatus(roomRequest.getStatus());
         room.setCleanlinessStatus(roomRequest.getCleanlinessStatus());
@@ -70,7 +70,6 @@ public class RoomMapper{
     public static Room ToEntity(InsertRoomDTO roomRequest, Room_Type room_type){
         System.out.println("eliana");
         System.out.println(roomRequest.getStatus());
-
         return Room.builder().room_number(roomRequest.getRoom_number())
                 .status(roomRequest.getStatus())
                 .view(roomRequest.getView())

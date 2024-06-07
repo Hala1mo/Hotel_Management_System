@@ -14,6 +14,7 @@ public interface HouseKeepingService {
 
     List<TaskDTO> getTaskForEmployee(long id);
     TaskDTO getTaskById(long id);
+    TaskDTO getTaskByIdV2(long id);
 
     TaskDTO updateTask(long id, TaskDTO taskDTO);
 
