@@ -38,7 +38,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     public List<RoomTypeDTO> retrieveRoomsTypes(){
         List<Room_Type> allRoomTypes= roomTypeRepository.findAll();
         if(allRoomTypes==null){
-            throw new EntityNotFoundException("No Room types available");
+            throw new EntityNotFoundException("No Room types found in database");
         }
         return allRoomTypes.stream().map(type -> RoomTypeMapper.mapToDTO(type)).collect(Collectors.toList());
     }

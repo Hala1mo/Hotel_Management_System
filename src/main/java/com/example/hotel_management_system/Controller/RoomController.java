@@ -27,6 +27,7 @@ public class RoomController {
     public RoomController(RoomService roomService){
         this.roomService=roomService;
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/bedTypes")
     public List<RoomDTO> retrieveBedTypes(){
         return roomService.retrieveRooms();
@@ -81,6 +82,11 @@ public class RoomController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("update/id/{id}")
+    public RoomDTO updateRoom(@PathVariable Long id,@Valid @RequestBody InsertRoomDTO requestedRoom) {
+        return roomService.updateRoomById(id,requestedRoom);
+    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/cleanliness/{status}")

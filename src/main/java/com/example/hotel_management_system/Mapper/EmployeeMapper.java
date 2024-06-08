@@ -1,12 +1,27 @@
 package com.example.hotel_management_system.Mapper;
 
 import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO2;
 import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 import com.example.hotel_management_system.Models.Employee;
 
 public class EmployeeMapper {
     public static EmployeeDTO mapToDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setFirstName(employee.getFirstName());
+        employeeDTO.setId(employee.getId());
+        employeeDTO.setLastName(employee.getLastName());
+        employeeDTO.setPhoneNumber(employee.getPhoneNumber());
+        employeeDTO.setEmail(employee.getEmail());
+        employeeDTO.setAddress(employee.getAddress());
+        employeeDTO.setSalary(employee.getSalary());
+        employeeDTO.setDepartment(employee.getDepartment());
+        return employeeDTO;
+    }
+
+
+    public static EmployeeDTO2 mapToDTOV2(Employee employee) {
+        EmployeeDTO2 employeeDTO = new EmployeeDTO2();
         employeeDTO.setFirstName(employee.getFirstName());
         employeeDTO.setId(employee.getId());
         employeeDTO.setLastName(employee.getLastName());

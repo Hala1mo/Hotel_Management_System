@@ -5,6 +5,7 @@ import com.example.hotel_management_system.DTO.ReservationDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.Services.ReservationService;
 import com.example.hotel_management_system.Services.RoomTypeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

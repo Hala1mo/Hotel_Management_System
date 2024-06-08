@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.Employee.EmployeeDTO;
+import com.example.hotel_management_system.DTO.Employee.EmployeeDTO2;
 import com.example.hotel_management_system.DTO.Employee.InsertEmployeeDTO;
 import com.example.hotel_management_system.Services.EmployeeService;
 import jakarta.validation.Valid;
@@ -21,10 +22,14 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/v1/id/{id}")
     public EmployeeDTO getEmployeeById(@PathVariable Long id) {
-
         return employeeService.getEmployeeById(id);
+    }
+
+    @GetMapping("/v2/id/{id}")
+    public EmployeeDTO2 getEmployeeByIdV2(@PathVariable Long id) {
+        return employeeService.getEmployeeByIdV2(id);
     }
 
     @GetMapping("/email/{email}")

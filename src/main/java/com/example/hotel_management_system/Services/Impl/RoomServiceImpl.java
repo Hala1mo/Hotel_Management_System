@@ -53,6 +53,10 @@ public class RoomServiceImpl implements RoomService {
     }
     public RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom) {
         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
+
+        if(roomType==null){
+            throw new EntityNotFoundException("Room  type not found with id: " + id);
+        }
         Room roomById = roomRepository.findAllById(id);
 
         if(roomById==null){
@@ -65,6 +69,9 @@ public class RoomServiceImpl implements RoomService {
 
     public ResponseEntity<?> saveNewRoom (InsertRoomDTO requestedRoom) {
         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
+        if (roomType==null) {
+            throw new EntityNotFoundException("No Room type with this id");
+        }
         Room roomToSave = RoomMapper.ToEntity(requestedRoom,roomType);
         roomRepository.save(roomToSave);
         return ResponseEntity.ok("Saved Successfully");
