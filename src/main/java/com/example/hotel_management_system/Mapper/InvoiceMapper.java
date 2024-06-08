@@ -15,6 +15,7 @@ public class InvoiceMapper {
         invoiceDetails.setNum_children(request.getBooking().getNum_children());
         invoiceDetails.setNum_adults(request.getBooking().getNum_adults());
         invoiceDetails.setTotalPrice(request.getPrice());
+        invoiceDetails.setStatusOfReservation(request.getBooking().getStatus());
         return invoiceDetails;
     }
     public static Invoice toEntity(Reservation booking,Double price){

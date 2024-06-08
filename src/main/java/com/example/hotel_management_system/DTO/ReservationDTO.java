@@ -1,12 +1,15 @@
 package com.example.hotel_management_system.DTO;
 
 import com.example.hotel_management_system.Models.Enum.paymentMethod;
+import com.example.hotel_management_system.Models.Reserve_Add_On;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +24,11 @@ public class ReservationDTO {
     @NotNull
     private long user_id;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date checkInDate;
+
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date checkOutDate;
 
     @NotNull
@@ -33,6 +39,8 @@ public class ReservationDTO {
 
     @NotNull
     private List <Reserve_RoomDTO>  booking_room;
+    @NotNull
+    private List <Reserve_Add_OnDTO>  additions=new ArrayList<>(); ;
 
     @NotNull
     private paymentMethod paymentMethod;

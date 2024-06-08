@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.DTO;
 
 
+import com.example.hotel_management_system.Models.Enum.reservationStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,8 @@ public class InvoiceDetailsDTO {
 
     @NotNull
     private double totalPrice;
+    @NotNull
+    private reservationStatus statusOfReservation;
 
 
 }

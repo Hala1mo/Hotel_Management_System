@@ -26,7 +26,7 @@ public class Add_OnController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("")
+    @PostMapping("/create")
     public Add_OnDTO saveAddOn (@Valid @RequestBody  Add_OnDTO request){
         return addOnService.saveAddOn(request);
     }

@@ -1,6 +1,7 @@
 package com.example.hotel_management_system.Services.Impl;
 
 import com.example.hotel_management_system.DTO.Room.FeatureDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.Mapper.FeatureMapper;
 import com.example.hotel_management_system.Models.Features;
 import com.example.hotel_management_system.Repository.FeaturesRepository;
@@ -8,6 +9,7 @@ import com.example.hotel_management_system.Repository.RoomTypeRepository;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,8 +41,15 @@ public class RoomFeaturesServiceImpl implements RoomFeaturesService {
         featuresRepository.save(featureToSave);
         return  FeatureMapper.mapToDTO(featureToSave);
     }
-
-
-
-
+    public ResponseEntity<?> updateFeatures (FeatureDTO request,long id){
+        Features featureToUpdate=featuresRepository.findAllById(id);
+        FeatureMapper.update(featureToUpdate,request);
+        featuresRepository.save(featureToUpdate);
+        return ResponseEntity.ok("Updated Successfully");
+    }
+    public ResponseEntity<?> deleteFeature (long id){
+        Features featureToDelete=featuresRepository.findAllById(id);
+        featuresRepository.delete(featureToDelete);
+        return ResponseEntity.ok("Successfully Deleted");
+    }
 }

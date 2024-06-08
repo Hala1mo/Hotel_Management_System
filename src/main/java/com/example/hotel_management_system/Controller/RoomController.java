@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
+    // get all the rooms in specific floor
     RoomService roomService;
     @Autowired
     public RoomController(RoomService roomService){

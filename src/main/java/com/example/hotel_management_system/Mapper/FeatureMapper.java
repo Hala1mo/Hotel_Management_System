@@ -11,10 +11,10 @@ public class FeatureMapper {
         feature.setDescription(request.getDescription());
         return feature;
     }
-    public static void update (Features feature , Features request) {
-        feature.setId(request.getId());
-        feature.setDescription(request.getDescription());
-        feature.setFeature(request.getFeature());
+    public static void update (Features featureToBeUpdated , FeatureDTO request) {
+        featureToBeUpdated.setId(request.getId());
+        featureToBeUpdated.setDescription(request.getDescription());
+        featureToBeUpdated.setFeature(request.getFeature());
     }
     public static Features ToEntity(FeatureDTO request){
         return  Features.builder().description(request.getDescription())
