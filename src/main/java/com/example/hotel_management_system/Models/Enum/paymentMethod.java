@@ -1,10 +1,10 @@
 package com.example.hotel_management_system.Models.Enum;
 
 public enum paymentMethod {
-    CREDIT_CARD("Pay_Later"),
-    DEBIT_CARD("Credit_CARD"),
-    PAY_LATER("PAY_LATER"),
-    CASH("CASH");
+
+    PAY_NOW("PAY_NOW"),
+    PAY_LATER("PAY_LATER");
+
 
     private final String value;
     paymentMethod(String value) {

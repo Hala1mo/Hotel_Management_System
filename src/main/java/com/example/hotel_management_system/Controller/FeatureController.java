@@ -4,6 +4,7 @@ import com.example.hotel_management_system.DTO.Room.FeatureDTO;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,16 @@ public class FeatureController {
     @PostMapping("/create")
     public FeatureDTO saveFeatures( @Valid @RequestBody FeatureDTO request){
         return roomFeaturesService.saveFeatures(request);
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/update")
+    public ResponseEntity<?> updateFeatures(@Valid @RequestBody FeatureDTO request, @PathVariable long id){
+        return roomFeaturesService.updateFeatures(request,id);
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteFeatures(@PathVariable long id){
+        return roomFeaturesService.deleteFeature(id);
     }
 
 }

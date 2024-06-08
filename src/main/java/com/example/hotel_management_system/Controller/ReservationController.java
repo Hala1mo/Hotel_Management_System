@@ -57,15 +57,25 @@ public class ReservationController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/Book")
+    @PostMapping("/Book/create")
     public ResponseEntity<?> reserveBooking(@RequestBody ReservationDTO request){
         return reservationService.reserveBooking(request);
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping("/Book/{id}/addOn")
-    public ResponseEntity<?> saveAdditionToSpecificBooking(@PathVariable long id, @RequestBody List<Add_OnDTO> request){
-        return reservationService.saveAdditionToSpecificBooking(request,id);
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/{id}/confirm")
+    public ResponseEntity<?> confirmReservation(@PathVariable Long id) {
+      return  reservationService.confirmReservation(id);
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/{id}/checkin")
+    public ResponseEntity<?> checkIn(@PathVariable Long id) {
+     return  reservationService.checkIn(id);
+    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/{id}/checkout")
+    public ResponseEntity<?> checkOut(@PathVariable Long id) {
+      return  reservationService.checkOut(id);
     }
 
     @PreAuthorize("isAuthenticated()")
