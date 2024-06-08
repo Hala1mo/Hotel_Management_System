@@ -160,8 +160,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/tasks/**").access(adminAuth)
                         .requestMatchers("/api/rooms/RoomType/**").access(adminAuth)
                         .requestMatchers("api/rooms/BedType/*").access(adminAuth)
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .anyRequest().permitAll())
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint(unauthorizedHandler))
 

@@ -3,6 +3,11 @@ package com.example.hotel_management_system.Controller;
 import com.example.hotel_management_system.DTO.User.*;
 import com.example.hotel_management_system.Security.auth.AuthenticationFacade;
 import com.example.hotel_management_system.Services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +32,9 @@ public class UserController {
         this.authenticationFacade = authenticationFacade;
     }
 
+    @Operation(summary = "Create a new user account")
+    @ApiResponse(responseCode = "201", description = "User account created",
+            content = @Content(schema = @Schema(implementation = UserResponseDTO.class)))
     @PostMapping("/auth/signup")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
@@ -34,11 +42,17 @@ public class UserController {
         return userService.signup(registerDTO);
     }
 
+    @Operation(summary = "Authenticate and login")
+    @ApiResponse(responseCode = "200", description = "User authenticated",
+            content = @Content(schema = @Schema(implementation = UserResponseDTO.class)))
     @PostMapping("auth/login")
     public UserResponseDTO authenticate(@Valid @RequestBody LoginDTO loginDTO) {
         return userService.login(loginDTO);
     }
 
+    @Operation(summary = "Get a customer by ID")
+    @ApiResponse(responseCode = "200", description = "Found the customer",
+            content = @Content(schema = @Schema(implementation = UserDTO.class)))
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/profile/{id}")
     public ResponseEntity<UserDTO> getCustomerById(@PathVariable long id) {
@@ -46,7 +60,9 @@ public class UserController {
         return ResponseEntity.ok(customer);
     }
 
-    //View Profile
+    @Operation(summary = "View user profile")
+    @ApiResponse(responseCode = "200", description = "User profile retrieved",
+            content = @Content(schema = @Schema(implementation = UserDTO.class)))
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
@@ -62,7 +78,9 @@ public class UserController {
         return userService.findByEmail(email);
     }
 
-    //updateProfile
+    @Operation(summary = "Update user profile")
+    @ApiResponse(responseCode = "200", description = "User profile updated",
+            content = @Content(schema = @Schema(implementation = UserDTO.class)))
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/profile/updateProfile")
     public ResponseEntity<UserDTO> updateProfile(@Valid @RequestBody UpdateUserDTO userDTO) {
@@ -76,15 +94,17 @@ public class UserController {
         return null;
     }
 
+    @Operation(summary = "Delete a user")
+    @ApiResponse(responseCode = "200", description = "User deleted")
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable long id) {
         userService.deleteCustomerById(id);
         return ResponseEntity.ok("Deleted successfully");
     }
 
-
-    //Change password
+    @Operation(summary = "Change user password")
+    @ApiResponse(responseCode = "200", description = "Password changed")
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/profile/changePassword")
     public ResponseEntity<String> changePassword(@Valid @RequestBody PasswordChangeDTO passwordChangeDTO) {
@@ -100,16 +120,18 @@ public class UserController {
         }
     }
 
-
-    //Get all customers
+    @Operation(summary = "Get all customers")
+    @ApiResponse(responseCode = "200", description = "List of customers",
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = UserDTO.class))))
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/customers")
     public List<UserDTO> getAllCustomers() {
-
         return userService.getAllCustomers();
     }
 
-    //Get all admins
+    @Operation(summary = "Get all admins")
+    @ApiResponse(responseCode = "200", description = "List of admins",
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = UserDTO.class))))
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admins")
     public List<UserDTO> getAllAdmins() {
