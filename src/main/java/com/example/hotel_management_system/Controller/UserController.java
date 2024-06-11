@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class UserController {
 
     @Operation(summary = "Create a new user account")
     @ApiResponse(responseCode = "201", description = "User account created",
-            content = @Content(schema = @Schema(implementation = UserResponseDTO.class)))
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = UserResponseDTO.class)))
     @PostMapping("/auth/signup")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
@@ -44,17 +45,20 @@ public class UserController {
 
     @Operation(summary = "Authenticate and login")
     @ApiResponse(responseCode = "200", description = "User authenticated",
-            content = @Content(schema = @Schema(implementation = UserResponseDTO.class)))
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = UserResponseDTO.class)))
     @PostMapping("auth/login")
     public UserResponseDTO authenticate(@Valid @RequestBody LoginDTO loginDTO) {
         return userService.login(loginDTO);
     }
 
-    @Operation(summary = "Get a customer by ID")
+    @Operation(summary = "Get a user by ID")
+    @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "Found the customer",
-            content = @Content(schema = @Schema(implementation = UserDTO.class)))
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = UserDTO.class))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+    })
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/profile/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<UserDTO> getCustomerById(@PathVariable long id) {
         UserDTO customer = userService.getCustomerById(id);
         return ResponseEntity.ok(customer);
@@ -62,7 +66,7 @@ public class UserController {
 
     @Operation(summary = "View user profile")
     @ApiResponse(responseCode = "200", description = "User profile retrieved",
-            content = @Content(schema = @Schema(implementation = UserDTO.class)))
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = UserDTO.class)))
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.OK)
@@ -79,8 +83,11 @@ public class UserController {
     }
 
     @Operation(summary = "Update user profile")
+    @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "User profile updated",
-            content = @Content(schema = @Schema(implementation = UserDTO.class)))
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = UserDTO.class))),
+    @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+})
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/profile/updateProfile")
     public ResponseEntity<UserDTO> updateProfile(@Valid @RequestBody UpdateUserDTO userDTO) {
@@ -95,7 +102,10 @@ public class UserController {
     }
 
     @Operation(summary = "Delete a user")
-    @ApiResponse(responseCode = "200", description = "User deleted")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "User deleted"),
+    @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+})
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable long id) {
@@ -104,7 +114,10 @@ public class UserController {
     }
 
     @Operation(summary = "Change user password")
-    @ApiResponse(responseCode = "200", description = "Password changed")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Password changed"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+    })
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/profile/changePassword")
     public ResponseEntity<String> changePassword(@Valid @RequestBody PasswordChangeDTO passwordChangeDTO) {
@@ -121,8 +134,11 @@ public class UserController {
     }
 
     @Operation(summary = "Get all customers")
+    @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "List of customers",
-            content = @Content(array = @ArraySchema(schema = @Schema(implementation = UserDTO.class))))
+            content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = UserDTO.class)))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+    })
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/customers")
     public List<UserDTO> getAllCustomers() {
@@ -130,8 +146,11 @@ public class UserController {
     }
 
     @Operation(summary = "Get all admins")
+    @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "List of admins",
-            content = @Content(array = @ArraySchema(schema = @Schema(implementation = UserDTO.class))))
+            content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = UserDTO.class)))),
+    @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+})
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admins")
     public List<UserDTO> getAllAdmins() {

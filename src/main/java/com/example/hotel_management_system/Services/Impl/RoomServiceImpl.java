@@ -102,6 +102,17 @@ public class RoomServiceImpl implements RoomService {
         return rooms.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<RoomDTO> retrieveAvailableRoomsBySpecificView(roomView view) {
+        List<Room> rooms = roomRepository.findAllByView(view);
+        if (rooms.isEmpty()) {
+            throw new EntityNotFoundException("No Rooms found in this view");
+        }
+        return rooms.stream()
+                .filter(room -> room.getStatus().equals("available")) // Filter rooms by status
+                .map(room -> RoomMapper.mapToDTO(room))
+                .collect(Collectors.toList());
+    }
 
     public List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id ){
         Room room=roomRepository.findAllById(id);

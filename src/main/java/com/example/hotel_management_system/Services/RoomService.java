@@ -18,6 +18,7 @@ public interface RoomService {
     ResponseEntity<?> saveNewRoom (InsertRoomDTO requestedRoom);
     List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status);
     List<RoomDTO>retrieveRoomsBySpecificView(roomView view);
+    List<RoomDTO>retrieveAvailableRoomsBySpecificView(roomView view);
     List<RoomDetailsInfoDTO>retrieveRoomsBySpecificDates(Date checkIn, Date checkOut);
     List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id );
     List<RoomDTO> getRoomsByCleanStatus(String status);

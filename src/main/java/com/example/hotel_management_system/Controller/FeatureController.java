@@ -2,6 +2,12 @@ package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.Room.FeatureDTO;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,35 +20,57 @@ import java.util.List;
 @RestController
 @RequestMapping("api/rooms/features")
 public class FeatureController {
-    //update feature
     RoomFeaturesService roomFeaturesService;
 
     @Autowired
-    public FeatureController( RoomFeaturesService roomFeaturesService){
+    public FeatureController(RoomFeaturesService roomFeaturesService){
         this.roomFeaturesService=roomFeaturesService;
     }
 
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("")
+    @Operation(summary = "Retrieve all room features")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved list of room features",
+                    content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = FeatureDTO.class)))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
+    })
+    @PreAuthorize("isAuthenticated()")
     public List<FeatureDTO> retrieveFeatures(){
-
         return roomFeaturesService.retrieveFeatures();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
-    public FeatureDTO saveFeatures( @Valid @RequestBody FeatureDTO request){
+    @Operation(summary = "Save a new room feature")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "201", description = "Successfully saved room feature",
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = FeatureDTO.class))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
+    })
+    @PreAuthorize("hasRole('ADMIN')")
+    public FeatureDTO saveFeatures(@Valid @RequestBody FeatureDTO request){
         return roomFeaturesService.saveFeatures(request);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping("/update")
-    public ResponseEntity<?> updateFeatures(@Valid @RequestBody FeatureDTO request, @PathVariable long id){
-        return roomFeaturesService.updateFeatures(request,id);
-    }
+    @Operation(summary = "Update an existing room feature")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Successfully updated room feature",
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = FeatureDTO.class))),
+    @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+    })
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/delete")
-    public ResponseEntity<?> deleteFeatures(@PathVariable long id){
-        return roomFeaturesService.deleteFeature(id);
+    public ResponseEntity<?> updateFeatures(@Valid @RequestBody FeatureDTO request, @RequestParam long id){
+        return roomFeaturesService.updateFeatures(request, id);
     }
 
+    @DeleteMapping("/delete")
+    @Operation(summary = "Delete a room feature")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully deleted room feature"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
+    })
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteFeatures(@RequestParam long id){
+        return roomFeaturesService.deleteFeature(id);
+    }
 }

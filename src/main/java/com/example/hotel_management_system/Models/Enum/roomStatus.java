@@ -3,8 +3,6 @@ package com.example.hotel_management_system.Models.Enum;
 public enum  roomStatus {
     AVAILABLE("AVAILABLE"),
     RESERVED("Reserved"),
-    DIRTY("Dirty"),
-    MAINTENANCE("Maintence"),
     CHECKED_OUT(" Checked_Out"),
     CHECKED_IN(" Checked_In");
 
