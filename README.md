@@ -1,8 +1,8 @@
- ## Hotel Management System
-# Project Overview
+ # Hotel Management System
+## Project Overview
 The Hotel Management System is designed to streamline operations for both hotel adminstrators and guests. It offers functionalities for customers such as searching for available rooms, making reservations, customer check-ins and check-outs, and invoice generation. Adimnstrators can manage hotel employees and staff, room availability, and tracking housekeeping schedules. The system includes role-based access control, providing different functionalities based on user roles (admin, customer).
-# Features
-# Customer Management
+## Features
+### Customer Management
 - Register: Allows new users to create an account.
 - Login: Enables existing users to log in.
 - Profile Management: Users can view, update, and change their profile information and passwords.
