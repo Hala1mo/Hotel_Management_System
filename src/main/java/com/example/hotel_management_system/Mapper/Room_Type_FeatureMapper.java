@@ -24,7 +24,7 @@ public class Room_Type_FeatureMapper {
     }
     public static FeatureDTO mapToDTOFeature(Room_Type_Feature request){
         FeatureDTO feature =new FeatureDTO();
-        feature.setId(request.getId());
+        feature.setId(request.getFeature_id().getId());
         feature.setFeature(request.getFeature_id().getFeature());
         feature.setDescription(request.getFeature_id().getDescription());
         return feature;
