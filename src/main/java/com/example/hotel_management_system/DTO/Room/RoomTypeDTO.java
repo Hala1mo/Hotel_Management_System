@@ -29,7 +29,7 @@ public class RoomTypeDTO {
     private Double size_room;
 
     @NotNull(message = "Number of adults is mandatory")
-    @Min(value = 0, message = "Number of children cannot be negative")
+    @Min(value =0, message = "Number of adults cannot be negative")
     private Integer num_adults;
 
     @NotNull(message = "Number of children is mandatory")
