@@ -124,7 +124,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Relationships:
   - Each invoice is related for specific reservation.
  
-## ERD
+## ER diagram
 
 ## Setup Instructions
 
