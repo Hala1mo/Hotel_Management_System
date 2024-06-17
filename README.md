@@ -95,7 +95,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ###  Add on feature
 - Description: This is for adition features that user adds in making reservation such as breakfast.
 - Attributes: ID, name, price.
-- Relationships:
+- Relationships: Each addition feature is assigned for specific reervation.
 
     
 ### Reservation
@@ -116,13 +116,15 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Description: This is for adding addition features in reservation.
 - Attributes: ID, booking id, addition feature id.
 - Relationships:
-  - Addition feature is added for specific reservation, then the invoice will be recalculated based on the additions.
+  - Addition features is added for specific reservation, then the invoice will be recalculated based on the additions.
 
 ### Invoice
 - Description: This is for calculating the invoice for specific reservation.
 - Attributes: ID, booking id, total price.
 - Relationships:
   - Each invoice is related for specific reservation.
+ 
+## ERD
 
 ## Setup Instructions
 
