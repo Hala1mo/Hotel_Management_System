@@ -32,6 +32,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ### Role-Based Access Control
 - Different functionalities are available based on user roles (admin, customer).
 
+## Resources
 ## Setup Instructions
 
 
