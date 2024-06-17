@@ -23,7 +23,6 @@ public class RoomTypeDTO {
     private Double price;
 
     @NotBlank(message = "Room type is mandatory")
-    @Size(min = 10, max = 50, message = "Room type must be between 10 and 50 characters")
     private String type_name;
 
     @NotNull(message = "Size of room is mandatory")

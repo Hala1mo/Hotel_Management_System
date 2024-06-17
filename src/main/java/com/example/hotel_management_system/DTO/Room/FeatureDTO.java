@@ -19,11 +19,9 @@ public class FeatureDTO {
 
     @Valid
     @NotBlank(message = "Feature is mandatory")
-    @Size(min=3,max = 50)
     private String feature;
 
     @NotBlank(message = "Description is mandatory")
-    @Size(min=3,max = 50)
     private String description;
 
 }
