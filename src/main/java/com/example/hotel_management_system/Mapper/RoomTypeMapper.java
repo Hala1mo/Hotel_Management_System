@@ -16,7 +16,6 @@ public class RoomTypeMapper {
         return roomtype;
     }
     public static Room_Type update (Room_Type roomtype , RoomTypeDTO roomtypeRequest) {
-        roomtype.setId(roomtypeRequest.getId());
         roomtype.setType_name(roomtypeRequest.getType_name());
         roomtype.setPrice(roomtypeRequest.getPrice());
         roomtype.setNum_adults(roomtypeRequest.getNum_adults());

@@ -88,6 +88,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             throw new EntityNotFoundException("No Room type found with this id");
         }
         Room_Type updated=RoomTypeMapper.update(room_type,request);
+        roomTypeRepository.save(updated);
         return  RoomTypeMapper.mapToDTO(updated);
     }
     public List<FeatureDTO> retrieveFeaturesForSpecificRoomType(long id){
