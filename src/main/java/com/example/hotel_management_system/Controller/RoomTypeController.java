@@ -73,6 +73,17 @@ public class RoomTypeController {
     public RoomTypeDTO saveRoomType(@Valid @RequestBody RoomTypeDTO request) {
         return roomTypeservice.saveRoomType(request);
     }
+    @PostMapping("/update")
+    @Operation(summary = "Update a room type")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully Updated room type",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoomTypeDTO.class))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
+    })
+    public RoomTypeDTO UpdateRoomType(@Valid @PathVariable long id,@Valid @RequestBody RoomTypeDTO request) {
+        return roomTypeservice.updateRoomType(id,request);
+    }
+
 
     @PostMapping("/save/Features")
     @Operation(summary = "Add a feature for a specific room type")

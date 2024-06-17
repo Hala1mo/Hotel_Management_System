@@ -11,6 +11,7 @@ public interface RoomTypeService {
     ResponseEntity<?> addBedTypeForSpecificRoomType(Room_Type_BedDTO request);
     List<FeatureDTO> retrieveFeaturesForSpecificRoomType(long id);
     RoomTypeDTO saveRoomType (RoomTypeDTO request);
+    RoomTypeDTO updateRoomType (long id,RoomTypeDTO request);
     List<Bed_TypeDTO> retrieveBedTypeForSpecificRoomType(Long id);
 
 }

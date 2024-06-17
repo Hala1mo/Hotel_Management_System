@@ -80,6 +80,16 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return ResponseEntity.ok("Saved Successfully");
 
     }
+
+
+    public RoomTypeDTO updateRoomType(long id, RoomTypeDTO request){
+        Room_Type room_type= roomTypeRepository.findAllById(id);
+        if(room_type==null){
+            throw new EntityNotFoundException("No Room type found with this id");
+        }
+        Room_Type updated=RoomTypeMapper.update(room_type,request);
+        return  RoomTypeMapper.mapToDTO(updated);
+    }
     public List<FeatureDTO> retrieveFeaturesForSpecificRoomType(long id){
         Room_Type room_type= roomTypeRepository.findAllById(id);
         if(room_type==null){

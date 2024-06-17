@@ -15,13 +15,7 @@ public class Room_Type_BedMapper {
                 .build();
     }
 
-    public static RoomTypeDTO mapToDTORoom_Type(Room_Type_Bed request){
-        RoomTypeDTO room_type=new RoomTypeDTO();
-        room_type.setId(request.getType_id().getId());
-        room_type.setType_name(request.getType_id().getType_name());
-        room_type.setPrice(request.getType_id().getPrice());
-        return room_type;
-    }
+
 
     public static Bed_TypeDTO mapToDTOBed(Room_Type_Bed request){
         Bed_TypeDTO bed_type =new Bed_TypeDTO();
