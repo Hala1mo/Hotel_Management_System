@@ -19,6 +19,7 @@ public class RegisterDTO {
     private String lastName;
     @NotNull(message = "Phone number is mandatory")
     @NotBlank(message = "Phone number is mandatory")
+    @Size(min = 10, max = 10, message = "Phone number must be exactly 10 digits")
     private String phoneNumber;
     @NotNull(message = "Email is mandatory")
     @NotBlank(message = "Email is mandatory")

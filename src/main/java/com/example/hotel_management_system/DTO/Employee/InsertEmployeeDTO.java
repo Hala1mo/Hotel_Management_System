@@ -4,6 +4,7 @@ import com.example.hotel_management_system.Models.Enum.Department;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -19,6 +20,7 @@ public class InsertEmployeeDTO {
     private String firstName;
     @NotBlank(message = "Last name is mandatory")
     private String lastName;
+    @Size(min = 10, max = 10, message = "Phone number must be exactly 10 digits")
     @NotBlank(message = "Phone number is mandatory")
     private String phoneNumber;
     @NotBlank(message = "Address is mandatory")

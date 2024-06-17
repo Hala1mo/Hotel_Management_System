@@ -6,6 +6,7 @@ import com.example.hotel_management_system.Models.User;
 import com.example.hotel_management_system.Repository.UserRepository;
 import com.example.hotel_management_system.Security.auth.AuthenticationFacade;
 import com.example.hotel_management_system.utils.JwtUtil;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.example.hotel_management_system.Mapper.UserMapper;
 import org.springframework.security.core.Authentication;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 
@@ -49,8 +51,10 @@ public class UserServiceImpl implements UserService {
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Override
     public UserResponseDTO signup(RegisterDTO registerDTO) {
-        userRepository.save(UserMapper.mapToEntity(registerDTO));
-        return login(new LoginDTO(registerDTO.getEmail(), registerDTO.getPassword()));
+        Objects.requireNonNull(registerDTO, "registerDTO must not be null");
+
+            userRepository.save(UserMapper.mapToEntity(registerDTO));
+            return login(new LoginDTO(registerDTO.getEmail(), registerDTO.getPassword()));
 
     }
 
