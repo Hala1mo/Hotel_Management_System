@@ -138,4 +138,4 @@ The Hotel Management System is designed to streamline operations for both hotel 
 
 ## Contributors
 - Student 1: Hala Abdel Halim.
-- Student 2: Eliana Ellati
+- Student 2: Eliana Ellati.
