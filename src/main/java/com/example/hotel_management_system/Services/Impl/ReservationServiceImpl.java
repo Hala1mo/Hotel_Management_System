@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -234,10 +235,19 @@ public  ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String
     }
 */
 
-    public double calculateAdditionPrice(List<Reserve_Add_On> addition,double totalPrice){
+    public double calculateroomPrice(List<Reserve_Room> room,double totalPrice){
+
+        for(int i=0;i<room.size();++i){
+            totalPrice=totalPrice+(room.get(i).getRoom_id().getRoomType().getPrice());
+            System.out.print("totalllllt"+totalPrice);
+        }
+        return totalPrice;
+    }
+    public double calculateAdditionPrice(List<Reserve_Add_On> addition,double totalPrice,double numberOfStay){
 
       for(int i=0;i<addition.size();++i){
-          totalPrice=totalPrice+(addition.get(i).getAdd_on_id().getPrice());
+          totalPrice=totalPrice+(numberOfStay*addition.get(i).getAdd_on_id().getPrice());
+          System.out.print("totalllllt"+totalPrice);
       }
       return totalPrice;
     }
@@ -350,40 +360,84 @@ public  ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String
             throw new IllegalArgumentException("Payment method is required");
         }
         Reservation modifiedReservation=ReservationMapper.update(ToupdatedReservation,request,userId,status);
-        List<Reserve_Add_On> addition=ToupdatedReservation.getAdd_on();
-        calculateAdditionPrice(addition,totalPrice);
-        List<Reserve_Room> reserve_rooms= reservationRoomRepository.findAllByBooking(ToupdatedReservation);
-        for(int i=0;i<request.getBooking_room().size();++i) {
-            Room room = roomRepository.findAllById(request.getBooking_room().get(i).getRoom_id());
+
+        List<Reserve_Room> reserve_rooms = reservationRoomRepository.findAllByBooking(ToupdatedReservation);
+        List<Room> newBookingRooms = request.getBooking_room().stream()
+                .map(bookingRoomRequest -> roomRepository.findAllById(bookingRoomRequest.getRoom_id()))
+                .collect(Collectors.toList());
+
+        for (Room room : newBookingRooms) {
             boolean roomExists = reserve_rooms.stream()
                     .anyMatch(reserveRoom -> reserveRoom.getRoom_id().getId() == room.getId());
-            System.out.print(roomExists);
             if (!roomExists) {
                 if (room.getStatus().compareTo(roomStatus.AVAILABLE) == 0) {
-                    Reserve_Room updatedreserve_room = Reserve_RoomMapper.toEntity(room,ToupdatedReservation);
+                    Reserve_Room updatedreserve_room = Reserve_RoomMapper.toEntity(room, ToupdatedReservation);
                     ToupdatedReservation.getBooking_room().add(updatedreserve_room);
                     room.setStatus(roomStatus.RESERVED);
                     room.getBooking_room().add(updatedreserve_room);
                     reservationRoomRepository.save(updatedreserve_room);
-                    totalPrice = totalPrice + room.getRoomType().getPrice();
+
                     roomRepository.save(room);
                 } else {
                     return ResponseEntity.ok("ROOM IS NOT AVAILABLE");
                 }
-
             }
         }
+
+        for (Iterator<Reserve_Room> iterator = reserve_rooms.iterator(); iterator.hasNext();) {
+            Reserve_Room existingReserveRoom = iterator.next();
+            boolean existsInNewList = newBookingRooms.stream()
+                    .anyMatch(newRoom -> newRoom.getId() == existingReserveRoom.getRoom_id().getId());
+
+            if (!existsInNewList) {
+                reservationRoomRepository.delete(existingReserveRoom);
+                ToupdatedReservation.getBooking_room().remove(existingReserveRoom);
+                iterator.remove();
+            }
+        }
+        List<Reserve_Room> rooms=ToupdatedReservation.getBooking_room();
+        totalPrice=totalPrice+calculateroomPrice(rooms,totalPrice);
+
+        List<Reserve_Add_On> reserve_addon = reserve_Add_OnRepository.findAllByBooking(ToupdatedReservation);
+
+        List<Add_On> newAdditions = request.getAdditions().stream()
+                .map(additionRequest -> addOnRepository.findAllById(additionRequest.getAdd_on_id()))
+                .collect(Collectors.toList());
+
+        for (Add_On addition : newAdditions) {
+            boolean additionExists = reserve_addon.stream()
+                    .anyMatch(addon -> addon.getAdd_on_id().getId() == addition.getId());
+
+            if (!additionExists) {
+                Reserve_Add_On reserve_add_on = Reserve_Add_OnMapper.toEntity(ToupdatedReservation, addition);
+                ToupdatedReservation.getAdd_on().add(reserve_add_on);
+                reserve_Add_OnRepository.save(reserve_add_on);
+            }
+        }
+
+        for (Iterator<Reserve_Add_On> iterator = reserve_addon.iterator(); iterator.hasNext();) {
+            Reserve_Add_On existingReserveAddOn = iterator.next();
+            boolean existsInNewList = newAdditions.stream()
+                    .anyMatch(newAddition -> newAddition.getId() == existingReserveAddOn.getAdd_on_id().getId());
+
+            if (!existsInNewList) {
+                reserve_Add_OnRepository.delete(existingReserveAddOn);
+                ToupdatedReservation.getAdd_on().remove(existingReserveAddOn);
+                iterator.remove();
+            }
+        }
+
+        List<Reserve_Add_On> addition=ToupdatedReservation.getAdd_on();
+        long diffInMillies = Math.abs(ToupdatedReservation.getCheckOutDate().getTime() - ToupdatedReservation.getCheckInDate().getTime());
+        int numberOfStay = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        totalPrice=calculateAdditionPrice(addition,totalPrice,numberOfStay);
         reservationRepository.save(modifiedReservation);
         Invoice invoice=  invoiceRepository.findAllByBooking(modifiedReservation);
-        invoice.setPrice(totalPrice);
         invoice=InvoiceMapper.update(modifiedReservation,invoice);
+        invoice.setPrice(totalPrice);
+        invoiceRepository.save(invoice);
         return ResponseEntity.ok(InvoiceMapper.mapToInvoiceDetailsDTO(invoice));
-
     }
-
-
-
-
 
 
 
