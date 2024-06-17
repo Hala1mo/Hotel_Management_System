@@ -73,7 +73,7 @@ public class RoomTypeController {
     public RoomTypeDTO saveRoomType(@Valid @RequestBody RoomTypeDTO request) {
         return roomTypeservice.saveRoomType(request);
     }
-    @PostMapping("/update")
+    @PostMapping("/update/{id}")
     @Operation(summary = "Update a room type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Successfully Updated room type",
