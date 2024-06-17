@@ -8,7 +8,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Profile Management: Users can view, update, and change their profile information and passwords.
 ### Employee Management
 - Admin Functionality: Admin users can manage hotel employees and staff.
-- Search Functionality
+## Search Functionality
 - Reservations: Search for reservations by customer name or ID and date.
 - Customer Info: Search for customer information.
 - Available Rooms: Search for available rooms and view details such as price, facilities, capacity, size, and features.
