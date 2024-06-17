@@ -34,7 +34,7 @@ public class FeatureController {
                     content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = FeatureDTO.class)))),
             @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
     })
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<FeatureDTO> retrieveFeatures(){
         return roomFeaturesService.retrieveFeatures();
     }
