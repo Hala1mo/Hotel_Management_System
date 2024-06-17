@@ -20,7 +20,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Room Types: Manage different types of rooms.
 - Availability: Manage room availability.
 - Status: Update room status.
-  ### Check-In/Check-Out
+### Check-In/Check-Out
 - Check-In: Manage customer arrival processes.
 - Check-Out: Manage customer departure processes.
 ### Housekeeping Management
