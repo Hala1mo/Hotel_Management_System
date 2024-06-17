@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,9 @@ public class RoomTypeController {
         this.roomTypeservice = roomTypeservice;
     }
 
+
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("")
     @Operation(summary = "Retrieve all room types")
     @ApiResponses(value = {
@@ -39,6 +43,7 @@ public class RoomTypeController {
         return roomTypeservice.retrieveRoomsTypes();
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("Features/{id}")
     @Operation(summary = "Retrieve features for a specific room type")
     @ApiResponses(value = {
@@ -51,6 +56,7 @@ public class RoomTypeController {
         return roomTypeservice.retrieveFeaturesForSpecificRoomType(id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/Bed/{id}")
     @Operation(summary = "Retrieve bed types for a specific room type")
     @ApiResponses(value = {
@@ -63,6 +69,7 @@ public class RoomTypeController {
         return roomTypeservice.retrieveBedTypeForSpecificRoomType(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     @Operation(summary = "Create a new room type")
     @ApiResponses(value = {
@@ -73,6 +80,7 @@ public class RoomTypeController {
     public RoomTypeDTO saveRoomType(@Valid @RequestBody RoomTypeDTO request) {
         return roomTypeservice.saveRoomType(request);
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a room type")
     @ApiResponses(value = {
@@ -85,6 +93,7 @@ public class RoomTypeController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save/Features")
     @Operation(summary = "Add a feature for a specific room type")
     @ApiResponses(value = {
@@ -96,6 +105,8 @@ public class RoomTypeController {
         return roomTypeservice.addFeatureForSpecificRoomType(request);
     }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save/Bed")
     @Operation(summary = "Add a bed type for a specific room type")
     @ApiResponses(value = {

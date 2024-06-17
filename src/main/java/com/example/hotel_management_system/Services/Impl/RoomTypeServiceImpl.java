@@ -8,6 +8,7 @@ import com.example.hotel_management_system.Models.*;
 import com.example.hotel_management_system.Repository.*;
 import com.example.hotel_management_system.Services.RoomTypeService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -43,14 +44,14 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         return allRoomTypes.stream().map(type -> RoomTypeMapper.mapToDTO(type)).collect(Collectors.toList());
     }
 
-    public ResponseEntity<?> addFeatureForSpecificRoomType(Room_Type_FeatureDTO request){
+    public ResponseEntity<?> addFeatureForSpecificRoomType(@NotNull  Room_Type_FeatureDTO request){
        Room_Type room_type= roomTypeRepository.findAllById(request.getType_id());
         if(room_type==null){
-            throw new EntityNotFoundException("No Room type found with this id");
+            throw new EntityNotFoundException("No Room type found ");
         }
        Features features=featureRepository.findAllById(request.getFeature_id());
         if(features==null){
-            throw new EntityNotFoundException("No feature found with this id");
+            throw new EntityNotFoundException("No feature found");
         }
        Room_Type_Feature room_type_feature= Room_Type_FeatureMapper.toEntity(room_type,features);
        room_type.getRoom_type_feature().add(room_type_feature);
