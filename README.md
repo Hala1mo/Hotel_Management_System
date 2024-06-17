@@ -76,13 +76,13 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Description: Represents the beds in the hotel
 - Attributes: ID, bed type.
 - Relationships:
-  - Each bed type is assigned for specific Room Type.
+  - Bed type is assigned for a Room Type.
  
 ###  Room Type Bed 
 - Description: Each room type has specific type of beds.
 - Attributes: ID, room type id, bed id, number of beds.
 - Relationships:
-  - Each room type has a a bed type.
+  - Each room type has a list of bed types.
 
 ###  House keeping task
 - Description: This is for managing houe keeping taks in the hotel, employees are asigned for specific rooms.
@@ -95,7 +95,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ###  Add on feature
 - Description: This is for adition features that user adds in making reservation such as breakfast.
 - Attributes: ID, name, price.
-- Relationships: Each addition feature is assigned for specific reervation.
+- Relationships: Each addition feature is assigned for a reervation.
 
     
 ### Reservation
