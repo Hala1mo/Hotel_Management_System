@@ -38,11 +38,11 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Description: Represents the user in the hotel
 - Attributes: ID, first name, last name, phone number,email, password, role (e.g. ROLE_USER, ROLE_ADMIN) 
 - Relationships:
-  - Supplies Products
+  - if it is customer, then the customer is related for specific reservation.
 
 ### Employee
 - Description: Represents the employees in the hotel
-- Attributes: ID, first name, last name, phone number,email, address, salary, hireDate, department (e.g.     FRONT_DESK, HOUSEKEEPING, MAINTENANCE, KITCHEN, SECURITY, HR, MARKETING, IT, FINANCE)
+- Attributes: ID, first name, last name, phone number,email, address, salary, hire date, department (e.g. FRONT_DESK, HOUSEKEEPING, MAINTENANCE, KITCHEN, SECURITY, HR, MARKETING, IT, FINANCE)
 - Relationships:
   - Employees in houseKeeping department is assigned for specific tasks.
 
@@ -51,11 +51,11 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Description: Represents the rooms in the hotel
 - Attributes: ID, Room number, Floor number, view (e.g. Pool, garden, sea), status (e.g. Available, reserved , checked_Out, checked_In), cleanliness_status (e.g. Dirty, underMaintenance, cleaned)
 - Relationships:
-  - Customer books a room
+  - Customer books a room.
 
 
 ### Room type 
-- Description: Represents the rooms in the hotel
+- Description: Represents the room types in the hotel
 - Attributes: ID, price, type name , room size, number of adults, number of childrens
 - Relationships:
   - Each room is related to room type. 
@@ -64,13 +64,13 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Description: Represents the room features in the hotel
 - Attributes: ID, feature and description.
 - Relationships:
-  - Assign feature to room type.
+  - Assign feature to specific room type.
     
 ###  Room Type Feature 
 - Description: Each room type has specific features.
 - Attributes: ID, room type id, feature id
 - Relationships:
-  - Each room type has a features.
+  - Each room type has a specific features.
 
 ### Bed type
 - Description: Represents the beds in the hotel
