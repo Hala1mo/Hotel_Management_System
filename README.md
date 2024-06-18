@@ -129,18 +129,17 @@ The Hotel Management System is designed to streamline operations for both hotel 
 
 
 ## How to Build, Package, and Run the Application
-- Build the Project:
 - By Using the Following command building the project and its JAR files will be completed :
-- ## ./mvnw.cmd package -DskipTests
-- After the build process completes, you will find the JAR file in the target directory:
-target/Hotel_Management_System-0.0.1-SNAPSHOT.jar
+- ./mvnw.cmd package -DskipTests
+##  After the build process completes, you will find the JAR file in the target directory:
+- target/Hotel_Management_System-0.0.1-SNAPSHOT.jar
 -After That we Create a Dockerfile in the root directory of our project.
 ## Build the Docker Image:
-By Using the following command the Docker image will be built:
-## docker build -t halamo1/hotel_management_system:latest .
-Pushing the Docker Image to DockerHub Using the following command :
-## docker push your-dockerhub-username/hotel_management_system:latest
-Running the Application with Docker Compose command.
+- By Using the following command the Docker image will be built:
+- docker build -t halamo1/hotel_management_system:latest .
+## Pushing the Docker Image to DockerHub Using the following command :
+-  docker push your-dockerhub-username/hotel_management_system:latest
+## Running the Application with Docker Compose command.
 ## DockerHub Repository
 You can find the Docker image for this project on DockerHub her
 ## Lessons Learned
