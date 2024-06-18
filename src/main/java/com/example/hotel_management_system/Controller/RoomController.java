@@ -143,7 +143,6 @@ public class RoomController {
         return roomService.saveNewRoom(requestedRoom);
     }
 
-
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/id/{id}")
     @Operation(summary = "Get a room by ID")
@@ -156,7 +155,6 @@ public class RoomController {
     public RoomDTO getRoomById(@PathVariable Long id) {
         return roomService.findRoomById(id);
     }
-
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("update/id/{id}")
@@ -181,7 +179,5 @@ public class RoomController {
     public List<RoomDTO> getRoomByCleanStatus(@PathVariable String status) {
         return roomService.getRoomsByCleanStatus(status);
     }
-
-
 
 }
