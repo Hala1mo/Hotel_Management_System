@@ -141,7 +141,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 -  docker push your-dockerhub-username/hotel_management_system:latest
 ## Running the Application with Docker Compose command.
 ## DockerHub Repository
-You can find the Docker image for this project on DockerHub her
+You can find the Docker image for this project on DockerHub hub
 ## Lessons Learned
 - Understanding of Spring Boot and RESTful API development.
 - Hands-on experience with Docker and Docker Compose for containerization.
