@@ -159,7 +159,7 @@ public class RoomController {
 
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Get a room by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved a room by ID",
@@ -169,6 +169,19 @@ public class RoomController {
     })
     public RoomDTO getRoomById(@PathVariable Long id) {
         return roomService.findRoomById(id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/id/{id}")
+    @Operation(summary = "Get a room by ID for Users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved a room by ID",
+                    content = @Content(mediaType = "application/json",schema = @Schema(implementation = RoomDTO.class))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Room not found with this id", content = @Content)
+    })
+    public RoomDetailsNotSpecifiedDTO getRoomByIdForUser(@PathVariable Long id) {
+        return roomService.findRoomByIdForUser(id);
     }
 
 

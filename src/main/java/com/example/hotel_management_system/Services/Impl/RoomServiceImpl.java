@@ -36,7 +36,7 @@ public class RoomServiceImpl implements RoomService {
         this.roomRepository=roomRepository;
         this.roomTypeRepository=roomTypeRepository;
     }
-    @Override
+
     public List<RoomDTO> retrieveRooms() {
         List<Room> allRoom= roomRepository.findAll();
         if (allRoom.isEmpty()) {
@@ -44,13 +44,21 @@ public class RoomServiceImpl implements RoomService {
         }
         return allRoom.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
-    @Override
+
     public RoomDTO findRoomById(long id) {
         Room roomById = roomRepository.findAllById(id);
         if (roomById==null) {
             throw new EntityNotFoundException("No Room found with this id");
         }
         return RoomMapper.mapToDTO(roomById);
+    }
+
+    public RoomDetailsNotSpecifiedDTO findRoomByIdForUser(long id) {
+        Room roomById = roomRepository.findAllById(id);
+        if (roomById==null) {
+            throw new EntityNotFoundException("No Room found with this id");
+        }
+        return RoomMapper.mapToDTOButNotSpecified(roomById);
     }
     public RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom) {
         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());

@@ -15,6 +15,7 @@ import java.util.List;
 public interface RoomService {
     List<RoomDTO> retrieveRooms();
     RoomDTO findRoomById(long id);
+    RoomDetailsNotSpecifiedDTO findRoomByIdForUser(long id);
     RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom);
     ResponseEntity<?> saveNewRoom (InsertRoomDTO requestedRoom);
     List<RoomDetailsInfoDTO>retrieveRoomsBySpecificStatus(roomStatus status);
