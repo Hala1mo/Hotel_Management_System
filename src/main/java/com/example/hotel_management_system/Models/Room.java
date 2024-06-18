@@ -44,6 +44,8 @@ public class Room  {
     @OneToMany(mappedBy = "room_id", cascade = {CascadeType.ALL})
     private List<Reserve_Room> booking_room;
 
+    @OneToMany(mappedBy = "room")
+    private List<HouseKeepingTask> houseKeepingTasks;
 
     @Column(name="cleanliness_status",nullable = false)
     private CleanlinessStatus cleanlinessStatus;

@@ -37,4 +37,7 @@ public class Employee {
     @Column(name="department",nullable = false)
     private Department department;
 
+
+    @OneToMany(mappedBy = "employee")
+    private List<HouseKeepingTask> houseKeepingTasks;
 }

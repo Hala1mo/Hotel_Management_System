@@ -5,6 +5,7 @@ import com.example.hotel_management_system.DTO.Room.InsertRoomDTO;
 import com.example.hotel_management_system.DTO.ReservationInfoDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDetailsNotSpecifiedDTO;
 import com.example.hotel_management_system.Mapper.Reserve_RoomMapper;
 import com.example.hotel_management_system.Mapper.RoomMapper;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
@@ -35,7 +36,7 @@ public class RoomServiceImpl implements RoomService {
         this.roomRepository=roomRepository;
         this.roomTypeRepository=roomTypeRepository;
     }
-    @Override
+
     public List<RoomDTO> retrieveRooms() {
         List<Room> allRoom= roomRepository.findAll();
         if (allRoom.isEmpty()) {
@@ -43,13 +44,21 @@ public class RoomServiceImpl implements RoomService {
         }
         return allRoom.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
-    @Override
+
     public RoomDTO findRoomById(long id) {
         Room roomById = roomRepository.findAllById(id);
         if (roomById==null) {
             throw new EntityNotFoundException("No Room found with this id");
         }
         return RoomMapper.mapToDTO(roomById);
+    }
+
+    public RoomDetailsNotSpecifiedDTO findRoomByIdForUser(long id) {
+        Room roomById = roomRepository.findAllById(id);
+        if (roomById==null) {
+            throw new EntityNotFoundException("No Room found with this id");
+        }
+        return RoomMapper.mapToDTOButNotSpecified(roomById);
     }
     public RoomDTO updateRoomById(long id,InsertRoomDTO requestedRoom) {
         Room_Type roomType=roomTypeRepository.findAllById(requestedRoom.getRoom_TypeID());
@@ -102,6 +111,7 @@ public class RoomServiceImpl implements RoomService {
         return rooms.stream().map(room -> RoomMapper.mapToDTO(room)).collect(Collectors.toList());
     }
 
+
     @Override
     public List<RoomDTO> retrieveAvailableRoomsBySpecificView(roomView view) {
         List<Room> rooms = roomRepository.findAllByView(view);
@@ -115,6 +125,18 @@ public class RoomServiceImpl implements RoomService {
                 .collect(Collectors.toList());
     }
 
+
+    public List<RoomDetailsNotSpecifiedDTO> retrieveAvailableRoomsBySpecificViewNotSpecified(roomView view) {
+        List<Room> rooms = roomRepository.findAllByView(view);
+        System.out.println(rooms);
+        if (rooms.isEmpty()) {
+            throw new EntityNotFoundException("No Rooms found with view: " + view);
+        }
+        return rooms.stream()
+                .filter(room -> room.getStatus().equals(roomStatus.AVAILABLE))
+                .map(room -> RoomMapper.mapToDTOButNotSpecified(room))
+                .collect(Collectors.toList());
+    }
 
     public List<ReservationInfoDTO>retrieveReservationForSpecificRoom (long id ){
         Room room=roomRepository.findAllById(id);
