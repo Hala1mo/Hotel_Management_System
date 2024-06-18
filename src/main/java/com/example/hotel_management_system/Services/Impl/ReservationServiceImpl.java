@@ -44,16 +44,16 @@ public class ReservationServiceImpl implements ReservationService {
         this.addOnRepository= addOnRepository;
     }
 
-public  ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String firstName) {
+public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, String firstName) {
     User user = userRepository.findByNameOrId(firstName, id);
     if (user != null) {
         List<Reservation> reservationForCustomer = reservationRepository.findAllByUser(user);
 
-        return  ResponseEntity.ok(reservationForCustomer.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList()));
+        return  reservationForCustomer.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList());
 
     }
     else{
-            throw new EntityNotFoundException("User not found");
+        throw new IllegalArgumentException("User Not Found");
     }
 }
 

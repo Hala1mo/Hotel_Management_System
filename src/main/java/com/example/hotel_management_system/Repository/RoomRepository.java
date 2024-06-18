@@ -18,7 +18,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findAllByStatus(roomStatus status);
     List<Room> findAllByView(roomView view);
     @Query("SELECT DISTINCT r FROM Room r " +
-            "WHERE r.status = 0 AND NOT EXISTS (" +
+            "WHERE r.status = 0  AND NOT EXISTS (" +
             "   SELECT 1 FROM Reserve_Room rr " +
             "   JOIN rr.booking res " +
             "   WHERE rr.room_id = r AND res.status != 3 AND (" +
