@@ -125,7 +125,8 @@ The Hotel Management System is designed to streamline operations for both hotel 
   - Each invoice is related for specific reservation.
  
 ## ER diagram
-![Blank diagram](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/35fc195a-b095-428d-b4f8-6af27f29448a)
+![image](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/a3abdb8a-5702-4924-ac25-81aa854383f5)
+
 
 ## Setup Instructions
 
