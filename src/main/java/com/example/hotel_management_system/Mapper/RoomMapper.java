@@ -4,6 +4,7 @@ package com.example.hotel_management_system.Mapper;
 import com.example.hotel_management_system.DTO.Room.InsertRoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDetailsNotSpecifiedDTO;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Room;
 import com.example.hotel_management_system.Models.Room_Type;
@@ -26,6 +27,19 @@ public class RoomMapper{
         room.setCleanlinessStatus(roomRequest.getCleanlinessStatus());
         return room;
     }
+    public static RoomDetailsNotSpecifiedDTO mapToDTOButNotSpecified(Room roomRequest){
+        RoomDetailsNotSpecifiedDTO room=new RoomDetailsNotSpecifiedDTO();
+        room.setFloor_number(roomRequest.getFloor_number());
+        room.setView(roomRequest.getView());
+        room.setType_name(roomRequest.getRoomType().getType_name());
+        List<Room_Type_Feature> features= roomRequest.getRoomType().getRoom_type_feature();
+        room.setFeatures( features.stream().map(feature -> Room_Type_FeatureMapper.mapToDTOFeature(feature)).collect(Collectors.toList()));
+        List<Room_Type_Bed> beds= roomRequest.getRoomType().getRoom_type_bed();
+        room.setBed_Type(beds.stream().map(bed-> Room_Type_BedMapper.mapToDTOBed(bed)).collect(Collectors.toList()));
+        room.setPrice(roomRequest.getRoomType().getPrice());
+        return room;
+    }
+
 
 
     public static RoomDetailsInfoDTO detailsMapToDTO(Room roomRequest){

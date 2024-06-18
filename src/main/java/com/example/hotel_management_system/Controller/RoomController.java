@@ -4,6 +4,7 @@ import com.example.hotel_management_system.DTO.*;
 import com.example.hotel_management_system.DTO.Room.InsertRoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
+import com.example.hotel_management_system.DTO.Room.RoomDetailsNotSpecifiedDTO;
 import com.example.hotel_management_system.Models.Employee;
 import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
@@ -61,7 +62,7 @@ public class RoomController {
         return roomService.retrieveRoomsBySpecificStatus(status);
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/view/{view}")
     @Operation(summary = "Get rooms for specific view")
     @ApiResponses(value = {
@@ -74,9 +75,10 @@ public class RoomController {
         return roomService.retrieveRoomsBySpecificView(view);
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/available/view/{view}")
-    @Operation(summary = "Get available rooms for specific view")
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/available/{view}")
+    @Operation(summary = "Get available rooms for specific view for admins")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved available rooms for specific view",
                     content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RoomDTO.class)))}),
@@ -85,6 +87,18 @@ public class RoomController {
     })
     public List<RoomDTO>retrieveRoomsAvailableBySpecificView(@PathVariable roomView view){
         return roomService.retrieveAvailableRoomsBySpecificView(view);
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/available/view/{view}")
+    @Operation(summary = "Get available rooms for specific view for users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved available rooms for specific view",
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RoomDTO.class)))}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
+            @ApiResponse(responseCode = "404", description = "No rooms available for this view", content = @Content),
+    })
+    public List<RoomDetailsNotSpecifiedDTO>retrieveAvailableRoomsBySpecificViewNotSpecified(@PathVariable roomView view){
+        return roomService.retrieveAvailableRoomsBySpecificViewNotSpecified(view);
     }
 
     @PreAuthorize("isAuthenticated()")
