@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ReservationService {
     ResponseEntity<?> reserveBooking (ReservationDTO request);
-    ResponseEntity<?> retrieveReservationForSpecificCustomer(Long id, String firstName);
+    List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, String firstName);
     ResponseEntity<?> cancelAnReservation(long id);
     ResponseEntity<?> approveReservationCancellation(long id);
    // ResponseEntity<?> saveAdditionToSpecificBooking(List<Add_OnDTO> request, long id);

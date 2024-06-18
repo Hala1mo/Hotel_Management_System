@@ -36,16 +36,15 @@ public class ReservationController {
     @Operation(summary = "Find reservations for a customer")
     @ApiResponse(responseCode = "200", description = "Successfully retrieved reservations",
             content = @Content(array = @ArraySchema(schema = @Schema(implementation = ReservationDTO.class))))
-    public ResponseEntity<? >findReservationForCustomer(
+    public  List<ReservationDTO> findReservationForCustomer(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "id", required = false) Long id) {
         if (id != null) {
-            return ResponseEntity.ok(reservationService.retrieveReservationForSpecificCustomer(id, null));
+            return reservationService.retrieveReservationForSpecificCustomer(id, null);
         } else if (name != null) {
-            return ResponseEntity.ok(reservationService.retrieveReservationForSpecificCustomer(null, name));
-        } else {
-            return ResponseEntity.ok("USER NOT FOUND");
+            return reservationService.retrieveReservationForSpecificCustomer(null, name);
         }
+        throw new IllegalArgumentException("User Not Found");
     }
 
     @GetMapping("/{id}/rooms")
@@ -109,11 +108,5 @@ public class ReservationController {
     public ResponseEntity<?> updateSpecificBooking(@PathVariable long id, @RequestBody ReservationDTO request){
         return reservationService.modifyBooking(id,request);
     }
-
-
-
-
-
-
 
 }

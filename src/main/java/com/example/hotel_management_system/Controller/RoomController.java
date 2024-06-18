@@ -64,7 +64,7 @@ public class RoomController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/view/{view}")
-    @Operation(summary = "Get rooms for specific view")
+    @Operation(summary = "Get All rooms for specific view")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved rooms for specific view",
                     content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RoomDTO.class)))}),
