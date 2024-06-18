@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Data
 public class TaskDTO {
 
+    private Long id;
+
     @Valid
     @NotBlank(message = "Description is mandatory")
     private String description;

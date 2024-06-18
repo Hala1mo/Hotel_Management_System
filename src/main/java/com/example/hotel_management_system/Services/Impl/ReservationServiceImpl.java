@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
@@ -263,6 +262,21 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         return ResponseEntity.ok("Checked out successfully");
     }
 
+    @Override
+    public List<ReservationDTO> retrieveReservationsBySpecificDates(Date checkIn, Date checkOut) {
+
+            List<Reservation> ReservationsBySpecificDates = reservationRepository.findAllReservationsInDates(checkIn,checkOut);
+            if(!ReservationsBySpecificDates.isEmpty()) {
+                return ReservationsBySpecificDates.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList());
+            }
+            else {
+                throw new EntityNotFoundException("No reservations found in this period");
+            }
+    }
+
+
+
+
 
 
 
@@ -351,11 +365,11 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
     }
     public double calculateAdditionPrice(List<Reserve_Add_On> addition,double totalPrice,double numberOfStay){
 
-      for(int i=0;i<addition.size();++i){
-          totalPrice=totalPrice+(numberOfStay*addition.get(i).getAdd_on_id().getPrice());
-          System.out.print("totalllllt"+totalPrice);
-      }
-      return totalPrice;
+        for(int i=0;i<addition.size();++i){
+            totalPrice=totalPrice+(numberOfStay*addition.get(i).getAdd_on_id().getPrice());
+            System.out.print("totalllllt"+totalPrice);
+        }
+        return totalPrice;
     }
     public ResponseEntity<?> cancelAnReservation(long id){
         Reservation reservation=reservationRepository.findAllById(id);
@@ -450,6 +464,9 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
 
     public ResponseEntity<?> modifyBooking(long id,ReservationDTO request) {
         Reservation ToupdatedReservation=reservationRepository.findAllById(id);
+        if(ToupdatedReservation==null){
+            throw new EntityNotFoundException("Reservation ID not found");
+        }
         User userId = userRepository.findAllById(request.getUser_id());
         double totalPrice = 0;
         reservationStatus status = reservationStatus.Pending;
@@ -463,7 +480,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         } else if (payment.compareTo(paymentMethod.PAY_NOW) == 0) {
             status = reservationStatus.Confirmed;
         } else {
-            throw new IllegalArgumentException("Payment method is required");
+            throw new EntityNotFoundException("Payment method is required");
         }
         Reservation modifiedReservation=ReservationMapper.update(ToupdatedReservation,request,userId,status);
 

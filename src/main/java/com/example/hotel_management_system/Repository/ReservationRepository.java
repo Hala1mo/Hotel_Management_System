@@ -2,6 +2,7 @@ package com.example.hotel_management_system.Repository;
 
 
 import com.example.hotel_management_system.Models.Reservation;
+import com.example.hotel_management_system.Models.Room;
 import com.example.hotel_management_system.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,9 @@ List<Reservation> findAllByUser(User user);
                                                   @Param("checkInDate") Date checkInDate,
                                                   @Param("checkOutDate") Date checkOutDate);
 
+
+
+    @Query("SELECT r FROM Reservation r WHERE r.checkInDate >= :checkInDate AND r.checkOutDate <= :checkOutDate")
+    List<Reservation> findAllReservationsInDates(@Param("checkInDate") Date checkInDate, @Param("checkOutDate") Date checkOutDate);
 
 }

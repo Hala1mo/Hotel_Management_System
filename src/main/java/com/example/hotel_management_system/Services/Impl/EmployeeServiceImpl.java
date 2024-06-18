@@ -97,12 +97,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
     @Override
-    public EmployeeDTO updateEmployee(long id, EmployeeDTO employeeDTO) {
+    public EmployeeDTO updateEmployee(long id, InsertEmployeeDTO employeeDTO) {
         Employee employee= employeeRepository.findById(id);
               if(employee!=null){
                     employee.setFirstName(employeeDTO.getFirstName());
                     employee.setLastName(employeeDTO.getLastName());
-                    employee.setEmail(employeeDTO.getEmail());
+                    employee.setEmail(employee.getEmail());
                     employee.setPhoneNumber(employeeDTO.getPhoneNumber());
                     employee.setSalary(employeeDTO.getSalary());
 //                    employee.setHireDate(employeeDTO.getHireDate());

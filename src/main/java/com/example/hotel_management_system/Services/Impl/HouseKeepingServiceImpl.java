@@ -50,11 +50,11 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
         Optional<Room> roomOptional = roomRepository.findById(taskDTO.getRoom_id());
         Room room = roomOptional.orElseThrow(() -> new EntityNotFoundException("Room not found with id: " + taskDTO.getRoom_id()));
 
-        if(room.getCleanlinessStatus().equals("Cleaned")){
+        if(room.getCleanlinessStatus().name().equals("Cleaned")){
             throw new IllegalArgumentException("Room is already clean");
         }
 
-        if(room.getCleanlinessStatus().equals("UnderMaintenance")){
+        if(room.getCleanlinessStatus().name().equals("UnderMaintenance")){
             throw new IllegalArgumentException("Room is already in progress");
         }
         task.setDescription(taskDTO.getDescription());
@@ -69,12 +69,18 @@ public class HouseKeepingServiceImpl implements HouseKeepingService {
     @Override
     public List<TaskDTO> getAllTasks() {
         List<HouseKeepingTask> queryResult = taskRepository.findAll();
+        if(!queryResult.isEmpty()){
         List<TaskDTO> tasks = new ArrayList<>();
         for (HouseKeepingTask task : queryResult) {
             TaskDTO taskDTO = TaskMapper.mapToDTO(task);
             tasks.add(taskDTO);
         }
-        return tasks;
+
+        return tasks;}
+
+        else{
+            throw new EntityNotFoundException("No tasks found");
+        }
     }
 
     @Override

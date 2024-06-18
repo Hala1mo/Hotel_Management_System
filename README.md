@@ -1,6 +1,6 @@
  # Hotel Management System
 ## Project Overview
-The Hotel Management System is designed to streamline operations for both hotel adminstrators and guests. It offers functionalities for customers such as searching for available rooms, making reservations, customer check-ins and check-outs, and invoice generation. Adimnstrators can manage hotel employees and staff, room availability, and tracking housekeeping schedules. The system includes role-based access control, providing different functionalities based on user roles (admin, customer).
+The Hotel Management System is designed to streamline operations for both hotel adminstrators and guests. It offers functionalities for customers such as searching for available rooms, making reservations, customer check-ins and check-outs, and invoice generation. Adminstrators can manage hotel employees and staff, room availability, and tracking housekeeping schedules. The system includes role-based access control, providing different functionalities based on user roles (admin, customer).
 ## Features
 ### Customer Management
 - Register: Allows new users to create an account.
@@ -125,11 +125,28 @@ The Hotel Management System is designed to streamline operations for both hotel 
   - Each invoice is related for specific reservation.
  
 ## ER diagram
-![Blank diagram](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/35fc195a-b095-428d-b4f8-6af27f29448a)
-
-## Setup Instructions
+![image](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/a3abdb8a-5702-4924-ac25-81aa854383f5)
 
 
+## How to Build, Package, and Run the Application
+- By Using the Following command building the project and its JAR files will be completed :
+- ./mvnw.cmd package -DskipTests
+##  After the build process completes, you will find the JAR file in the target directory:
+- target/Hotel_Management_System-0.0.1-SNAPSHOT.jar
+-After That we Create a Dockerfile in the root directory of our project.
+## Build the Docker Image:
+- By Using the following command the Docker image will be built:
+- docker build -t halamo1/hotel_management_system:latest .
+## Pushing the Docker Image to DockerHub Using the following command :
+-  docker push hala1mo/hotel_management_system:latest
+## Running the Application with Docker Compose 
+- Pull the Docker image from DockerHub using the following command docker pull halamo1/hotel_management_system:latest
+- Create a docker-compose.yml file
+- Navigate to the directory containing the docker-compose.yml file.
+- Run Docker Compose using docker-compose up command.
+
+## DockerHub Repository
+You can find the Docker image for this project on DockerHub hub
 ## Lessons Learned
 - Understanding of Spring Boot and RESTful API development.
 - Hands-on experience with Docker and Docker Compose for containerization.
@@ -140,3 +157,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ## Contributors
 - Student 1: Hala Abdel Halim.
 - Student 2: Eliana Ellati.
+
+## OpenApISpecification Link:
+- http://localhost:8080/swagger-ui/index.html#/
+
