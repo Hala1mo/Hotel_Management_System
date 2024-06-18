@@ -21,8 +21,6 @@ import java.util.List;
 
 public class RoomDetailsInfoDTO{
     private long id;
-
-
     @NotNull
     @NotBlank
     private int room_number;

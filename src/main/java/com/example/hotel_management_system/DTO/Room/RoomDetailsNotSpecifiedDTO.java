@@ -24,9 +24,6 @@ public class RoomDetailsNotSpecifiedDTO{
     @NotNull
     @NotBlank
     private int floor_number;
-
-
-
     @Enumerated
     @NotNull
     private roomView view ;

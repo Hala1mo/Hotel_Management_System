@@ -30,7 +30,7 @@ public class Employee {
     private String address;
     @Column(name="hireDate",nullable = false)
     private LocalDate hireDate;
-    @Column(name="email",nullable = false,unique = true)
+    @Column(name="email",nullable = false)
     private String email;
     @Column(name="salary",nullable = false)
     private long salary;

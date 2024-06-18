@@ -2,6 +2,7 @@ package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.Task.CreateTaskDTO;
 import com.example.hotel_management_system.DTO.Task.TaskDTO;
+import com.example.hotel_management_system.DTO.Task.TaskDTOV2;
 import com.example.hotel_management_system.Models.Employee;
 import com.example.hotel_management_system.Services.HouseKeepingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,8 +49,8 @@ public class TaskController {
     @Operation(summary = "Get a task by ID (version 2)")
     @ApiResponse(responseCode = "200", description = "Successfully retrieved task by ID",
             content = @Content(schema = @Schema(implementation = TaskDTO.class)))
-    public TaskDTO getTasksByIDV2(@PathVariable Long id) {
-        return housekeepingTaskService.getTaskById(id);
+    public TaskDTOV2 getTasksByIDV2(@PathVariable Long id) {
+        return housekeepingTaskService.getTaskByIdV2(id);
     }
 
     @GetMapping("/employee/{employeeId}")

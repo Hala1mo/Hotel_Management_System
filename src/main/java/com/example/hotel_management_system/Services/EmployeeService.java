@@ -21,7 +21,7 @@ public interface EmployeeService {
 
     List<EmployeeDTO> getEmployeeForSpecifDepartment(String department);
 
-    EmployeeDTO updateEmployee(long id, EmployeeDTO employeeDTO);
+    EmployeeDTO updateEmployee(long id, InsertEmployeeDTO employeeDTO);
 
     void deleteEmployeeById(long id);
 }

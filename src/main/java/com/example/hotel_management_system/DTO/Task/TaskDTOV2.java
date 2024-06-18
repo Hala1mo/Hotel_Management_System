@@ -10,6 +10,7 @@ import lombok.Data;
 import java.time.LocalDate;
 @Data
 public class TaskDTOV2 {
+        private Long id;
         @Valid
         @NotBlank(message = "Description is mandatory")
         private String description;

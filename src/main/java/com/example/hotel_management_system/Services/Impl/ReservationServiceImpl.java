@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -34,30 +35,28 @@ public class ReservationServiceImpl implements ReservationService {
     Reserve_Add_OnRepository reserve_Add_OnRepository;
 
     @Autowired
-    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, RoomRepository roomRepository,Reservation_RoomRepository reservationRoomRepository, InvoiceRepository invoiceRepository,Add_OnRepository addOnRepository, Reserve_Add_OnRepository reserve_Add_OnRepository) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, RoomRepository roomRepository, Reservation_RoomRepository reservationRoomRepository, InvoiceRepository invoiceRepository, Add_OnRepository addOnRepository, Reserve_Add_OnRepository reserve_Add_OnRepository) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.roomRepository = roomRepository;
-        this.reservationRoomRepository=reservationRoomRepository;
-        this.invoiceRepository= invoiceRepository;
-        this.reserve_Add_OnRepository= reserve_Add_OnRepository;
-        this.addOnRepository= addOnRepository;
+        this.reservationRoomRepository = reservationRoomRepository;
+        this.invoiceRepository = invoiceRepository;
+        this.reserve_Add_OnRepository = reserve_Add_OnRepository;
+        this.addOnRepository = addOnRepository;
     }
 
-public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, String firstName) {
-    User user = userRepository.findByNameOrId(firstName, id);
-    if (user != null) {
-        List<Reservation> reservationForCustomer = reservationRepository.findAllByUser(user);
+    public List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, String firstName) {
+        User user = userRepository.findByNameOrId(firstName, id);
+        if (user != null) {
+            List<Reservation> reservationForCustomer = reservationRepository.findAllByUser(user);
 
-        return  reservationForCustomer.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList());
+            return reservationForCustomer.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList());
 
+        } else {
+                throw new EntityNotFoundException("User Not Found");
+
+        }
     }
-    else{
-        throw new IllegalArgumentException("User Not Found");
-    }
-}
-
-
 
 
     public ResponseEntity<?> reserveBooking(ReservationDTO request) {
@@ -115,12 +114,12 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         }
         long diffInMillies = Math.abs(reservation.getCheckOutDate().getTime() - reservation.getCheckInDate().getTime());
         int numberOfStay = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        for(int i=0;i< additionList.size();++i){
-            Add_On addition=addOnRepository.findAllById(additionList.get(i).getAdd_on_id());
-            Reserve_Add_On reserve_add_on= Reserve_Add_OnMapper.toEntity(reservation,addition);
+        for (int i = 0; i < additionList.size(); ++i) {
+            Add_On addition = addOnRepository.findAllById(additionList.get(i).getAdd_on_id());
+            Reserve_Add_On reserve_add_on = Reserve_Add_OnMapper.toEntity(reservation, addition);
             reservation.getAdd_on().add(reserve_add_on);
             addition.getAdd_on_id().add(reserve_add_on);
-            totalPrice=totalPrice+(numberOfStay*addition.getPrice());
+            totalPrice = totalPrice + (numberOfStay * addition.getPrice());
             reserve_Add_OnRepository.save(reserve_add_on);
             addOnRepository.save(addition);
         }
@@ -130,22 +129,24 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         return ResponseEntity.ok(InvoiceMapper.mapToInvoiceDetailsDTO(invoice));
     }
 
-    public ResponseEntity<?> confirmReservation( Long id){
-        Reservation reservation=reservationRepository.findAllById(id);
+    public ResponseEntity<?> confirmReservation(Long id) {
+        Reservation reservation = reservationRepository.findAllById(id);
         reservation.setStatus(reservationStatus.Confirmed);
         reservationRepository.save(reservation);
         return ResponseEntity.ok("Reservation confirmed");
     }
-    public ResponseEntity<?> checkIn( Long id){
-        Reservation reservation=reservationRepository.findAllById(id);
-      if(reservation.getStatus().compareTo(reservationStatus.Confirmed)==0){
-          reservation.setStatus(reservationStatus.Checkin);
-          reservationRepository.save(reservation);
-          return ResponseEntity.ok("Checked in successfully");
-      }
-          return ResponseEntity.ok("Please Confirmed The Reservation First");
+
+    public ResponseEntity<?> checkIn(Long id) {
+        Reservation reservation = reservationRepository.findAllById(id);
+        if (reservation.getStatus().compareTo(reservationStatus.Confirmed) == 0) {
+            reservation.setStatus(reservationStatus.Checkin);
+            reservationRepository.save(reservation);
+            return ResponseEntity.ok("Checked in successfully");
+        }
+        return ResponseEntity.ok("Please Confirmed The Reservation First");
 
     }
+
     public ResponseEntity<?> checkOut(long id) {
         Reservation reservation = reservationRepository.findAllById(id);
         for (int i = 0; i < reservation.getBooking_room().size(); ++i) {
@@ -156,6 +157,21 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         reservation.setStatus(reservationStatus.Checkout);
         return ResponseEntity.ok("Checked out successfully");
     }
+
+    @Override
+    public List<ReservationDTO> retrieveReservationsBySpecificDates(Date checkIn, Date checkOut) {
+
+            List<Reservation> ReservationsBySpecificDates = reservationRepository.findAllReservationsInDates(checkIn,checkOut);
+            if(!ReservationsBySpecificDates.isEmpty()) {
+                return ReservationsBySpecificDates.stream().map(reservation -> ReservationMapper.mapToDTO(reservation)).collect(Collectors.toList());
+            }
+            else {
+                throw new EntityNotFoundException("No reservations found in this period");
+            }
+    }
+
+
+
 
 
 
@@ -245,11 +261,11 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
     }
     public double calculateAdditionPrice(List<Reserve_Add_On> addition,double totalPrice,double numberOfStay){
 
-      for(int i=0;i<addition.size();++i){
-          totalPrice=totalPrice+(numberOfStay*addition.get(i).getAdd_on_id().getPrice());
-          System.out.print("totalllllt"+totalPrice);
-      }
-      return totalPrice;
+        for(int i=0;i<addition.size();++i){
+            totalPrice=totalPrice+(numberOfStay*addition.get(i).getAdd_on_id().getPrice());
+            System.out.print("totalllllt"+totalPrice);
+        }
+        return totalPrice;
     }
     public ResponseEntity<?> cancelAnReservation(long id){
         Reservation reservation=reservationRepository.findAllById(id);
@@ -344,6 +360,9 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
 
     public ResponseEntity<?> modifyBooking(long id,ReservationDTO request) {
         Reservation ToupdatedReservation=reservationRepository.findAllById(id);
+        if(ToupdatedReservation==null){
+            throw new EntityNotFoundException("Reservation ID not found");
+        }
         User userId = userRepository.findAllById(request.getUser_id());
         double totalPrice = 0;
         reservationStatus status = reservationStatus.Pending;
@@ -357,7 +376,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         } else if (payment.compareTo(paymentMethod.PAY_NOW) == 0) {
             status = reservationStatus.Confirmed;
         } else {
-            throw new IllegalArgumentException("Payment method is required");
+            throw new EntityNotFoundException("Payment method is required");
         }
         Reservation modifiedReservation=ReservationMapper.update(ToupdatedReservation,request,userId,status);
 
@@ -448,8 +467,8 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
             reservation.setStatus(reservationStatus.Canceled);
         }
         for(int i=0;i<reservation.getBooking_room().size();++i){
-          Room roomToUpdate=RoomMapper.updateToAvailable(reservation.getBooking_room().get(i).getRoom_id());
-          roomRepository.save(roomToUpdate);
+            Room roomToUpdate=RoomMapper.updateToAvailable(reservation.getBooking_room().get(i).getRoom_id());
+            roomRepository.save(roomToUpdate);
         }
         reservationRepository.save(reservation);
         return ResponseEntity.ok("Reservation Canceled");
@@ -458,7 +477,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
     public List<RoomDTO> retrieveRoomsForSpecficReservation(long id){
         Reservation reservation =reservationRepository.findAllById(id);
         List<Reserve_Room> list_room=reservation.getBooking_room();
-       return  list_room.stream().map(room -> Reserve_RoomMapper.mapToRoom(room)).collect(Collectors.toList());
+        return  list_room.stream().map(room -> Reserve_RoomMapper.mapToRoom(room)).collect(Collectors.toList());
     }
 
 
@@ -468,8 +487,8 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         int totalcapcity = 0;
         for (Reserve_RoomDTO reserveRoom : reservedRooms) {
             Room room = roomRepository.findAllById(reserveRoom.getRoom_id());
-              totalcapcity=totalcapcity+room.getRoomType().getNum_adults()+room.getRoomType().getNum_children();
-                System.out.print(totalcapcity);
+            totalcapcity=totalcapcity+room.getRoomType().getNum_adults()+room.getRoomType().getNum_children();
+            System.out.print(totalcapcity);
         }
         int remainingCapcity = request.getNum_adults() +request.getNum_children();
         if((totalcapcity-remainingCapcity)<0) {

@@ -96,7 +96,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "400", description = "Invalid employee ID", content = @Content)
     })
     @PutMapping("/update/{id}")
-    public EmployeeDTO updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeDTO updatedEmployee) {
+    public EmployeeDTO updateEmployee(@PathVariable Long id, @Valid @RequestBody InsertEmployeeDTO updatedEmployee) {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 

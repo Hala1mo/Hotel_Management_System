@@ -31,7 +31,6 @@ public class HouseKeepingTask {
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
-
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
