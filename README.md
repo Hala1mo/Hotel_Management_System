@@ -128,7 +128,64 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ![image](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/a3abdb8a-5702-4924-ac25-81aa854383f5)
 
 
-## Setup Instructions
+## How to Build, Package, and Run the Application
+Building and Packaging the Application
+Build the Project:
+By Using the Following command to build the project and generate a JAR file:
+## ./mvnw.cmd package -DskipTests
+After the build process completes, you will find the JAR file in the target directory:
+target/Hotel_Management_System-0.0.1-SNAPSHOT.jar
+Creating a Docker Image
+## Dockerfile:
+Create a Dockerfile in the root directory of our project with the following content:
+Dockerfile
+Copy code
+FROM openjdk:17-jdk-alpine
+# Set the working directory in the container
+WORKDIR /app
+# Copy the packaged Spring Boot application (JAR file) to the docker image
+COPY target/Hotel_Management_System-0.0.1-SNAPSHOT.jar app.jar
+# Expose the port that your Spring Boot application listens on
+EXPOSE 8080
+# Set the entry point for the container
+ENTRYPOINT ["java", "-jar", "app.jar"]
+## Build the Docker Image:
+By Using the following command to build the Docker image:
+## docker build -t halamo1/hotel_management_system:latest .
+Push the Docker Image to DockerHub Using the following command :
+## docker push your-dockerhub-username/hotel_management_system:latest
+Running the Application with Docker Compose
+## Docker Compose Configuration:
+Create a docker-compose.yml file in the root directory with the following content:
+yaml
+Copy code
+version: '3'
+services:
+  springboot-app:
+    image: your-dockerhub-username/hotel_management_system:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/hotel
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+
+  mysqldb:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=hotel
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+      - MYSQL_ROOT_PASSWORD=root
+Run the Docker Compose:
+By Executing the following command we garantee the starting of the application and its dependencies:
+docker-compose up
+## DockerHub Repository
+You can find the Docker image for this project on DockerHub her
 
 
 ## Lessons Learned
