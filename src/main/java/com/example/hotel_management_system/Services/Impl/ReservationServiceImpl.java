@@ -10,16 +10,22 @@ import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Repository.*;
 import com.example.hotel_management_system.Services.ReservationService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -33,8 +39,10 @@ public class ReservationServiceImpl implements ReservationService {
     Add_OnRepository addOnRepository;
     Reserve_Add_OnRepository reserve_Add_OnRepository;
 
+    private TaskScheduler taskScheduler;
+
     @Autowired
-    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, RoomRepository roomRepository,Reservation_RoomRepository reservationRoomRepository, InvoiceRepository invoiceRepository,Add_OnRepository addOnRepository, Reserve_Add_OnRepository reserve_Add_OnRepository) {
+    public ReservationServiceImpl(ReservationRepository reservationRepository, UserRepository userRepository, RoomRepository roomRepository,Reservation_RoomRepository reservationRoomRepository, InvoiceRepository invoiceRepository,Add_OnRepository addOnRepository, Reserve_Add_OnRepository reserve_Add_OnRepository,TaskScheduler taskScheduler) {
         this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
         this.roomRepository = roomRepository;
@@ -42,7 +50,104 @@ public class ReservationServiceImpl implements ReservationService {
         this.invoiceRepository= invoiceRepository;
         this.reserve_Add_OnRepository= reserve_Add_OnRepository;
         this.addOnRepository= addOnRepository;
+        this.taskScheduler=taskScheduler;
+
     }
+
+
+    @Transactional
+    public ResponseEntity<?> reserveBooking(ReservationDTO request) {
+        User userId = userRepository.findAllById(request.getUser_id());
+        double totalPrice = 0;
+        reservationStatus status = reservationStatus.Pending;
+        List<Reserve_RoomDTO> reservedRooms = request.getBooking_room();
+
+        if (checkNumberOfGuests(reservedRooms, request) == 0) {
+            throw new IllegalArgumentException("Room capacity exceeded");
+        }
+
+        paymentMethod payment = request.getPaymentMethod();
+        if (payment == paymentMethod.PAY_LATER) {
+            status = reservationStatus.Pending;
+        } else if (payment == paymentMethod.PAY_NOW) {
+            status = reservationStatus.Confirmed;
+        } else {
+            throw new IllegalArgumentException("Payment method is required");
+        }
+
+        for (Reserve_RoomDTO reserveRoomDTO : reservedRooms) {
+            Room room = roomRepository.findAllById(reserveRoomDTO.getRoom_id());
+            if (!isRoomAvailable(room, request.getCheckInDate(), request.getCheckOutDate())) {
+                throw new IllegalArgumentException("Room " + room.getId() + " is not available for the requested period");
+            }
+        }
+        Reservation reservation = Reservation.builder()
+                .user(userId)
+                .status(status)
+                .num_children(request.getNum_children())
+                .num_adults(request.getNum_adults())
+                .checkInDate(request.getCheckInDate())
+                .checkOutDate(request.getCheckOutDate())
+                .payment_Method(payment)
+                .booking_room(new ArrayList<>())
+                .add_on(new ArrayList<>())
+                .build();
+
+        reservationRepository.save(reservation);
+
+        List<Reserve_Add_OnDTO> additionList = request.getAdditions();
+        for (Reserve_RoomDTO reserveRoomDTO : reservedRooms) {
+            Room room = roomRepository.findAllById(reserveRoomDTO.getRoom_id());
+            Reserve_Room reserve_room = Reserve_RoomMapper.toEntity(room, reservation);
+            reservation.getBooking_room().add(reserve_room);
+
+            room.getBooking_room().add(reserve_room);
+            reservationRoomRepository.save(reserve_room);
+            totalPrice = totalPrice + room.getRoomType().getPrice();
+            roomRepository.save(room);
+        }
+        long diffInMillies = Math.abs(reservation.getCheckOutDate().getTime() - reservation.getCheckInDate().getTime());
+        int numberOfStay = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        for(int i=0;i< additionList.size();++i){
+            Add_On addition=addOnRepository.findAllById(additionList.get(i).getAdd_on_id());
+            Reserve_Add_On reserve_add_on= Reserve_Add_OnMapper.toEntity(reservation,addition);
+            reservation.getAdd_on().add(reserve_add_on);
+            addition.getAdd_on_id().add(reserve_add_on);
+            totalPrice=totalPrice+(numberOfStay*addition.getPrice());
+            reserve_Add_OnRepository.save(reserve_add_on);
+            addOnRepository.save(addition);
+        }
+        updateRoomStatusForReservations();
+        Invoice invoice = InvoiceMapper.toEntity(reservation, totalPrice);
+        invoiceRepository.save(invoice);
+        return ResponseEntity.ok(InvoiceMapper.mapToInvoiceDetailsDTO(invoice));
+    }
+    private boolean isRoomAvailable(Room room, Date checkInDate, Date checkOutDate) {
+        List<Reservation> overlappingReservations = reservationRepository.findOverlappingReservations(room.getId(), checkInDate, checkOutDate);
+
+        return overlappingReservations.isEmpty();
+    }
+
+
+    @Transactional
+    public void updateRoomStatusForReservations() {
+
+        List<Reserve_Room> reserve_room= reservationRoomRepository.findAll();
+
+        for (Reserve_Room reserve_roomm : reserve_room) {
+
+            Date checkInDate = reserve_roomm.getBooking().getCheckInDate();
+            System.out.print(checkInDate);
+            Date currentDate = new Date(); // Current date/time
+
+            if (checkInDate.after(currentDate)) {
+                Room room=roomRepository.findAllById(reserve_roomm.getRoom_id().getId());
+
+                    room.setStatus(roomStatus.RESERVED);
+                    roomRepository.save(room);
+                }
+            }
+        }
 
 public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, String firstName) {
     User user = userRepository.findByNameOrId(firstName, id);
@@ -60,7 +165,8 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
 
 
 
-    public ResponseEntity<?> reserveBooking(ReservationDTO request) {
+/*
+   public ResponseEntity<?> reserveBooking(ReservationDTO request) {
         User userId = userRepository.findAllById(request.getUser_id());
         double totalPrice = 0;
         reservationStatus status = reservationStatus.Pending;
@@ -129,7 +235,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         invoiceRepository.save(invoice);
         return ResponseEntity.ok(InvoiceMapper.mapToInvoiceDetailsDTO(invoice));
     }
-
+*/
     public ResponseEntity<?> confirmReservation( Long id){
         Reservation reservation=reservationRepository.findAllById(id);
         reservation.setStatus(reservationStatus.Confirmed);
