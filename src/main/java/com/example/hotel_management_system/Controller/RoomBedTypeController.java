@@ -45,7 +45,6 @@ public class RoomBedTypeController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Bed_TypeDTO.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
     })
-    @PreAuthorize("hasRole('ADMIN')")
     public Bed_TypeDTO saveBedType(@Valid @RequestBody Bed_TypeDTO request){
         return bedTypeService.saveBedType(request);
     }

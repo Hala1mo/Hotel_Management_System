@@ -158,7 +158,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users/auth/**").permitAll()
                         .requestMatchers("/api/employees/**").access(adminAuth)
                         .requestMatchers("/api/tasks/**").access(adminAuth)
-                        .requestMatchers("api/rooms/BedType/*").access(adminAuth)
+                        .requestMatchers("api/rooms/BedType/**").access(adminAuth)
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
