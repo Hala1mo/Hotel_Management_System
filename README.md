@@ -138,8 +138,14 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - By Using the following command the Docker image will be built:
 - docker build -t halamo1/hotel_management_system:latest .
 ## Pushing the Docker Image to DockerHub Using the following command :
--  docker push your-dockerhub-username/hotel_management_system:latest
-## Running the Application with Docker Compose command.
+-  docker push hala1mo/hotel_management_system:latest
+## Running the Application with Docker Compose 
+- Pull the Docker image from DockerHub.
+- docker pull halamo1/hotel_management_system:latest
+- Create a docker-compose.yml file
+- Navigate to the directory containing the docker-compose.yml file.
+- Run Docker Compose using docker-compose up command.
+
 ## DockerHub Repository
 You can find the Docker image for this project on DockerHub hub
 ## Lessons Learned
@@ -152,3 +158,7 @@ You can find the Docker image for this project on DockerHub hub
 ## Contributors
 - Student 1: Hala Abdel Halim.
 - Student 2: Eliana Ellati.
+
+## OpenApISpecification Link:
+- http://localhost:8080/swagger-ui/index.html#/
+
