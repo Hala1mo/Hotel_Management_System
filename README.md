@@ -103,8 +103,6 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Attributes: ID, List of rooms reserved, user id, number of adults, number of children, check-in date, check-out date, payment method (e.g. pay now, pay later), invoice. 
 - Relationships:
   - Each booking has one or more rooms reserved.
-  - Each task is assigned to a specific employee for a specific room in a specific date.
-
 
 ### Reserve Room
 - Description: This is for reserving a room for a specific booking.
