@@ -135,7 +135,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - target/Hotel_Management_System-0.0.1-SNAPSHOT.jar
 - After That, we Create a Dockerfile in the root directory of our project.
 ## Build the Docker Image:
-- By using the following command the Docker image will be built: docker build -t halamo1/hotel_management_system:latest .
+- By using the following command the Docker image will be built: docker build -t halamo1/hotel_management_system:latest 
 ## Pushing the Docker Image to DockerHub Using the following command :
 -  docker push hala1mo/hotel_management_system:latest
 ## Running the Application with Docker Compose 
@@ -146,6 +146,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 
 ## DockerHub Repository
 You can find the Docker image for this project on DockerHub 
+- Link: https://hub.docker.com/repository/docker/hala1mo/hotel_management/general
 ## Lessons Learned
 - Understanding of Spring Boot and RESTful API development.
 - Hands-on experience with Docker and Docker Compose for containerization.
