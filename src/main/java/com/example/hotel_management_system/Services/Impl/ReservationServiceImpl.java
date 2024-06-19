@@ -502,7 +502,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
             boolean roomExists = reserve_rooms.stream()
                     .anyMatch(reserveRoom -> reserveRoom.getRoom_id().getId() == room.getId());
             if (!roomExists) {
-                if (room.getStatus().compareTo(roomStatus.AVAILABLE) == 0) {
+                if (isRoomAvailable(room, request.getCheckInDate(), request.getCheckOutDate())) {
                     Reserve_Room updatedreserve_room = Reserve_RoomMapper.toEntity(room, ToupdatedReservation);
                     ToupdatedReservation.getBooking_room().add(updatedreserve_room);
                     room.setStatus(roomStatus.RESERVED);
@@ -511,7 +511,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
 
                     roomRepository.save(room);
                 } else {
-                    return ResponseEntity.ok("ROOM IS NOT AVAILABLE");
+                    throw new IllegalArgumentException("Room " + room.getId() + " is not available for the requested period");
                 }
             }
         }
