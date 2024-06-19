@@ -2,7 +2,7 @@ package com.example.hotel_management_system.Services.Impl;
 
 
 import com.example.hotel_management_system.DTO.Room.InsertRoomDTO;
-import com.example.hotel_management_system.DTO.ReservationInfoDTO;
+import com.example.hotel_management_system.DTO.Reservation.ReservationInfoDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDetailsNotSpecifiedDTO;

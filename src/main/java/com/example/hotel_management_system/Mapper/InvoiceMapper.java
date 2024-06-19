@@ -1,8 +1,6 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.InvoiceDTO;
-import com.example.hotel_management_system.DTO.InvoiceDetailsDTO;
-import com.example.hotel_management_system.DTO.ReservationDTO;
+import com.example.hotel_management_system.DTO.Reservation.InvoiceDetailsDTO;
 import com.example.hotel_management_system.Models.Invoice;
 import com.example.hotel_management_system.Models.Reservation;
 

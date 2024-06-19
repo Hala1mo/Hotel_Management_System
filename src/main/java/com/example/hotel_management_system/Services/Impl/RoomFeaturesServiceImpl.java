@@ -1,7 +1,8 @@
 package com.example.hotel_management_system.Services.Impl;
 
-import com.example.hotel_management_system.DTO.Room.FeatureDTO;
-import com.example.hotel_management_system.DTO.Room.RoomDTO;
+import com.example.hotel_management_system.DTO.Room.FeatureDTOv1;
+import com.example.hotel_management_system.DTO.Room.FeatureDTOv2;
+import com.example.hotel_management_system.DTO.Room.InsertFeatureDTO;
 import com.example.hotel_management_system.Mapper.FeatureMapper;
 import com.example.hotel_management_system.Models.Features;
 import com.example.hotel_management_system.Repository.FeaturesRepository;
@@ -28,20 +29,29 @@ public class RoomFeaturesServiceImpl implements RoomFeaturesService {
         this.featuresRepository = featuresRepository;
         this.roomTypeRepository = roomTypeRepository;
     }
-    public List<FeatureDTO> retrieveFeatures(){
+    public List<FeatureDTOv1> retrieveFeaturesV1(){
         List<Features> allFeatures= featuresRepository.findAll();
         if(allFeatures==null){
             throw new EntityNotFoundException("No features found in the database");
         }
-        return allFeatures.stream().map(feature -> FeatureMapper.mapToDTO(feature)).collect(Collectors.toList());
+        return allFeatures.stream().map(feature -> FeatureMapper.mapToDTOV1(feature)).collect(Collectors.toList());
     }
 
-    public FeatureDTO saveFeatures (FeatureDTO request){
+    public List<FeatureDTOv2> retrieveFeaturesV2(){
+        List<Features> allFeatures= featuresRepository.findAll();
+        if(allFeatures==null){
+            throw new EntityNotFoundException("No features found in the database");
+        }
+        return allFeatures.stream().map(feature -> FeatureMapper.mapToDTOV2(feature)).collect(Collectors.toList());
+    }
+
+
+    public InsertFeatureDTO saveFeatures (InsertFeatureDTO request){
         Features featureToSave = FeatureMapper.ToEntity(request);
         featuresRepository.save(featureToSave);
         return  FeatureMapper.mapToDTO(featureToSave);
     }
-    public ResponseEntity<?> updateFeatures (FeatureDTO request,long id){
+    public ResponseEntity<?> updateFeatures (InsertFeatureDTO request, long id){
         Features featureToUpdate=featuresRepository.findAllById(id);
         FeatureMapper.update(featureToUpdate,request);
         featuresRepository.save(featureToUpdate);

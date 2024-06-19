@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.Add_OnDTO;
+import com.example.hotel_management_system.DTO.Reservation.Add_OnDTO;
 import com.example.hotel_management_system.Services.AddOnService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

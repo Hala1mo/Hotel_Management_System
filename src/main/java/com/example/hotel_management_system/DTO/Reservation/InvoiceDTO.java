@@ -1,4 +1,4 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Reservation;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

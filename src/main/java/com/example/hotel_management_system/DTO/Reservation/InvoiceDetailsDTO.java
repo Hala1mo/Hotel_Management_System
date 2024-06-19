@@ -1,4 +1,4 @@
-package com.example.hotel_management_system.DTO;
+package com.example.hotel_management_system.DTO.Reservation;
 
 
 import com.example.hotel_management_system.Models.Enum.reservationStatus;

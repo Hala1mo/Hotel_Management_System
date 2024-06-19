@@ -1,7 +1,6 @@
 package com.example.hotel_management_system.DTO.Room;
 
 
-import com.example.hotel_management_system.Models.Enum.roomStatus;
 import com.example.hotel_management_system.Models.Enum.roomView;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
@@ -37,7 +36,7 @@ public class RoomDetailsNotSpecifiedDTO{
     private String type_name;
 
     @NotNull
-    List<FeatureDTO> features;
+    List<InsertFeatureDTO> features;
     @NotNull
     List<Bed_TypeDTO> bed_Type;
 }

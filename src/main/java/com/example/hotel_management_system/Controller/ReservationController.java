@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.ReservationDTO;
+import com.example.hotel_management_system.DTO.Reservation.ReservationDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
 import com.example.hotel_management_system.Services.ReservationService;

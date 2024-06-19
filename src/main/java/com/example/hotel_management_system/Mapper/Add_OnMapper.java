@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.Add_OnDTO;
+import com.example.hotel_management_system.DTO.Reservation.Add_OnDTO;
 import com.example.hotel_management_system.Models.Add_On;
 
 public class Add_OnMapper {

@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.DTO.Add_OnDTO;
+import com.example.hotel_management_system.DTO.Reservation.Add_OnDTO;
 
 import java.util.List;
 

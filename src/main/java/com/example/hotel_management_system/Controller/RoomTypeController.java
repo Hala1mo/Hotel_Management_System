@@ -1,7 +1,6 @@
 package com.example.hotel_management_system.Controller;
 
 import com.example.hotel_management_system.DTO.Room.*;
-import com.example.hotel_management_system.Models.Employee;
 import com.example.hotel_management_system.Services.RoomTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -48,11 +47,11 @@ public class RoomTypeController {
     @Operation(summary = "Retrieve features for a specific room type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved features for a specific room type",
-                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = FeatureDTO.class)))}),
+                    content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = InsertFeatureDTO.class)))}),
             @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
             @ApiResponse(responseCode = "404", description = "No features found for this room", content = @Content),
     })
-    public List<FeatureDTO> retrieveFeaturesForSpecificRoomType(@PathVariable Long id) {
+    public List<InsertFeatureDTO> retrieveFeaturesForSpecificRoomType(@PathVariable Long id) {
         return roomTypeservice.retrieveFeaturesForSpecificRoomType(id);
     }
 

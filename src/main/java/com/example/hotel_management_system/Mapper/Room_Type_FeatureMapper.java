@@ -1,6 +1,6 @@
 package com.example.hotel_management_system.Mapper;
 
-import com.example.hotel_management_system.DTO.Room.FeatureDTO;
+import com.example.hotel_management_system.DTO.Room.InsertFeatureDTO;
 import com.example.hotel_management_system.DTO.Room.RoomTypeDTO;
 import com.example.hotel_management_system.Models.Features;
 import com.example.hotel_management_system.Models.Room_Type;
@@ -22,8 +22,8 @@ public class Room_Type_FeatureMapper {
         room_type.setPrice(request.getType_id().getPrice());
         return room_type;
     }
-    public static FeatureDTO mapToDTOFeature(Room_Type_Feature request){
-        FeatureDTO feature =new FeatureDTO();
+    public static InsertFeatureDTO mapToDTOFeature(Room_Type_Feature request){
+        InsertFeatureDTO feature =new InsertFeatureDTO();
         feature.setId(request.getFeature_id().getId());
         feature.setFeature(request.getFeature_id().getFeature());
         feature.setDescription(request.getFeature_id().getDescription());

@@ -1,6 +1,8 @@
 package com.example.hotel_management_system.Controller;
 
-import com.example.hotel_management_system.DTO.Room.FeatureDTO;
+import com.example.hotel_management_system.DTO.Room.FeatureDTOv1;
+import com.example.hotel_management_system.DTO.Room.FeatureDTOv2;
+import com.example.hotel_management_system.DTO.Room.InsertFeatureDTO;
 import com.example.hotel_management_system.Services.RoomFeaturesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -27,27 +29,50 @@ public class FeatureController {
         this.roomFeaturesService=roomFeaturesService;
     }
 
-    @GetMapping("")
-    @Operation(summary = "Retrieve all room features")
+    @GetMapping(headers = "X-API-VERSION=1")
+    @Operation(summary = "Retrieve all room features using version 1")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of room features",
-                    content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = FeatureDTO.class)))),
+                    content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = InsertFeatureDTO.class)))),
             @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
     })
     @PreAuthorize("hasRole('ADMIN')")
-    public List<FeatureDTO> retrieveFeatures(){
-        return roomFeaturesService.retrieveFeatures();
+    public List<FeatureDTOv1> retrieveFeaturesV1(){
+        return roomFeaturesService.retrieveFeaturesV1();
     }
+
+
+
+    @GetMapping(headers = "X-API-VERSION=2")
+    @Operation(summary = "Retrieve all room features using version 2 ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved list of room features",
+                    content = @Content(mediaType = "application/json",array = @ArraySchema(schema = @Schema(implementation = InsertFeatureDTO.class)))),
+            @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
+    })
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<FeatureDTOv2> retrieveFeaturesV2(){
+        return roomFeaturesService.retrieveFeaturesV2();
+    }
+
+
+
+
+
+
+
+
+
 
     @PostMapping("/create")
     @Operation(summary = "Save a new room feature")
     @ApiResponses(value = {
     @ApiResponse(responseCode = "201", description = "Successfully saved room feature",
-            content = @Content(mediaType = "application/json",schema = @Schema(implementation = FeatureDTO.class))),
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = InsertFeatureDTO.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content),
     })
     @PreAuthorize("hasRole('ADMIN')")
-    public FeatureDTO saveFeatures(@Valid @RequestBody FeatureDTO request){
+    public InsertFeatureDTO saveFeatures(@Valid @RequestBody InsertFeatureDTO request){
         return roomFeaturesService.saveFeatures(request);
     }
 
@@ -55,11 +80,11 @@ public class FeatureController {
     @Operation(summary = "Update an existing room feature")
     @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "Successfully updated room feature",
-            content = @Content(mediaType = "application/json",schema = @Schema(implementation = FeatureDTO.class))),
+            content = @Content(mediaType = "application/json",schema = @Schema(implementation = InsertFeatureDTO.class))),
     @ApiResponse(responseCode = "401", description = "Unauthorized user", content = @Content)
     })
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> updateFeatures(@Valid @RequestBody FeatureDTO request, @RequestParam long id){
+    public ResponseEntity<?> updateFeatures(@Valid @RequestBody InsertFeatureDTO request, @RequestParam long id){
         return roomFeaturesService.updateFeatures(request, id);
     }
 

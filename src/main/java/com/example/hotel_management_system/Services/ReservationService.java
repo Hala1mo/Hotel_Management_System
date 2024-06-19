@@ -1,11 +1,8 @@
 package com.example.hotel_management_system.Services;
 
-import com.example.hotel_management_system.DTO.Add_OnDTO;
-import com.example.hotel_management_system.DTO.ReservationDTO;
+import com.example.hotel_management_system.DTO.Reservation.ReservationDTO;
 import com.example.hotel_management_system.DTO.Room.RoomDTO;
-import com.example.hotel_management_system.DTO.Room.RoomDetailsInfoDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;

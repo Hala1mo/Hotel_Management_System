@@ -46,7 +46,7 @@ public class RoomDetailsInfoDTO{
     private String type_name;
 
     @NotNull
-    List<FeatureDTO> features;
+    List<InsertFeatureDTO> features;
 
 
     @NotNull
