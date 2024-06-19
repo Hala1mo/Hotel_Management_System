@@ -38,7 +38,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - Description: Represents the user in the hotel
 - Attributes: ID, first name, last name, phone number, email, password, role (e.g. ROLE_USER, ROLE_ADMIN) 
 - Relationships:
-  - if it is a customer, then the customer is related to a specific reservation.
+  - if it is a customer, then the customer is related to a specific reservation, and the user has many reservations.
 
 ### Employee
 - Description: Represents the employees in the hotel
@@ -95,16 +95,17 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ###  Add on feature
 - Description: This is for additional features that the user adds in making reservations such as breakfast.
 - Attributes: ID, name, price.
-- Relationships: Each additional feature is assigned for a reservation.
+- Relationships:
+  - Additional features are added for a reservation.
 
     
 ### Reservation
 - Description: This is for reservation.
 - Attributes: ID, List of rooms reserved, user id, number of adults, number of children, check-in date, check-out date, payment method (e.g. pay now, pay later), invoice. 
 - Relationships:
+  - Each booking is related to a specific customer.
   - Each booking has one or more rooms reserved.
-  - Each task is assigned to a specific employee for a specific room in a specific date.
-
+  - Each reservation has it's own invoice.
 
 ### Reserve Room
 - Description: This is for reserving a room for a specific booking.
@@ -125,7 +126,7 @@ The Hotel Management System is designed to streamline operations for both hotel 
   - Each invoice is related to a specific reservation.
  
 ## ER diagram
-![image](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/a3abdb8a-5702-4924-ac25-81aa854383f5)
+![Blank diagram (1)](https://github.com/elianaellati/Hotel_Management_System/assets/132192886/b7cfa1e7-128b-46df-8cd7-32380db92a82)
 
 
 ## How to Build, Package, and Run the Application
