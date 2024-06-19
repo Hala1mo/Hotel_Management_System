@@ -95,7 +95,8 @@ The Hotel Management System is designed to streamline operations for both hotel 
 ###  Add on feature
 - Description: This is for additional features that the user adds in making reservations such as breakfast.
 - Attributes: ID, name, price.
-- Relationships: Additional features are added for a reservation.
+- Relationships:
+  - Additional features are added for a reservation.
 
     
 ### Reservation
