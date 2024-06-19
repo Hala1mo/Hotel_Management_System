@@ -568,6 +568,7 @@ public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, Str
         invoice=InvoiceMapper.update(modifiedReservation,invoice);
         invoice.setPrice(totalPrice);
         invoiceRepository.save(invoice);
+        updateRoomStatusForReservations();
         return ResponseEntity.ok(InvoiceMapper.mapToInvoiceDetailsDTO(invoice));
     }
 
