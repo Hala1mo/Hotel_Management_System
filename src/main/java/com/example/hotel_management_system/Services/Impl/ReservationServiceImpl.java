@@ -90,6 +90,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .build();
 
         reservationRepository.save(reservation);
+
         List<Reserve_Add_OnDTO> additionList = request.getAdditions();
         for (Reserve_RoomDTO reserveRoomDTO : reservedRooms) {
             Room room = roomRepository.findAllById(reserveRoomDTO.getRoom_id());

@@ -1,0 +1,2232 @@
+{
+	"info": {
+		"_postman_id": "a70fea38-01e7-46c4-a6cd-b45dbcacf261",
+		"name": "Hotel_Management_System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31334994"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/users/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"email\":\"johnmontaser@gmail.com\",\r\n    \"password\":\"123456789\"\r\n \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"firstName\":\"john\",\r\n    \"lastName\":\"montaser\",\r\n    \"email\":\"johnmontaser@gmail.com\",\r\n    \"password\":\"123456789\",\r\n    \"role\":\"ROLE_USER\",\r\n    \"phoneNumber\":\"0595980166\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/id/4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2hubW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjExOTkyLCJleHAiOjE3MTg2NDc5OTJ9.QzHMWRrJ8f5ED3up-NRYXPTRVkX9WYFXVx6akYThmMg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/id/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"id",
+						"4"
+					]
+				},
+				"description": "Unauthorized access"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/id/4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyMTk3LCJleHAiOjE3MTg2NDgxOTd9.7ZJjlFdMX6p77G-FAHy9luM6Hzfg8aJEmXXIvTlJahQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/id/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"id",
+						"4"
+					]
+				},
+				"description": "user is able to access this api"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2hubW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyMzAzLCJleHAiOjE3MTg2NDgzMDN9.ihB9WSNtZxl69ocoKYTX0aVLymhVJXTmCIRLMp31rB0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				},
+				"description": "User profile"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/admins",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/admins",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"admins"
+					]
+				},
+				"description": "Get all admins"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/customers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"customers"
+					]
+				},
+				"description": "Get all customers"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/profile/changePassword",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"newPassword\":\"12345678A\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/profile/changePassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"profile",
+						"changePassword"
+					]
+				},
+				"description": "Change password"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/profile/updateProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"hala\",\r\n    \"lastName\": \"montaser\",\r\n    \"phoneNumber\": \"0595980177\",\r\n    \"email\": \"halamontaser@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/profile/updateProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"profile",
+						"updateProfile"
+					]
+				},
+				"description": "Update profile"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType/update/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type_name\":\"Family Room\",\r\n     \"size_room\":64,\r\n      \"num_adults\":2,\r\n      \"num_children\":3,\r\n      \"price\":150\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType",
+						"update",
+						"1"
+					]
+				},
+				"description": "save Room type"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"price\": 90.0,\r\n        \"type_name\": \"Single Room\",\r\n        \"size_room\": 20.0,\r\n        \"num_adults\": 1,\r\n        \"num_children\":0\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType/Features/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType",
+						"Features",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType"
+					]
+				},
+				"description": "Get all rooom types"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/features/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"feature\":\"Expansive living space\",\r\n\r\n\"description\":\"A large, open area within the room that provides plenty of space for guests to relax, entertain, and move around comfortably. It may include a seating area, dining table, and additional furnishings for a home-like atmosphere.\"\r\n\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/features/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"features",
+						"create"
+					]
+				},
+				"description": "Features"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/features",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/features",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"features"
+					]
+				},
+				"description": "Get all features"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType/save/Features",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NjEyNDAzLCJleHAiOjE3MTg2NDg0MDN9.INk4FuOEBWKPLZHix-XBtcxx2lgEZmSB_CnhYzp-H8s",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type_id\":11,\r\n    \"feature_id\":6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType/save/Features",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType",
+						"save",
+						"Features"
+					]
+				},
+				"description": "Add feature to specific room type"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/BedType/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"bed_type\":\"Sofa Bed\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/BedType/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"BedType",
+						"create"
+					]
+				},
+				"description": "Save Bed types in the hotel"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/BedType",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/BedType",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"BedType"
+					]
+				},
+				"description": "Get all bed types in the hotel"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType/save/Bed",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"type_id\":11,\r\n\"bed_id\":6,\r\n\"num_beds\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType/save/Bed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType",
+						"save",
+						"Bed"
+					]
+				},
+				"description": "Save bed types for specific room types"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/RoomType/Bed/6",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/RoomType/Bed/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"RoomType",
+						"Bed",
+						"6"
+					]
+				},
+				"description": "Get bed type for specific room type"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"room_number\":115,\r\n    \"floor_number\":5,\r\n    \"status\":\"AVAILABLE\",\r\n    \"view\":\"SEA\",\r\n    \"room_TypeID\":4,\r\n    \"cleanlinessStatus\": \"Cleaned\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"create"
+					]
+				},
+				"description": "Created rooms"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms"
+					]
+				},
+				"description": "Get all rooms"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/addOn/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"add_on_name\":\"Cultural Cuisine Nights\",\r\n \"price\":70.00\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/addOn/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"addOn",
+						"create"
+					]
+				},
+				"description": "Saved addition features"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/addOn",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/addOn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"addOn"
+					]
+				},
+				"description": "Get all addittion features"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/available?check-in-date=2024-10-17&check-out-date=2024-10-21",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzAyMjYyLCJleHAiOjE3MTg3MzgyNjJ9.UzClV1TAX9iPq1JSAaiQybz5L9KTchp7iwC0JFniduM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/available?check-in-date=2024-10-17&check-out-date=2024-10-21",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"available"
+					],
+					"query": [
+						{
+							"key": "check-in-date",
+							"value": "2024-10-17"
+						},
+						{
+							"key": "check-out-date",
+							"value": "2024-10-21"
+						}
+					]
+				},
+				"description": "Get available rooms in specific period"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/available/view/SEA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyMzI2LCJleHAiOjE3MTg3NDgzMjZ9.MoSfwNN8p8JElubSEPYDvJWRl4ohgBKF0ddjOj09POI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/view/SEA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"view",
+						"SEA"
+					]
+				},
+				"description": "Get available rooms for specific view"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/Book/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 3,\r\n    \"checkInDate\": \"2024-11-17\",\r\n    \"checkOutDate\": \"2024-11-19\",\r\n    \"num_adults\": 2,\r\n    \"num_children\": 2,\r\n    \"booking_room\": [\r\n        {\r\n            \"room_id\": 3\r\n        }\r\n    ],\r\n    \"additions\": [\r\n        {\r\n            \"add_on_id\": 1\r\n        },\r\n        {\r\n            \"add_on_id\": 2\r\n        }\r\n    ],\r\n    \"paymentMethod\": \"PAY_LATER\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/Book/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"Book",
+						"create"
+					]
+				},
+				"description": "Reserve "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/search?name=john",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/search?name=john",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "john"
+						}
+					]
+				},
+				"description": "Get reservation for specific user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/reserved/period?check-in-date=2024-1-17&check-out-date=2024-10-30",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/reserved/period?check-in-date=2024-1-17&check-out-date=2024-10-30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"reserved",
+						"period"
+					],
+					"query": [
+						{
+							"key": "check-in-date",
+							"value": "2024-1-17"
+						},
+						{
+							"key": "check-out-date",
+							"value": "2024-10-30"
+						}
+					]
+				},
+				"description": "Get reservations for specific period"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"firstName\":\"basima\",\r\n    \"lastName\":\"salem\",\r\n    \"phoneNumber\":\"0595980166\",\r\n    \"address\":\"Ramallah\",\r\n    \"email\":\"basimaS@gmail.com\",\r\n    \"salary\":3000,\r\n     \"hireDate\":\"2017-09-06\",\r\n    \"department\":\"HOUSEKEEPING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/employees/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees",
+						"create"
+					]
+				},
+				"description": "Save employees"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees"
+					]
+				},
+				"description": "Get all employees"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees/department/HOUSEKEEPING",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/employees/department/HOUSEKEEPING",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees",
+						"department",
+						"HOUSEKEEPING"
+					]
+				},
+				"description": "Get employees in specific department"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees/email/tamara@gmail.com",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/employees/email/tamara@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees",
+						"email",
+						"tamara@gmail.com"
+					]
+				},
+				"description": "Get employee by email"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees/v1/id/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/employees/v1/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees",
+						"v1",
+						"id",
+						"1"
+					]
+				},
+				"description": "Get employee information by id in version 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees/v2/id/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/employees/v2/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees",
+						"v2",
+						"id",
+						"1"
+					]
+				},
+				"description": "Get employee information by id in version 2"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/employees/update/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"tamara\",\r\n    \"lastName\":\"salem\",\r\n    \"phoneNumber\":\"0595980188\",\r\n    \"address\":\"Ramallah\",\r\n    \"email\":\"tamara@gmail.com\",\r\n    \"salary\":2500,\r\n     \"hireDate\":\"2017-09-01\",\r\n    \"department\":\"HOUSEKEEPING\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/employees/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"employees",
+						"update",
+						"1"
+					]
+				},
+				"description": "Update employee"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"description\":\"Clean room\",\r\n    \"scheduledDate\":\"2024-06-12\",\r\n     \"employee_id\":1,\r\n     \"room_id\":13\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"create"
+					]
+				},
+				"description": "Created task"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"description\":\"Clean room\",\r\n    \"scheduledDate\":\"2024-06-12\",\r\n     \"employee_id\":3,\r\n     \"room_id\":14\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"create"
+					]
+				},
+				"description": "Created task but employee is not in departement house keeping"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "Get all tasks"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"description\":\"Clean room\",\r\n    \"scheduledDate\":\"2024-06-12\",\r\n     \"employee_id\":1,\r\n     \"room_id\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"create"
+					]
+				},
+				"description": "Do a task for a cleaned room"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"3"
+					]
+				},
+				"description": "Delete a task"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/id/1?version=1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/id/1?version=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"id",
+						"1"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Get task by id using version 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/id/1?version=2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/id/1?version=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"id",
+						"1"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Get task by id using version 2"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/employee/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/employee/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"employee",
+						"1"
+					]
+				},
+				"description": "Get tasks for specific employee"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/status/finish/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/status/finish/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"status",
+						"finish",
+						"1"
+					]
+				},
+				"description": "Set task as finished"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/id/1?version=2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/id/1?version=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"id",
+						"1"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "2"
+						}
+					]
+				},
+				"description": "See how the status changed"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/status/pending",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/status/pending",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"status",
+						"pending"
+					]
+				},
+				"description": "Get tasks with pending status"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/status/completed",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/status/completed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"status",
+						"completed"
+					]
+				},
+				"description": "Get completed tasks"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/status/underProgress/2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/status/underProgress/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"status",
+						"underProgress",
+						"2"
+					]
+				},
+				"description": "Set task status to under-progress"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/tasks/status/underProgress",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tasks/status/underProgress",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tasks",
+						"status",
+						"underProgress"
+					]
+				},
+				"description": "Get under-progress tasks"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/Book/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 2,\r\n    \"checkInDate\": \"2024-06-18\",\r\n    \"checkOutDate\": \"2024-06-19\",\r\n    \"num_adults\": 1,\r\n    \"num_children\": 1,\r\n    \"booking_room\": [\r\n        {\r\n            \"room_id\": 5\r\n        }\r\n    ],\r\n    \"additions\": [\r\n        {\r\n            \"add_on_id\": 1\r\n        },\r\n        {\r\n            \"add_on_id\": 2\r\n        }\r\n    ],\r\n    \"paymentMethod\": \"PAY_LATER\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/Book/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"Book",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/Book/33/update",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/Book/33/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"Book",
+						"33",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/Book/11/update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\":2,\r\n    \"checkInDate\": \"2024-06-19\",\r\n    \"checkOutDate\": \"2024-06-24\",\r\n    \"num_adults\": 1,\r\n    \"num_children\": 1,\r\n    \"booking_room\": [\r\n        {\r\n            \"room_id\": 8\r\n        }\r\n    ],\r\n    \"additions\": [\r\n        {\r\n            \"add_on_id\": 1\r\n        },\r\n        {\r\n            \"add_on_id\": 2\r\n        }\r\n    ],\r\n    \"paymentMethod\": \"PAY_LATER\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/Book/11/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"Book",
+						"11",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/features",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-VERSION",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/features",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"features"
+					]
+				},
+				"description": "Retrieving features using version 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/rooms/features",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-VERSION",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/rooms/features",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rooms",
+						"features"
+					]
+				},
+				"description": "Retrieve features using version 2"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/v3/api-docs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4NzEyNzg3LCJleHAiOjE3MTg3NDg3ODd9.xpRhQ3-3hcAEAmLZAO7QMUjC6GPWzzXAB_LMzWZxbns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v3/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"api-docs"
+					]
+				},
+				"description": "OpenAPI Specification"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/11/checkin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/11/checkin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"11",
+						"checkin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/11/confirm",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/11/confirm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"11",
+						"confirm"
+					]
+				},
+				"description": "Confirm the reservation after the billing functionalities is done"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/cancel/11",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/cancel/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"cancel",
+						"11"
+					]
+				},
+				"description": "the user cancel the reservation and waiting for admin approvals"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/reservations/approvecancellation/11",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxhbW9udGFzZXJAZ21haWwuY29tIiwiaWF0IjoxNzE4Nzg4MzYyLCJleHAiOjE3MTg4MjQzNjJ9.KG3gu-wa23jRK7VbUUkyJ_lVpV4w6LltKpZ_6hr9f-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/reservations/approvecancellation/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations",
+						"approvecancellation",
+						"11"
+					]
+				},
+				"description": "the admin approve the reservation request"
+			},
+			"response": []
+		}
+	]
+}
