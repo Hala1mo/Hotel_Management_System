@@ -134,20 +134,20 @@ The Hotel Management System is designed to streamline operations for both hotel 
 - ./mvnw.cmd package -DskipTests
 ##  After the build process completes, you will find the JAR file in the target directory:
 - target/Hotel_Management_System-0.0.1-SNAPSHOT.jar
--After That we Create a Dockerfile in the root directory of our project.
+-After That, we Create a Dockerfile in the root directory of our project.
 ## Build the Docker Image:
-- By Using the following command the Docker image will be built:
+- By using the following command the Docker image will be built:
 - docker build -t halamo1/hotel_management_system:latest .
 ## Pushing the Docker Image to DockerHub Using the following command :
 -  docker push hala1mo/hotel_management_system:latest
 ## Running the Application with Docker Compose 
-- Pull the Docker image from DockerHub using the following command docker pull halamo1/hotel_management_system:latest
-- Create a docker-compose.yml file
-- Navigate to the directory containing the docker-compose.yml file.
-- Run Docker Compose using docker-compose up command.
+- Pull the Docker image from DockerHub using the following command docker pull hala1mo/hotel_management:v2
+- Create a docker-compose.txt file
+- Navigate to the directory containing the docker-compose.txt file.
+- Run Docker Compose using the docker-compose up command, like this command: docker-compose -f Docker_Compose.txt up
 
 ## DockerHub Repository
-You can find the Docker image for this project on DockerHub hub
+You can find the Docker image for this project on DockerHub 
 ## Lessons Learned
 - Understanding of Spring Boot and RESTful API development.
 - Hands-on experience with Docker and Docker Compose for containerization.
