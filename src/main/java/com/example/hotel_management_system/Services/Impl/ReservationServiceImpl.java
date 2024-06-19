@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -80,6 +77,7 @@ public class ReservationServiceImpl implements ReservationService {
                 throw new IllegalArgumentException("Room " + room.getId() + " is not available for the requested period");
             }
         }
+       // updateRoomStatusForReservations();
         Reservation reservation = Reservation.builder()
                 .user(userId)
                 .status(status)
@@ -93,7 +91,6 @@ public class ReservationServiceImpl implements ReservationService {
                 .build();
 
         reservationRepository.save(reservation);
-
         List<Reserve_Add_OnDTO> additionList = request.getAdditions();
         for (Reserve_RoomDTO reserveRoomDTO : reservedRooms) {
             Room room = roomRepository.findAllById(reserveRoomDTO.getRoom_id());
@@ -116,9 +113,10 @@ public class ReservationServiceImpl implements ReservationService {
             reserve_Add_OnRepository.save(reserve_add_on);
             addOnRepository.save(addition);
         }
-        updateRoomStatusForReservations();
+
         Invoice invoice = InvoiceMapper.toEntity(reservation, totalPrice);
         invoiceRepository.save(invoice);
+        updateRoomStatusForReservations();
         return ResponseEntity.ok(InvoiceMapper.mapToInvoiceDetailsDTO(invoice));
     }
     private boolean isRoomAvailable(Room room, Date checkInDate, Date checkOutDate) {
@@ -128,7 +126,6 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
 
-    @Transactional
     public void updateRoomStatusForReservations() {
 
         List<Reserve_Room> reserve_room= reservationRoomRepository.findAll();
@@ -136,17 +133,29 @@ public class ReservationServiceImpl implements ReservationService {
         for (Reserve_Room reserve_roomm : reserve_room) {
 
             Date checkInDate = reserve_roomm.getBooking().getCheckInDate();
+            System.out.println("halaaa");
+            System.out.println(reserve_roomm .getRoom_id().getId());
             System.out.print(checkInDate);
             Date currentDate = new Date(); // Current date/time
-
-            if (checkInDate.after(currentDate)) {
+            if (truncateTime(checkInDate).equals(truncateTime(currentDate))) {
                 Room room=roomRepository.findAllById(reserve_roomm.getRoom_id().getId());
-
+                     System.out.println("elianananana");
+                    System.out.print(checkInDate);
                     room.setStatus(roomStatus.RESERVED);
+                System.out.print(roomStatus.RESERVED);
                     roomRepository.save(room);
                 }
             }
         }
+    private Date truncateTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
 
 public  List<ReservationDTO> retrieveReservationForSpecificCustomer(Long id, String firstName) {
     User user = userRepository.findByNameOrId(firstName, id);
